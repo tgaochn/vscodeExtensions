@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "__error": "Not found",
+    ".gitignore": true,
+    ".favorites.json": true
+  }
+}

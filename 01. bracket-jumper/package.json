@@ -1,8 +1,8 @@
 {
     "name": "gtfish-01",
     "displayName": "gtfish-01",
-    "description": "bracket-jumper",
-    "version": "0.0.1",
+    "description": "publish testing",
+    "version": "0.0.3",
     "publisher": "gtfish",
     "engines": {
         "vscode": "^1.30.0"

@@ -1,8 +1,10 @@
 README.txt
 *.vsix
 02. insert-numbers/node_modules/
-bracket-jumper/node_modules/
 03. matlab-formatter/node_modules/
 04. select-highlight/node_modules/
 05. time-range/node_modules/
 01. bracket-jumper/node_modules/
+06. auto-markdown-preview/node_modules/
+06. auto-markdown-preview/package-lock.json
+06. auto-markdown-preview/.vscode/
