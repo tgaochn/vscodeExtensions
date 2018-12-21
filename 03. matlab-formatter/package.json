@@ -1,6 +1,6 @@
 {
-    "name": "gtfish_03",
-    "displayName": "gtfish_03",
+    "name": "gtfish-03",
+    "displayName": "gtfish-03",
     "description": "format MATLAB code",
     "version": "0.0.1",
     "publisher": "gtfish",
@@ -13,7 +13,7 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/tgaochn/vscodeExtensions/matlab-formatter"
-    },    
+    },
     "keywords": [
         "matlab"
     ],
