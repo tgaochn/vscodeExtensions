@@ -2,7 +2,7 @@
   "name": "gtfish08",
   "displayName": "gtfish08",
   "description": "",
-  "publisher": "gtfish",
+  "publisher": "gtfish1988",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.15.0"
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tgaochn/vscodeExtensions/tree/master/07.%20change-case"
+    "url": "https://github.com/tgaochn/vscodeExtensions/tree/master/08.%20markdown%20view"
   },
   "contributes": {
     "markdown.previewStyles": [
