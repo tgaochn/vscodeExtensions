@@ -1,0 +1,43 @@
+{
+	"name": "gtfish09-insertcomma",
+	"displayName": "gtfish09_insert-comma",
+	"description": "insert-comma",
+	"publisher": "gtfish1988",
+	"version": "0.1.1",
+	"engines": {
+		"vscode": "^1.49.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.insertComma"
+	],
+	"main": "./out/src/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.insertComma",
+				"title": "Insert comma"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.49.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.9.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	}
+}

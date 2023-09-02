@@ -3,5 +3,6 @@
     "__error": "Not found",
     ".gitignore": true,
     ".favorites.json": true
-  }
+},
+"git.ignoreLimitWarning": true
 }

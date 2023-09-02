@@ -1,0 +1,60 @@
+{
+	"name": "gtfish10",
+	"displayName": "gtfish10_diff-tool",
+	"description": "diff-tool",
+	"version": "0.1.0",
+	"publisher": "gtfish1988",
+	"engines": {
+		"vscode": "^1.10.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"vscode",
+		"diff"
+	],
+	"activationEvents": [
+		"onCommand:extension.diffTool.diffToolLeft",
+		"onCommand:extension.diffTool.diffToolRight"
+	],
+	"main": "./extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.diffTool.diffToolLeft",
+				"title": "DiffTool: Mark 1st file"
+			},
+			{
+				"command": "extension.diffTool.diffToolRight",
+				"title": "DiffTool: Mark 2nd file"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorTextFocus",
+					"command": "extension.diffTool.diffToolLeft",
+					"group": "2_diffTool"
+				},
+				{
+					"when": "editorTextFocus",
+					"command": "extension.diffTool.diffToolRight",
+					"group": "2_diffTool"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.0.3",
+		"vscode": "^1.0.0",
+		"mocha": "^2.3.3",
+		"eslint": "^3.6.0",
+		"@types/node": "^6.0.40",
+		"@types/mocha": "^2.2.32"
+	}
+}

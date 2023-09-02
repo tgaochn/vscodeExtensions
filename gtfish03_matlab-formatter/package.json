@@ -1,0 +1,61 @@
+{
+	"name": "gtfish03",
+	"displayName": "gtfish03_matlab-formatter",
+	"description": "matlab-formatter",
+	"version": "0.1.0",
+	"publisher": "gtfish1988",
+	"engines": {
+		"vscode": "^1.30.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/03.%20matlab-formatter"
+	},
+	"keywords": [
+		"matlab"
+	],
+	"activationEvents": [
+		"onLanguage:matlab"
+	],
+	"main": "./extension",
+	"icon": "images/icon.png",
+	"contributes": {
+		"configuration": {
+			"title": "Matlab-formatter configuration",
+			"type": "object",
+			"properties": {
+				"matlab-formatter.indentwidth": {
+					"type": "integer",
+					"default": 4,
+					"description": "number of spaces used for indentation"
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "matlab",
+				"aliases": [
+					"MATLAB"
+				]
+			}
+		],
+		"capabilities": {
+			"documentFormattingProvider": "true",
+			"documentRangeFormattingProvider": "true"
+		}
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6",
+		"eslint": "^4.11.0",
+		"@types/node": "^7.0.43",
+		"@types/mocha": "^2.2.42"
+	}
+}

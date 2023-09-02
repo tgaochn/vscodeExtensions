@@ -1,0 +1,98 @@
+{
+    "name": "split-join-text",
+    "displayName": "Split Join texts",
+    "description": "Splitting and joining texts with separator.",
+    "version": "0.0.9",
+    "publisher": "Matsuyanagi",
+    "engines": {
+		"vscode": "^1.59.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "join",
+        "split",
+        "edit"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Matsuyanagi/vscode-split-join-text.git"
+    },
+    "activationEvents": [
+        "onCommand:extension.splitText",
+        "onCommand:extension.splitTextAndDeleteSeparator",
+        "onCommand:extension.joinText",
+        "onCommand:extension.joinTextAndDeleteIndent"
+    ],
+	"main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.splitText",
+                "title": "Split Text with separator"
+            },
+            {
+                "command": "extension.splitTextAndDeleteSeparator",
+                "title": "Split Text with separator, and delete separator"
+            },
+            {
+                "command": "extension.joinText",
+                "title": "Join Text with separator"
+            },
+            {
+                "command": "extension.joinTextAndDeleteIndent",
+                "title": "Join Text with separator, and delete indent"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Split Join Text Configuration",
+            "properties": {
+                "splitJoinText.defaultSeparator": {
+                    "type": "string",
+                    "default": ",",
+                    "description": "Default separator."
+                }
+            },
+            "default": {
+                "defaultSeparator": ","
+            }
+        },
+        "keybindings": [
+            {
+                "command": "extension.splitText",
+                "key": "ctrl+k ctrl+1",
+                "mac": "ctrl+k ctrl+1",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "command": "extension.joinText",
+                "key": "ctrl+k ctrl+2",
+                "mac": "ctrl+k ctrl+2",
+                "when": "editorTextFocus && !editorReadonly"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+		"@types/vscode": "^1.59.0",
+		"@types/glob": "^7.1.4",
+		"@types/mocha": "^9.0.0",
+		"@types/node": "16.x",
+		"eslint": "^7.32.0",
+		"@typescript-eslint/eslint-plugin": "^4.29.0",
+		"@typescript-eslint/parser": "^4.29.0",
+		"glob": "^7.1.7",
+		"mocha": "^9.0.3",
+		"typescript": "^4.3.5",
+		"vscode-test": "^1.6.1"
+    }
+}

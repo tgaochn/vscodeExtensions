@@ -1,0 +1,26 @@
+{
+	"name": "gtfish06",
+	"displayName": "gtfish06_markdown-auto-preview",
+	"description": "markdown-auto-preview",
+	"version": "0.1.0",
+	"publisher": "gtfish1988",
+	"engines": {
+		"vscode": "^1.30.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/05.%20insert-time-range"
+	},
+	"activationEvents": [
+		"onLanguage:markdown"
+	],
+	"main": "./out/src/extension",
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	}
+}

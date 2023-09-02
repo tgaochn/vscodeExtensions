@@ -1,0 +1,64 @@
+{
+	"name": "tablegenerator",
+	"displayName": "Markdown Table Generator",
+	"description": "Generate formatted tables for markdown",
+	"version": "1.0.4",
+	"publisher": "JayFiDev",
+	"engines": {
+		"vscode": "^1.24.0"
+	},
+	"categories": [
+		"Other",
+		"Programming Languages"
+	],
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#0A6A6A",
+		"theme": "dark"
+	},
+	"activationEvents": [
+		"onCommand:markdown.generateTable",
+		"onCommand:markdown.generateTableWithAlignment"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "markdown.generateTable",
+				"title": "Markdown: New Table"
+			},
+			{
+				"command": "markdown.generateTableWithAlignment",
+				"title": "Markdown: New Table With Alignment"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6",
+		"tslint": "^5.8.0",
+		"@types/node": "^7.0.43",
+		"@types/mocha": "^2.2.42"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/JayFiDev/MarkdownTablegenerator"
+	},
+	"__metadata": {
+		"id": "08d2aadf-2e06-45fe-8718-ff90fc0e4d1a",
+		"publisherId": "1c92af0d-9074-46f9-ad79-fa3ff44ff28d",
+		"publisherDisplayName": "JayFi Development",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1680816247739,
+		"preRelease": false
+	}
+}

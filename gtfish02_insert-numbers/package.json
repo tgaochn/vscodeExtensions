@@ -1,0 +1,50 @@
+{
+	"name": "gtfish02",
+	"displayName": "gtfish02_insert-numbers",
+	"description": "insert-numbers",
+	"version": "0.1.0",
+	"publisher": "gtfish1988",
+	"galleryBanner": {
+		"color": "#0000FF",
+		"theme": "dark"
+	},
+	"engines": {
+		"vscode": "^1.30.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/02.%20insert-numbers"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.insertNumbers"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.insertNumbers",
+				"title": "Insert Numbers"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.insertNumbers",
+				"key": "ctrl+alt+n",
+				"mac": "cmd+alt+n",
+				"when": "editorTextFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"typescript": "^1.8.5",
+		"vscode": "^0.11.0"
+	}
+}
