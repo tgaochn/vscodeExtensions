@@ -2,7 +2,7 @@
 	"name": "gtfish19-wrap-selection",
 	"displayName": "gtfish19-wrap-selection",
 	"description": "wrap selection with combination of symbols or your custom pattern",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "gtfish1988",
 	"engines": {
 		"vscode": "^1.18.0"

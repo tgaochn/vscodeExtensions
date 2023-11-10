@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish19-wrap-selection" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish19-wrap-selection" Version="0.0.2" Publisher="gtfish1988"/>
         <DisplayName>gtfish19-wrap-selection</DisplayName>
         <Description xml:space="preserve">wrap selection with combination of symbols or your custom pattern</Description>
         <Tags></Tags>

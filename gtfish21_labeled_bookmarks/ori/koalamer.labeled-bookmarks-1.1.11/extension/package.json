@@ -1,0 +1,380 @@
+{
+  "name": "labeled-bookmarks",
+  "displayName": "Labeled Bookmarks",
+  "description": "Bookmarks, multiple groups, customizable visuals",
+  "version": "1.1.11",
+  "publisher": "koalamer",
+  "icon": "resources/vsc-labeled-bookmarks-logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koalamer/vsc-labeled-bookmarks.git"
+  },
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "vsc-labeled-bookmarks.toggleBookmark",
+        "title": "Bookmarks: toggle bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleLabeledBookmark",
+        "title": "Bookmarks: toggle labeled bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToBookmark",
+        "title": "Bookmarks: navigate to bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToBookmarkOfAnyGroup",
+        "title": "Bookmarks: navigate to bookmark of any group"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.selectGroup",
+        "title": "Bookmarks: select group"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.addGroup",
+        "title": "Bookmarks: add group"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.deleteGroup",
+        "title": "Bookmarks: delete group"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.setGroupIconShape",
+        "title": "Bookmarks: set group icon shape"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.setGroupIconColor",
+        "title": "Bookmarks: set group icon color"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.deleteBookmark",
+        "title": "Bookmarks: delete bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleHideAll",
+        "title": "Bookmarks: toggle hiding all bookmark decorations"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleHideInactiveGroups",
+        "title": "Bookmarks: toggle hiding inactive group decorations"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToNextBookmark",
+        "title": "Bookmarks: navigate to next bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToPreviousBookmark",
+        "title": "Bookmarks: navigate to previous bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.clearFailedJumpFlags",
+        "title": "Bookmarks: clear failed jump flags from bookmarks"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.expandSelectionToNextBookmark",
+        "title": "Bookmarks: expand selection to next bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.expandSelectionToPreviousBookmark",
+        "title": "Bookmarks: expand selection to previous bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.refreshTreeView",
+        "title": "Bookmarks: refresh tree view",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.jumpToBookmark",
+        "title": "Bookmarks: jump to bookmark"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.showTreeView",
+        "title": "Bookmarks: show tree view"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.moveBookmarksFromActiveGroup",
+        "title": "Bookmarks: move bookmarks"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.activateTreeItem",
+        "title": "Activate bookmark tree item",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.editTreeItem",
+        "title": "Edit bookmark tree item",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.deleteTreeItem",
+        "title": "Remove bookmark tree item",
+        "icon": "$(remove-close)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vsc-labeled-bookmarks.toggleBookmark",
+        "key": "ctrl+alt+m",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleLabeledBookmark",
+        "key": "ctrl+alt+l",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToNextBookmark",
+        "key": "ctrl+alt+k",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToPreviousBookmark",
+        "key": "ctrl+alt+j",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.expandSelectionToNextBookmark",
+        "key": "shift+alt+k",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.expandSelectionToPreviousBookmark",
+        "key": "shift+alt+j",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToBookmark",
+        "key": "ctrl+alt+n"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.selectGroup",
+        "key": "ctrl+alt+b g"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.addGroup",
+        "key": "ctrl+alt+b alt+g"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.deleteGroup",
+        "key": "ctrl+alt+b shift+g"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.setGroupIconShape",
+        "key": "ctrl+alt+b s"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.setGroupIconColor",
+        "key": "ctrl+alt+b c"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.navigateToBookmarkOfAnyGroup",
+        "key": "ctrl+alt+b n"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.deleteBookmark",
+        "key": "ctrl+alt+b d"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleHideAll",
+        "key": "ctrl+alt+b h"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.toggleHideInactiveGroups",
+        "key": "ctrl+alt+b i"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.clearFailedJumpFlags",
+        "key": "ctrl+alt+b f"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.showTreeView",
+        "key": "ctrl+alt+b t"
+      },
+      {
+        "command": "vsc-labeled-bookmarks.moveBookmarksFromActiveGroup",
+        "key": "ctrl+alt+b m"
+      }
+    ],
+    "configuration": {
+      "title": "Labeled Bookmarks",
+      "properties": {
+        "labeledBookmarks.colors": {
+          "type": "array",
+          "description": "Array of names and color codes that will be available as bookmark group colors, eg: [[\"red\": \"ff0000\"], [\"green\": \"00ff00\"]]",
+          "default": [
+            [
+              "teal",
+              "#00dddd"
+            ],
+            [
+              "blue",
+              "#0000dd"
+            ],
+            [
+              "magenta",
+              "#dd00dd"
+            ],
+            [
+              "red",
+              "#dd0000"
+            ],
+            [
+              "yellow",
+              "#dddd00"
+            ],
+            [
+              "green",
+              "#00dd00"
+            ]
+          ]
+        },
+        "labeledBookmarks.unicodeMarkers": {
+          "type": "array",
+          "description": "Array of names and unicode characters that will be available as extra decoration shapes for bookmark groups, eg: [[\"look\": \"👀\"], [\"bug\",\"🐞\"]]",
+          "default": [
+            [
+              "look",
+              "👀"
+            ],
+            [
+              "bug",
+              "🐞"
+            ],
+            [
+              "asterix",
+              "✱"
+            ],
+            [
+              "diamond",
+              "◈"
+            ]
+          ]
+        },
+        "labeledBookmarks.defaultShape": {
+          "type": "string",
+          "description": "The default shape for new bookmark groups",
+          "default": "bookmark",
+          "enum": [
+            "bookmark",
+            "circle",
+            "heart",
+            "label",
+            "star"
+          ]
+        },
+        "labeledBookmarks.overviewRulerLane": {
+          "type": "string",
+          "description": "The placement of bookmark markers in the overview ruler (the scrollbar)",
+          "default": "center",
+          "enum": [
+            "center",
+            "full",
+            "left",
+            "right",
+            "none"
+          ]
+        },
+        "labeledBookmarks.lineEndLabelType": {
+          "type": "string",
+          "description": "The style of how the line end decorations for labeled bookmarks should appear",
+          "default": "bordered",
+          "enum": [
+            "none",
+            "bordered",
+            "inverse"
+          ]
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "labeled-bookmarks-tree-view",
+          "title": "Labeled Bookmarks",
+          "icon": "$(bookmark)"
+        }
+      ]
+    },
+    "views": {
+      "labeled-bookmarks-tree-view": [
+        {
+          "id": "bookmarksByActiveGroup",
+          "name": "Active Group",
+          "icon": "$(bookmark)"
+        },
+        {
+          "id": "bookmarksByInactiveGroups",
+          "name": "Inactive Groups",
+          "icon": "$(bookmark)"
+        },
+        {
+          "id": "bookmarksByFile",
+          "name": "By File",
+          "icon": "$(bookmark)"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "bookmarksByActiveGroup",
+        "contents": "Loading..."
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "vsc-labeled-bookmarks.activateTreeItem",
+          "when": "view == bookmarksByInactiveGroups && viewItem == group",
+          "group": "inline"
+        },
+        {
+          "command": "vsc-labeled-bookmarks.editTreeItem",
+          "when": "view == bookmarksByActiveGroup && viewItem != none && viewItem != file || view == bookmarksByInactiveGroups && viewItem != none && viewItem != file || view == bookmarksByFile && viewItem != none && viewItem != file",
+          "group": "inline"
+        },
+        {
+          "command": "vsc-labeled-bookmarks.deleteTreeItem",
+          "when": "view == bookmarksByActiveGroup && viewItem != none || view == bookmarksByInactiveGroups && viewItem != none || view == bookmarksByFile && viewItem != none ",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.54.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^10.0.0",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  }
+}

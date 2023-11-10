@@ -1,5 +1,10 @@
 personally forked version from jayfidev.tablegenerator-1.0.4
 
+# [0.0.2] - 2023-10-11
+
+1. add a dropbox list for available keys
+
+
 # [0.0.1] - 2023-09-02
 
 1. fixed default symbols cmd
