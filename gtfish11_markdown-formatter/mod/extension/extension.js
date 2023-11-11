@@ -323,6 +323,10 @@ class DocumentFormatter {
         lines = content.split("\n").map((line) => {
             line = line.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
+            // !! 在这里改, 全局生效
+            line = this.replaceFullNums(line);
+            line = this.replaceFullChars(line);
+
             // 0.2.12: [ ( -> [(
             line = line.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
 
@@ -344,6 +348,7 @@ class DocumentFormatter {
                         !element.match(/(^\s*\".*\"$)/g) &&         //"XX"
                         !element.match(/(^\s*\'.*\'$)/g)            //'XX'
                 ) {
+                    // !! 在这里改, 代码块内生效, 在上面的条件内不生效
                     // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
                     element = element.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
                     element = element.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
@@ -366,6 +371,7 @@ class DocumentFormatter {
                     let line_tmp = "";
                     // 使用行中代码块为分割
                     line.split(/(`.*?`)/).forEach(element => {
+                        // !! 在这里改, 只有普通内容里生效, 代码块内/引号等条件内不生效
                         if (element.search(/(`.*`)/) == -1) {
                             // 修复 markdown 链接所使用的标点。
                             if (config.get("line")) {
@@ -393,13 +399,12 @@ class DocumentFormatter {
                             ) {
                                 // 替换全角数字
                                 if (config.get("replaceFullNums")) {
-                                    // content = this.replaceFullNums(content); // bug, content 换成 element
                                     element = this.replaceFullNums(element);
                                 }
                                 // 替换全角英文和标点
                                 if (config.get("replaceFullChars")) {
-                                    // content = this.replaceFullChars(content); // bug, content 换成 element
                                     element = this.replaceFullChars(element);
+                                    element = this.replaceOtherChars(element);
                                 }
                                 // 汉字后的标点符号，转成全角符号。
                                 if (config.get("replacePunctuations")) {
@@ -545,16 +550,16 @@ class DocumentFormatter {
      * 替换全角数字
      */
     replaceFullNums(content) {
-        content = content.replace("０", "0");
-        content = content.replace("１", "1");
-        content = content.replace("２", "2");
-        content = content.replace("３", "3");
-        content = content.replace("４", "4");
-        content = content.replace("５", "5");
-        content = content.replace("６", "6");
-        content = content.replace("７", "7");
-        content = content.replace("８", "8");
-        content = content.replace("９", "9");
+        content = content.replaceAll("０", "0");
+        content = content.replaceAll("１", "1");
+        content = content.replaceAll("２", "2");
+        content = content.replaceAll("３", "3");
+        content = content.replaceAll("４", "4");
+        content = content.replaceAll("５", "5");
+        content = content.replaceAll("６", "6");
+        content = content.replaceAll("７", "7");
+        content = content.replaceAll("８", "8");
+        content = content.replaceAll("９", "9");
         return content;
     }
     /**
@@ -562,58 +567,58 @@ class DocumentFormatter {
      */
     replaceFullChars(content) {
         // 全角英文和标点。
-        content = content.replace("Ａ", "A");
-        content = content.replace("Ｂ", "B");
-        content = content.replace("Ｃ", "C");
-        content = content.replace("Ｄ", "D");
-        content = content.replace("Ｅ", "E");
-        content = content.replace("Ｆ", "F");
-        content = content.replace("Ｇ", "G");
-        content = content.replace("Ｈ", "H");
-        content = content.replace("Ｉ", "I");
-        content = content.replace("Ｊ", "J");
-        content = content.replace("Ｋ", "K");
-        content = content.replace("Ｌ", "L");
-        content = content.replace("Ｍ", "M");
-        content = content.replace("Ｎ", "N");
-        content = content.replace("Ｏ", "O");
-        content = content.replace("Ｐ", "P");
-        content = content.replace("Ｑ", "Q");
-        content = content.replace("Ｒ", "R");
-        content = content.replace("Ｓ", "S");
-        content = content.replace("Ｔ", "T");
-        content = content.replace("Ｕ", "U");
-        content = content.replace("Ｖ", "V");
-        content = content.replace("Ｗ", "W");
-        content = content.replace("Ｘ", "X");
-        content = content.replace("Ｙ", "Y");
-        content = content.replace("Ｚ", "Z");
-        content = content.replace("ａ", "a");
-        content = content.replace("ｂ", "b");
-        content = content.replace("ｃ", "c");
-        content = content.replace("ｄ", "d");
-        content = content.replace("ｅ", "e");
-        content = content.replace("ｆ", "f");
-        content = content.replace("ｇ", "g");
-        content = content.replace("ｈ", "h");
-        content = content.replace("ｉ", "i");
-        content = content.replace("ｊ", "j");
-        content = content.replace("ｋ", "k");
-        content = content.replace("ｌ", "l");
-        content = content.replace("ｍ", "m");
-        content = content.replace("ｎ", "n");
-        content = content.replace("ｏ", "o");
-        content = content.replace("ｐ", "p");
-        content = content.replace("ｑ", "q");
-        content = content.replace("ｒ", "r");
-        content = content.replace("ｓ", "s");
-        content = content.replace("ｔ", "t");
-        content = content.replace("ｕ", "u");
-        content = content.replace("ｖ", "v");
-        content = content.replace("ｗ", "w");
-        content = content.replace("ｘ", "x");
-        content = content.replace("ｙ", "y");
-        content = content.replace("ｚ", "z");
+        content = content.replaceAll("Ａ", "A");
+        content = content.replaceAll("Ｂ", "B");
+        content = content.replaceAll("Ｃ", "C");
+        content = content.replaceAll("Ｄ", "D");
+        content = content.replaceAll("Ｅ", "E");
+        content = content.replaceAll("Ｆ", "F");
+        content = content.replaceAll("Ｇ", "G");
+        content = content.replaceAll("Ｈ", "H");
+        content = content.replaceAll("Ｉ", "I");
+        content = content.replaceAll("Ｊ", "J");
+        content = content.replaceAll("Ｋ", "K");
+        content = content.replaceAll("Ｌ", "L");
+        content = content.replaceAll("Ｍ", "M");
+        content = content.replaceAll("Ｎ", "N");
+        content = content.replaceAll("Ｏ", "O");
+        content = content.replaceAll("Ｐ", "P");
+        content = content.replaceAll("Ｑ", "Q");
+        content = content.replaceAll("Ｒ", "R");
+        content = content.replaceAll("Ｓ", "S");
+        content = content.replaceAll("Ｔ", "T");
+        content = content.replaceAll("Ｕ", "U");
+        content = content.replaceAll("Ｖ", "V");
+        content = content.replaceAll("Ｗ", "W");
+        content = content.replaceAll("Ｘ", "X");
+        content = content.replaceAll("Ｙ", "Y");
+        content = content.replaceAll("Ｚ", "Z");
+        content = content.replaceAll("ａ", "a");
+        content = content.replaceAll("ｂ", "b");
+        content = content.replaceAll("ｃ", "c");
+        content = content.replaceAll("ｄ", "d");
+        content = content.replaceAll("ｅ", "e");
+        content = content.replaceAll("ｆ", "f");
+        content = content.replaceAll("ｇ", "g");
+        content = content.replaceAll("ｈ", "h");
+        content = content.replaceAll("ｉ", "i");
+        content = content.replaceAll("ｊ", "j");
+        content = content.replaceAll("ｋ", "k");
+        content = content.replaceAll("ｌ", "l");
+        content = content.replaceAll("ｍ", "m");
+        content = content.replaceAll("ｎ", "n");
+        content = content.replaceAll("ｏ", "o");
+        content = content.replaceAll("ｐ", "p");
+        content = content.replaceAll("ｑ", "q");
+        content = content.replaceAll("ｒ", "r");
+        content = content.replaceAll("ｓ", "s");
+        content = content.replaceAll("ｔ", "t");
+        content = content.replaceAll("ｕ", "u");
+        content = content.replaceAll("ｖ", "v");
+        content = content.replaceAll("ｗ", "w");
+        content = content.replaceAll("ｘ", "x");
+        content = content.replaceAll("ｙ", "y");
+        content = content.replaceAll("ｚ", "z");
 
         // 替换全角字符
         content = content.replaceAll("＠", "@");
@@ -641,6 +646,10 @@ class DocumentFormatter {
         content = content.replaceAll("“", "\"");
         content = content.replaceAll("”", "\"");
 
+        return content;
+    }
+
+    replaceOtherChars(content) {
         // 去掉特殊格式
         content = content.replaceAll("\\mathbb{", "{");
         content = content.replaceAll("\\mathrm{", "{");

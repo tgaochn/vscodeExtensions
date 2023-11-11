@@ -4,5 +4,8 @@
     ".gitignore": true,
     ".favorites.json": true
 },
-"git.ignoreLimitWarning": true
+"git.ignoreLimitWarning": true,
+"[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
 }
