@@ -62,6 +62,15 @@
 				}
 			},
 			{
+				"command": "Notes.newNote2",
+				"title": "New note with today's date",
+				"category": "Notes",
+				"icon": {
+					"light": "./resources/light/add.svg",
+					"dark": "./resources/dark/add.svg"
+				}
+			},            
+			{
 				"command": "Notes.refreshNotes",
 				"title": "Refresh Notes",
 				"category": "Notes",
@@ -107,6 +116,11 @@
 					"command": "Notes.newNote",
 					"when": "view == notes",
 					"group": "navigation@2"
+				},
+				{
+					"command": "Notes.newNote2",
+					"when": "view == notes",
+					"group": "navigation@3"
 				}
 			],
 			"view/item/context": [

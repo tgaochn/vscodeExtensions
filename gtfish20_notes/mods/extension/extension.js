@@ -894,6 +894,10 @@ module.exports = function (t) {
             a.newNote(e);
         });
         t.subscriptions.push(o);
+        let oo = n.commands.registerCommand("Notes.newNote2", () => {
+            a.newNote2(e);
+        });
+        t.subscriptions.push(oo);
         let c = n.commands.registerCommand("Notes.openNote", t => {
             a.openNote(t);
         });
@@ -919,8 +923,16 @@ module.exports = function (t) {
             return n.workspace.getConfiguration("Notes").get("notesLocation");
         }
         static deleteNote(t, e) {
-            n.window.showWarningMessage(`Are you sure you want to delete '${t.name}'? This action is permanent and can not be reversed.`, "Yes", "No").then(r => {
-                "Yes" === r && (i.unlink(o.join(String(t.location), String(t.name)), e => {
+            // n.window.showWarningMessage(`Are you sure you want to delete '${t.name}'? This action is permanent and can not be reversed.`, "Yes", "No").then(r => {
+            //     "Yes" === r && (i.unlink(o.join(String(t.location), String(t.name)), e => {
+            //         if (e) return console.error(e), n.window.showErrorMessage(`Failed to delete ${t.name}.`);
+            //         n.window.showInformationMessage(`Successfully deleted ${t.name}.`);
+            //     }), e.refresh());
+            // });
+
+            // directly remove the file
+            n.window.showWarningMessage(`Trying to delete '${t.name}'. This action is permanent and can not be reversed.`).then(r => {
+                (i.unlink(o.join(String(t.location), String(t.name)), e => {
                     if (e) return console.error(e), n.window.showErrorMessage(`Failed to delete ${t.name}.`);
                     n.window.showInformationMessage(`Successfully deleted ${t.name}.`);
                 }), e.refresh());
@@ -968,6 +980,32 @@ module.exports = function (t) {
                     }), t.refresh();
                 }
             });
+        }
+        static newNote2(t) {
+            let note_path = String(a.getNotesLocation());
+
+            // get current date
+            let date = new Date();
+            let formattedDate = date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日 ";
+            let dayOfWeek = date.toLocaleString('zh-US', { weekday: 'long' });
+            formattedDate += dayOfWeek
+
+            // create a file directly
+            let r = formattedDate;
+            let s = `${r}`;
+            let fn_full = o.join(String(note_path), `${s.replace(/\:/gi, "")}.md`);
+            if (i.existsSync(String(fn_full))) return n.window.showWarningMessage("A note with that name already exists.");
+            i.writeFile(fn_full, "", t => {
+                if (t) return console.error(t), n.window.showErrorMessage("Failed to create the new note.");
+                {
+                    let t = n.Uri.file(fn_full);
+                    n.window.showTextDocument(t).then(() => {
+                        n.commands.executeCommand("cursorMove", {
+                            to: "viewPortBottom"
+                        });
+                    });
+                }
+            }), t.refresh();
         }
         static openNote(t) {
             let e = String(a.getNotesLocation());
