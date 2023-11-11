@@ -1,4 +1,4 @@
 README.txt
 *.vsix
 node_modules
-.vscode
+.vscode/

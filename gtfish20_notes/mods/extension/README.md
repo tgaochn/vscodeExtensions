@@ -1,5 +1,10 @@
 personally forked version from dionmunk.vscode-notes-1.1.0
 
+# [0.0.2] - 2023-11-10
+
+1. removed the confirmation when deleting a note
+2. added a icon to directly generate a note with today's date without input box
+
 # [0.0.1] - 2023-10-11
 
 1. use current date as the default filename
