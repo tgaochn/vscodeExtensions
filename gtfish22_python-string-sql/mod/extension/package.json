@@ -1,0 +1,43 @@
+{
+    "name": "gtfish22-python-string-sql",
+    "displayName": "gtfish22-python-string-sql",
+    "description": "highlight python strings as sql",
+    "version": "0.0.1",
+    "publisher": "gtfish1988",
+    "repository": {
+        "url": "https://github.com/ptweir/python-string-sql"
+    },
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "grammars": [
+            {
+                "path": "./syntaxes/highlight-sql-string.json",
+                "scopeName": "python-sql.injection",
+                "injectTo": [
+                    "source.python",
+                    "source.coconut"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "editor.action.insertSnippet",
+                "key": "cmd+s",
+                "mac": "ctrl+s",
+                "when": "editorTextFocus",
+                "args": {
+                    "langId": ["python", "coconut"],
+                    "name": "SQL_highlighted_string"
+                }
+            }
+        ]
+    }
+}

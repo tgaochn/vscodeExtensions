@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.3.3] - 2023-11-11
+
+优化format范围
+
 ## [0.3.2] - 2023-04-30
 
 fixed a bug that only replace the first space in file path

@@ -1,0 +1,62 @@
+{
+    "name": "python-string-sql",
+    "displayName": "python-string-sql",
+    "description": "highlight python strings as sql",
+    "version": "1.2.0",
+    "publisher": "ptweir",
+    "icon": "docs/logo.png",
+    "repository": {
+        "url": "https://github.com/ptweir/python-string-sql"
+    },
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+    "contributes": {
+        "grammars": [
+            {
+                "path": "./syntaxes/highlight-sql-string.json",
+                "scopeName": "python-sql.injection",
+                "injectTo": [
+                    "source.python",
+                    "source.coconut"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            },
+            {
+                "path": "./syntaxes/highlight-html-string.json",
+                "scopeName": "python-html.injection",
+                "injectTo": [
+                    "source.python",
+                    "source.coconut"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.html": "html"
+                }
+            }
+        ],
+        "snippets": [
+            {
+                "language": "python",
+                "path": "./snippets/python.json"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "editor.action.insertSnippet",
+                "key": "cmd+s",
+                "mac": "ctrl+s",
+                "when": "editorTextFocus",
+                "args": {
+                    "langId": ["python", "coconut"],
+                    "name": "SQL_highlighted_string"
+                }
+            }
+        ]
+    }
+}
