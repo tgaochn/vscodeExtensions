@@ -1,6 +1,10 @@
-forked version from ptweir.python-string-sql-1.2.0.
+forked version from chintans98.markdown-jira-1.1.0.
 
 # changelog
+
+## [0.0.2] - 2024-07-12
+
+1. fixed readme
 
 ## [0.0.1] - 2024-07-12
 
