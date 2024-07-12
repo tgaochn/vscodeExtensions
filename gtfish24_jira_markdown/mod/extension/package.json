@@ -2,7 +2,7 @@
     "name": "gtfish24-jira-markdown",
     "displayName": "gtfish24-jira-markdown",
     "description": "VSCode Extension for converting Markdown formatting to JIRA or vice-versa easily",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "gtfish1988",
     "engines": {
         "vscode": "^1.25.0"
