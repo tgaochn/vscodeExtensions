@@ -6,3 +6,4 @@ forked version from ptweir.python-string-sql-1.2.0.
 
 1. upgrade jira2md module to 3.0.0
 2. modified some buggy regex in jira2md
+3. include jira2md functions directly in extension.js to reduce files

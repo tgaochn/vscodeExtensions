@@ -1,68 +1,223 @@
 const vscode = require('vscode');
-const jira2md = require('jira2md');
 const path = require('path');
 
 /**
  * Helper functions below
  */
-function isCurrentFileValid(document, fileExtension) {
-    return document.fileName.endsWith(fileExtension);
-}
 
 function getCurrentDirectory(document) {
     return path.dirname(document.uri.path);
 }
 
+function getCurrentFilePath() {
+    if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
+        // Get the first workspace folder
+        const workspaceFolder = vscode.workspace.workspaceFolders[0];
+
+        // Get the filesystem path
+        const workspacePath = workspaceFolder.uri.fsPath;
+
+        return workspacePath;
+    } else {
+        // No workspace is open
+        return getCurrentDirectory(vscode.window.activeTextEditor.document);
+    }
+}
+
+function getCurrentDatetimeText() {
+    const now = new Date();
+
+    // Get individual components
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1; // getMonth() returns 0-11
+    const day = now.getDate();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // var rlt = year + month + day + " " + hour + minute + second;
+    const formattedDateTime = `${year}${month.toString().padStart(2, '0')}${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}${minutes.toString().padStart(2, '0')}${seconds.toString().padStart(2, '0')}`;
+
+    return formattedDateTime;
+}
+
 function openNewDocumentWithConvertedText(directory, newFileText, fileExtension) {
     // Establish new file path for formatted file
-    let newFilePath = path.join(directory, "formatted_file" + fileExtension);
-    let uri = vscode.Uri.file(newFilePath).with({ scheme: 'untitled' });
+    let curDatatime = getCurrentDatetimeText();
+    let newFilePath = path.join(directory + '/tempfile/jira2md', curDatatime + fileExtension);
 
-    return vscode.workspace.openTextDocument(uri).then(
-        document => {
+    const uri = vscode.Uri.file(newFilePath)
+    const encoder = new TextEncoder();
+    const data = encoder.encode('');
+
+    return vscode.workspace.fs.writeFile(uri, data)
+        .then(() => vscode.workspace.openTextDocument(uri))
+        .then(document => {
             let addedText = new vscode.WorkspaceEdit();
             addedText.insert(uri, new vscode.Position(0, 0), newFileText);
 
-            // If the text was added successfully, we can open the document for the user
-            vscode.workspace.applyEdit(addedText).then(
-                success => {
-                    if (success) {
-                        vscode.window.showTextDocument(document, vscode.window.Beside);
-                    } else {
-                        vscode.window.showInformationMessage('Sorry, we were unable to show you the converted text!');
-                    }
+            return vscode.workspace.applyEdit(addedText).then(success => {
+                if (success) {
+                    return vscode.window.showTextDocument(document, {
+                        viewColumn: vscode.ViewColumn.Active,
+                        preview: false
+                    });
+                } else {
+                    vscode.window.showInformationMessage('Sorry, we were unable to show you the converted text!');
+                    return null;
                 }
-            );
-        }
-    );
+            });
+        })
+        .catch(error => {
+            vscode.window.showErrorMessage('Error creating or opening file: ' + error);
+        });
 }
 
 function toMarkdown() {
     let document = vscode.window.activeTextEditor.document;
 
-    // Make sure current file is a Jira file
-    const isJiraFile = isCurrentFileValid(document, "jira");
-    if (!isJiraFile) {
-        vscode.window.showInformationMessage("Sorry, this isn't a JIRA (.jira) file.");
-    }
+    let markdownFormatted = document.getText()
+        // Ordered Lists
+        .replace(/^[ \t]*(\*+)\s+/gm, function (match, stars) {
+            return Array(stars.length).join("  ") + '* ';
+        })
+        // Un-ordered lists
+        .replace(/^[ \t]*(#+)\s+/gm, function (match, nums) {
+            return Array(nums.length).join("  ") + '1. ';
+        })
+        // Headers 1-6
+        .replace(/^h([0-6])\.(.*)$/gm, function (match, level, content) {
+            return Array(parseInt(level) + 1).join('#') + content;
+        })
+        // Bold
+        .replace(/\*(\S.*)\*/g, '**$1**')
+        // ! Italic - canceled due to buggy regex
+        // .replace(/\_(\S.*)\_/g, '*$1*')
+        // Monospaced text
+        .replace(/\{\{([^}]+)\}\}/g, '`$1`')
+        // Citations (buggy)
+        //.replace(/\?\?((?:.[^?]|[^?].)+)\?\?/g, '<cite>$1</cite>')
+        // ! Inserts - canceled due to buggy regex
+        // .replace(/\+([^+]*)\+/g, '<ins>$1</ins>')
+        // Superscript
+        .replace(/\^([^^]*)\^/g, '<sup>$1</sup>')
+        // Subscript
+        .replace(/~([^~]*)~/g, '<sub>$1</sub>')
+        // Strikethrough
+        .replace(/\s+-(\S+.*?\S)-\s+/g, ' ~~$1~~ ')
+        // Code Block
+        .replace(/\{code(:([a-z]+))?([:|]?(title|borderStyle|borderColor|borderWidth|bgColor|titleBGColor)=.+?)*\}([^]*)\{code\}/gm, '```$2$5```')
+        // Pre-formatted text
+        .replace(/{noformat}/g, '```')
+        // ! Un-named Links - bug fixed
+        // .replace(/\[([^|]+)\]/g, '<$1>')
+        .replace(/\[([^\]\|]+)\]/g, '<$1>')
+        // ! Named Links - bug fixed
+        // .replace(/\[(.+?)\|(.+)\]/g, '[$1]($2)')
+        .replace(/\[([^\|]+)\|([^\]]+)\]/g, '[$1]($2)')
+        // Single Paragraph Blockquote
+        .replace(/^bq\.\s+/gm, '> ')
+        // Remove color: unsupported in md
+        .replace(/\{color:[^}]+\}([^]*)\{color\}/gm, '$1')
+        // panel into table
+        .replace(/\{panel:title=([^}]*)\}\n?([^]*?)\n?\{panel\}/gm, '\n| $1 |\n| --- |\n| $2 |')
+        // table header
+        .replace(/^[ \t]*((?:\|\|.*?)+\|\|)[ \t]*$/gm, function (match, headers) {
+            var singleBarred = headers.replace(/\|\|/g, '|');
+            return '\n' + singleBarred + '\n' + singleBarred.replace(/\|[^|]+/g, '| --- ');
+        })
+        // remove leading-space of table headers and rows
+        .replace(/^[ \t]*\|/gm, '|');
 
-    // Convert current file into Markdown formatting
-    let markdownFormatted = jira2md.to_markdown(document.getText());
-    openNewDocumentWithConvertedText(getCurrentDirectory(document), markdownFormatted, ".md");
+    openNewDocumentWithConvertedText(getCurrentFilePath(), markdownFormatted, ".md");
 }
 
 function toJira() {
     let document = vscode.window.activeTextEditor.document;
 
-    // Make sure current file is a Markdown file
-    const isMarkdownFile = isCurrentFileValid(document, "md");
-    if (!isMarkdownFile) {
-        vscode.window.showInformationMessage("Sorry, this isn't a Markdown (.md) file.");
-    }
+    var map = {
+        //cite: '??',
+        del: '-',
+        ins: '+',
+        sup: '^',
+        sub: '~'
+    };
 
     // Convert current file into JIRA formatting
-    let jiraFormatted = jira2md.to_jira(document.getText());
-    openNewDocumentWithConvertedText(getCurrentDirectory(document), jiraFormatted, ".jira");
+    let jiraFormatted = document.getText()
+        // Bold, Italic, and Combined (bold+italic)
+        .replace(/([*_]+)(\S.*?)\1/g, function (match, wrapper, content) {
+            switch (wrapper.length) {
+                case 1: return '_' + content + '_';
+                case 2: return '*' + content + '*';
+                case 3: return '_*' + content + '*_';
+                default: return wrapper + content * wrapper;
+            }
+        })
+        // All Headers (# format)
+        .replace(/^([#]+)(.*?)$/gm, function (match, level, content) {
+            return 'h' + level.length + '.' + content;
+        })
+        // Headers (H1 and H2 underlines)
+        .replace(/^(.*?)\n([=-]+)$/gm, function (match, content, level) {
+            return 'h' + (level[0] === '=' ? 1 : 2) + '. ' + content;
+        })
+        // Ordered lists
+        .replace(/^([ \t]*)\d+\.\s+/gm, function (match, spaces) {
+            return Array(Math.floor(spaces.length / 2 + 1)).join("#") + '# ';
+        })
+        // Un-Ordered Lists
+        .replace(/^([ \t]*)\*\s+/gm, function (match, spaces) {
+            return Array(Math.floor(spaces.length / 2 + 1)).join("*") + '* ';
+        })
+        // Headers (h1 or h2) (lines "underlined" by ---- or =====)
+        // Citations, Inserts, Subscripts, Superscripts, and Strikethroughs
+        .replace(new RegExp('<(' + Object.keys(map).join('|') + ')>(.*?)<\/\\1>', 'g'), function (match, from, content) {
+            var to = map[from];
+            return to + content + to;
+        })
+        // Other kind of strikethrough
+        .replace(/\s+~~(.*?)~~\s+/g, ' -$1- ')
+        // Named/Un-Named Code Block
+        .replace(/`{3,}(\w+)?((?:\n|[^`])+)`{3,}/g, function (match, synt, content) {
+            var code = '{code';
+            if (synt) code += ':' + synt;
+            return code + '}' + content + '{code}';
+        })
+        // Inline-Preformatted Text
+        .replace(/`([^`]+)`/g, '{{$1}}')
+        // Named Link
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '[$1|$2]')
+        // Un-Named Link
+        .replace(/<([^>]+)>/g, '[$1]')
+        // Single Paragraph Blockquote
+        .replace(/^>/gm, 'bq.')
+        // ! tables - still buggy but it seems that most of the time it works
+        .replace(/^\s*(\|(?:.*?\|)+)\s*\n\s*(\|(?:\s*:?-+:?\s*\|)+)\s*\n((?:\s*\|(?:.*?\|)+\s*\n?)*)/gm,
+            function (match, headerLine, separatorLine, rowstr) {
+                var headers = headerLine.match(/(?<=\|)[^|]+(?=\|)/g);
+                var separators = separatorLine.match(/(?<=\|)[^|]+(?=\|)/g);
+                if (headers.length !== separators.length) {
+                    return match;
+                }
+                headers = headers.map(h => h.trim());
+                var rows = rowstr.trim().split('\n');
+                if (rows.length === 1 && headers.length === 1) {
+                    // panel
+                    return '{panel:title=' + headers[0].trim() + '}\n' +
+                        rows[0].replace(/^\|(.*)[ \t]*\|$/, '$1').trim() +
+                        '\n{panel}\n\n';
+                } else {
+                    var jiraTable = '||' + headers.join('||') + '||\n' + 
+                        rows.map(row => row.trim().replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '[$1|$2]')).join('\n');
+                    
+                    // Preserve empty lines after the table
+                    var emptyLinesAfter = match.match(/\n*$/)[0];
+                    return jiraTable + emptyLinesAfter;
+                }
+            });
+
+    openNewDocumentWithConvertedText(getCurrentFilePath(), jiraFormatted, ".jira");
 }
 
 // Method is called when the extension is first activated
