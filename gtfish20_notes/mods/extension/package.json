@@ -2,7 +2,7 @@
 	"name": "gtfish20-notes",
 	"displayName": "gtfish20-notes",
 	"description": "Notes is a Markdown focused notes extension for Visual Studio Code that takes inspiration from Notational Velocity and nvAlt.",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "gtfish1988",
 	"license": "CC-BY-NC-4.0",
 	"keywords": [

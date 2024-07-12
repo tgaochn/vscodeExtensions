@@ -1,0 +1,72 @@
+{
+    "name": "gtfish23-language-injection",
+    "displayName": "gtfish23-language-injection",
+    "description": "inject any language code blocks into any language (markdown codeblock/python string/etc.)",
+    "version": "0.0.1",
+    "publisher": "gtfish1988",
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "grammars": [
+			{
+				"path": "./syntaxes/ahk-inject-markdown.json",
+				"scopeName": "markdown.ahk.codeblock",
+				"injectTo": [
+					"text.html.markdown"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.ahk": "ahk"
+				}
+			},
+
+			{
+				"path": "./syntaxes/tree-inject-markdown.json",
+				"scopeName": "markdown.tree.codeblock",
+				"injectTo": [
+					"text.html.markdown"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.tree": "tree"
+				}
+			},
+
+			{
+				"path": "./syntaxes/avdl-inject-markdown.json",
+				"scopeName": "markdown.avro.codeblock",
+				"injectTo": [
+					"text.html.markdown"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.avro": "avro"
+				}
+			},
+
+			{
+				"path": "./syntaxes/julia-inject-markdown.json",
+				"scopeName": "markdown.julia.codeblock",
+				"injectTo": [
+					"text.html.markdown"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.julia": "julia"
+				}
+			},
+
+            {
+                "path": "./syntaxes/sql-inject-python.json",
+                "scopeName": "sql-inject-python.multi-line-text",
+                "injectTo": [
+                    "source.python",
+                    "source.coconut"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            }
+        ]
+    }
+}

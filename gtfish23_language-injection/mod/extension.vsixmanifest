@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish22-python-string-sql" Version="0.0.2" Publisher="gtfish1988" />
-        <DisplayName>gtfish22-python-string-sql</DisplayName>
-        <Description xml:space="preserve">highlight python strings as sql</Description>
-        <Tags>snippet,keybindings,python,sql,__web_extension</Tags>
+        <Identity Language="en-US" Id="gtfish23-language-injection" Version="0.0.1" Publisher="gtfish1988" />
+        <DisplayName>gtfish23-language-injection</DisplayName>
+        <Description xml:space="preserve">general language injection</Description>
+        <Tags>markdown,python,sql</Tags>
         <Categories>Programming Languages</Categories>
         <GalleryFlags>Public</GalleryFlags>
 

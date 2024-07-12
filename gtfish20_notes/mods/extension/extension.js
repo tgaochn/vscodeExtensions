@@ -930,7 +930,7 @@ module.exports = function (t) {
             //     }), e.refresh());
             // });
 
-            // directly remove the file
+            // ! directly remove the file
             n.window.showWarningMessage(`Trying to delete '${t.name}'. This action is permanent and can not be reversed.`).then(r => {
                 (i.unlink(o.join(String(t.location), String(t.name)), e => {
                     if (e) return console.error(e), n.window.showErrorMessage(`Failed to delete ${t.name}.`);
@@ -952,10 +952,10 @@ module.exports = function (t) {
 
             // get current date
             let date = new Date();
-            let formattedDate = date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日 ";
+            let formattedDate = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日 ";
             let dayOfWeek = date.toLocaleString('zh-US', { weekday: 'long' });
             formattedDate += dayOfWeek
-            
+
             n.window.showInputBox({
                 prompt: "Note name?",
                 value: formattedDate
@@ -984,9 +984,12 @@ module.exports = function (t) {
         static newNote2(t) {
             let note_path = String(a.getNotesLocation());
 
+            // ! my changes starts here
             // get current date
             let date = new Date();
-            let formattedDate = date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日 ";
+            let formattedDate = date.getFullYear() + "年" +
+                (date.getMonth() + 1).toString().padStart(2, '0') + "月" +
+                date.getDate().toString().padStart(2, '0') + "日 ";
             let dayOfWeek = date.toLocaleString('zh-US', { weekday: 'long' });
             formattedDate += dayOfWeek
 
