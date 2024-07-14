@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.3.4] - 2024-07-14
+
+`cont` 前后加空格
+
 ## [0.3.3] - 2023-11-11
 
 优化format范围
