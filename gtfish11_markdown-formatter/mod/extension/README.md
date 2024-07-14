@@ -2,7 +2,7 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
-## [0.3.4] - 2024-07-14
+## [0.3.5] - 2024-07-14
 
 `cont` 前后加空格
 

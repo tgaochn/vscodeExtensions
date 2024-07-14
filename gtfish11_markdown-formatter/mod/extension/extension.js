@@ -105,7 +105,7 @@ function activate(context) {
         const finalText = `[desc](${relativePath})`
 
         vscode.env.clipboard.writeText(finalText);
-    }));    
+    }));
 }
 exports.activate = activate;
 
@@ -327,10 +327,6 @@ class DocumentFormatter {
             line = this.replaceFullNums(line);
             line = this.replaceFullChars(line);
 
-            // ``与其他内容之间增加空格
-            line = line.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
-            line = line.replace(/(`[^`]+`)(([\u4e00-\u9fa5\u3040-\u30FF])|([a-zA-Z0-9]))/g, '$1 $2'); // 后空格
-
             // 0.2.12: [ ( -> [(
             line = line.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
 
@@ -342,15 +338,15 @@ class DocumentFormatter {
             line.split(/(`.*?`)/).forEach(element => {
                 // 跳过各种括号内的内容, 防止链接被断开
                 if (
-                        !element.match(/tags:.*/g) &&               //0.2.15: obsidian - tags: XX
-                        !element.match(/(\[.*\])(\(.*\))/g) &&      //[XX](XX)
-                        !element.match(/(^\s*\[.*\]$)/g) &&         //[XX]
-                        !element.match(/(^\s*\(.*\)$)/g) &&         //(XX)
-                        !element.match(/(^\s*{.*}$)/g) &&           //{XX}
-                        !element.match(/(^\s*<.*>$)/g) &&           //<XX>
-                        !element.match(/(^\s*`.*`$)/g) &&           //`XX`
-                        !element.match(/(^\s*\".*\"$)/g) &&         //"XX"
-                        !element.match(/(^\s*\'.*\'$)/g)            //'XX'
+                    !element.match(/tags:.*/g) &&               //0.2.15: obsidian - tags: XX
+                    !element.match(/(\[.*\])(\(.*\))/g) &&      //[XX](XX)
+                    !element.match(/(^\s*\[.*\]$)/g) &&         //[XX]
+                    !element.match(/(^\s*\(.*\)$)/g) &&         //(XX)
+                    !element.match(/(^\s*{.*}$)/g) &&           //{XX}
+                    !element.match(/(^\s*<.*>$)/g) &&           //<XX>
+                    !element.match(/(^\s*`.*`$)/g) &&           //`XX`
+                    !element.match(/(^\s*\".*\"$)/g) &&         //"XX"
+                    !element.match(/(^\s*\'.*\'$)/g)            //'XX'
                 ) {
                     // !! 在这里改, 代码块内生效, 在上面的条件内不生效
                     // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
@@ -372,10 +368,15 @@ class DocumentFormatter {
             } else if (tag) {
                 // 忽略 @import 语法
                 if (line.trim().search(/^@import /) == -1) {
+                    // !! 在这里改, 则非```代码块范围内生效
+                    // 0.3.4: ``与其他内容之间增加空格
+                    line = line.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
+                    line = line.replace(/(`[^`]+`)(([\u4e00-\u9fa5\u3040-\u30FF])|([a-zA-Z0-9]))/g, '$1 $2'); // 后空格
+
                     let line_tmp = "";
                     // 使用行中代码块为分割
                     line.split(/(`.*?`)/).forEach(element => {
-                        // !! 在这里改, 只有普通内容里生效, 代码块内/引号等条件内不生效
+                        // !! 在这里改, 只有普通内容里生效, ```代码块范围内/引号``等条件内不生效
                         if (element.search(/(`.*`)/) == -1) {
                             // 修复 markdown 链接所使用的标点。
                             if (config.get("line")) {
@@ -390,7 +391,6 @@ class DocumentFormatter {
                                     element = element.replace(/(^\s*<!--.*-->)([\r\n]*)/, "\n$1\n");
                                 }
                             }
-
                             // 忽略链接以及注释格式
                             if (!element.match(/(\[.*\])(\(.*\))/g) &&
                                 !element.match(/(^\s*\[.*\]$)/g) &&

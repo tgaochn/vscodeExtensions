@@ -2,7 +2,7 @@
 	"name": "gtfish11",
 	"displayName": "gtfish11_markdown-formatter",
 	"description": "markdown-formatter",
-	"version": "0.3.4",
+	"version": "0.3.5",
 	"publisher": "gtfish1988",
 	"engines": {
 		"vscode": "^1.21.0"
