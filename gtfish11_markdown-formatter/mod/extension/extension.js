@@ -114,12 +114,16 @@ function deactivate() { }
 exports.deactivate = deactivate;
 
 class DocumentFormatter {
-    /**
-     * 更新文档
-     */
+    current_document_range(doc) {
+        // 当前文档范围
+        let start = new vscode.Position(0, 0);
+        let end = new vscode.Position(doc.lineCount - 1, doc.lineAt(doc.lineCount - 1).text.length);
+        let range = new vscode.Range(start, end);
+        return range;
+    }
+
+
     updateDocument_md2html(document) {
-        // 获取配置
-        const config = vscode.workspace.getConfiguration("MarkdownFormat");
         // 按照每行进行搞定
         let content = document.getText(this.current_document_range(document));
         let lines = [];
@@ -217,8 +221,6 @@ class DocumentFormatter {
     }
 
     updateDocument_html2md(document) {
-        // 获取配置
-        const config = vscode.workspace.getConfiguration("MarkdownFormat");
         // 按照每行进行搞定
         let content = document.getText(this.current_document_range(document));
         let lines = [];
@@ -313,45 +315,22 @@ class DocumentFormatter {
     }
 
     updateDocument(document) {
-        // 获取配置
-        const config = vscode.workspace.getConfiguration("MarkdownFormat");
-        // 按照每行进行搞定
         let content = document.getText(this.current_document_range(document));
         let lines = [];
         let tag = true;
         // 每行操作
         lines = content.split("\n").map((line) => {
-            line = line.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
+            // !! T0: 全局生效
+            line = globalReplace(line);
 
-            // !! 在这里改, 全局生效
-            line = this.replaceFullNums(line);
-            line = this.replaceFullChars(line);
-
-            // 0.2.12: [ ( -> [(
-            line = line.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
-
-            // 0.2.13: ) ] -> )]
-            line = line.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
-
-            // 0.2.14: 增加全局生效的条件, 不在括号内
+            // 0.2.14: 增加全局生效的条件, 非链接, 不在括号内
             let line_tmp_global = "";
+
             line.split(/(`.*?`)/).forEach(element => {
                 // 跳过各种括号内的内容, 防止链接被断开
-                if (
-                    !element.match(/tags:.*/g) &&               //0.2.15: obsidian - tags: XX
-                    !element.match(/(\[.*\])(\(.*\))/g) &&      //[XX](XX)
-                    !element.match(/(^\s*\[.*\]$)/g) &&         //[XX]
-                    !element.match(/(^\s*\(.*\)$)/g) &&         //(XX)
-                    !element.match(/(^\s*{.*}$)/g) &&           //{XX}
-                    !element.match(/(^\s*<.*>$)/g) &&           //<XX>
-                    !element.match(/(^\s*`.*`$)/g) &&           //`XX`
-                    !element.match(/(^\s*\".*\"$)/g) &&         //"XX"
-                    !element.match(/(^\s*\'.*\'$)/g)            //'XX'
-                ) {
-                    // !! 在这里改, 代码块内生效, 在上面的条件内不生效
-                    // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
-                    element = element.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-                    element = element.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+                if (is_non_link(element)) {
+                    // !! T1: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+                    element = codeBlockReplace(element);
                 }
                 line_tmp_global += element;
             });
@@ -368,114 +347,22 @@ class DocumentFormatter {
             } else if (tag) {
                 // 忽略 @import 语法
                 if (line.trim().search(/^@import /) == -1) {
-                    // !! 在这里改, 则非```代码块范围内生效
-                    // 0.3.4: ``与其他内容之间增加空格
-                    line = line.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
-                    line = line.replace(/(`[^`]+`)(([\u4e00-\u9fa5\u3040-\u30FF])|([a-zA-Z0-9]))/g, '$1 $2'); // 后空格
+                    // !! T2: 非代码块内生效, 即 ```content``` 外生效
+                    line = noncodeBlockReplace(line);
 
                     let line_tmp = "";
                     // 使用行中代码块为分割
                     line.split(/(`.*?`)/).forEach(element => {
-                        // !! 在这里改, 只有普通内容里生效, ```代码块范围内/引号``等条件内不生效
                         if (element.search(/(`.*`)/) == -1) {
-                            // 修复 markdown 链接所使用的标点。
-                            if (config.get("line")) {
-                                element = element.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
-                                element = element.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
-                            }
-
-                            // 注释处理
-                            if (config.get("note")) {
-                                if (element.trim().search(/^<!--.*-->$/) != -1) {
-                                    // 注释前后加入空行
-                                    element = element.replace(/(^\s*<!--.*-->)([\r\n]*)/, "\n$1\n");
-                                }
-                            }
-                            // 忽略链接以及注释格式
-                            if (!element.match(/(\[.*\])(\(.*\))/g) &&
-                                !element.match(/(^\s*\[.*\]$)/g) &&
-                                !element.match(/(^\s*\(.*\)$)/g) &&
-                                !element.match(/(^\s*{.*}$)/g) &&
-                                !element.match(/(^\s*<.*>$)/g) &&
-                                !element.match(/(^\s*`.*`$)/g) &&
-                                !element.match(/(^\s*\".*\"$)/g) &&
-                                !element.match(/(^\s*\'.*\'$)/g)
-                            ) {
-                                // 替换全角数字
-                                if (config.get("replaceFullNums")) {
-                                    element = this.replaceFullNums(element);
-                                }
-                                // 替换全角英文和标点
-                                if (config.get("replaceFullChars")) {
-                                    element = this.replaceFullChars(element);
-                                    element = this.replaceOtherChars(element);
-                                }
-                                // 汉字后的标点符号，转成全角符号。
-                                if (config.get("replacePunctuations")) {
-                                    element = this.replacePunctuations(element);
-                                }
-                                // 汉字与其前后的英文字符、英文标点、数字间增加空白。
-                                // if (config.get("cn")) {
-                                //     // 汉字修改
-                                //     element = element.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-                                //     element = element.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
-                                // }
-
-                                // 英文修改, 英文字符间如果有相关符号, 则增加空格
-                                // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
-                                // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
-                                const pattern = /(.*)(\(|\[|\")(.*)(\)|\]|\")(.*)/g
-                                if (element.match(pattern)) {
-                                    let element_formatted = ""
-                                    const parts = element.split(pattern)
-                                    for (let i = 0; i < parts.length; i++) {
-                                        let part = parts[i]
-                                        if ((i == 1 || i == 5) && part.match(pattern)) {
-                                            let subParts = part.split(pattern)
-                                            let subElement_formatted = ""
-
-                                            for (let j = 0; j < subParts.length; j++) {
-                                                let subPart = subParts[j]
-                                                if (j == 1 || j == 5) {
-                                                    subPart = subPart.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-                                                    subPart = subPart.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
-                                                }
-                                                subElement_formatted += subPart
-                                            }
-                                            element_formatted += subElement_formatted
-                                        } else if (i == 1 || i == 5) {
-                                            part = part.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-                                            part = part.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
-
-                                            element_formatted += part
-                                        } else {
-                                            element_formatted += part
-                                        }
-                                    }
-                                    element = element_formatted
-                                }
-                                else {
-                                    element = element.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-                                    // element = element.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3'); // 前空格: a(123) -> a (123)
-                                    element = element.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
-                                }
-                            }
+                            // !! T3: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
+                            element = restReplace(element);
                         }
                         line_tmp += element;
                     });
                     // 标题处理
-                    if (config.get("title")) {
-                        if (line_tmp.trim().search(/(^#{1,6}.*)([\r\n]*)/) != -1) {
-                            // 标题后加入一个空格
-                            if (line_tmp.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
-                                // 0.2.16: skip md tags: #XX
-                                // line_tmp = line_tmp.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
-                            } else {
-                                line_tmp = line_tmp.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
-                            }
-                            // 标题前后加入空行
-                            line_tmp = line_tmp.trim().replace(/(^#{1,6}.*)([\r\n]*)/, "\n$1\n");
-                        }
+                    if (line_tmp.trim().search(/(^#{1,6}.*)([\r\n]*)/) != -1) {
+                        // !! 替换标题
+                        line_tmp = headerReplace(line_tmp);
                     }
                     line = line_tmp;
                 }
@@ -515,279 +402,371 @@ class DocumentFormatter {
         content = content.trim() + "\n";
         return content;
     }
-    /**
-     * 当前文档范围
-     */
-    current_document_range(doc) {
-        let start = new vscode.Position(0, 0);
-        let end = new vscode.Position(doc.lineCount - 1, doc.lineAt(doc.lineCount - 1).text.length);
-        let range = new vscode.Range(start, end);
-        return range;
-    }
-    /**
-     * 替换汉字后标点
-     */
-    replacePunctuations(content) {
-        // 汉字后的标点符号，转成全角符号。
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\.($|\s*)/g, '$1。');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF]),\s*/g, '$1，');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF]);\s*/g, '$1；');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])!\s*/g, '$1！');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF]):\s*/g, '$1：');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\?\s*/g, '$1？');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\\\s*/g, '$1、');
-        // 圆括号（）
-        content = content.replace(/\(([\u4e00-\u9fa5\u3040-\u30FF])/g, '（$1');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\)/g, '$1）');
-        // 方括号【】
-        content = content.replace(/\[([\u4e00-\u9fa5\u3040-\u30FF])/g, '【$1');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF。！])\]/g, '$1】');
-        // 尖括号《》
-        content = content.replace(/<([\u4e00-\u9fa5\u3040-\u30FF])/g, '《$1');
-        content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF。！])>/g, '$1》');
-        content = content.replace(/。\{3,}/g, '......');
-        content = content.replace(/([！？])$1{3,}/g, '$1$1$1');
-        content = content.replace(/([。，；：、“”『』〖〗《》])\1{1,}/g, '$1');
-        return content;
-    }
-    /**
-     * 替换全角数字
-     */
-    replaceFullNums(content) {
-        content = content.replaceAll("０", "0");
-        content = content.replaceAll("１", "1");
-        content = content.replaceAll("２", "2");
-        content = content.replaceAll("３", "3");
-        content = content.replaceAll("４", "4");
-        content = content.replaceAll("５", "5");
-        content = content.replaceAll("６", "6");
-        content = content.replaceAll("７", "7");
-        content = content.replaceAll("８", "8");
-        content = content.replaceAll("９", "9");
-        return content;
-    }
-    /**
-     * 替换全角英文和标点
-     */
-    replaceFullChars(content) {
-        // 全角英文和标点。
-        content = content.replaceAll("Ａ", "A");
-        content = content.replaceAll("Ｂ", "B");
-        content = content.replaceAll("Ｃ", "C");
-        content = content.replaceAll("Ｄ", "D");
-        content = content.replaceAll("Ｅ", "E");
-        content = content.replaceAll("Ｆ", "F");
-        content = content.replaceAll("Ｇ", "G");
-        content = content.replaceAll("Ｈ", "H");
-        content = content.replaceAll("Ｉ", "I");
-        content = content.replaceAll("Ｊ", "J");
-        content = content.replaceAll("Ｋ", "K");
-        content = content.replaceAll("Ｌ", "L");
-        content = content.replaceAll("Ｍ", "M");
-        content = content.replaceAll("Ｎ", "N");
-        content = content.replaceAll("Ｏ", "O");
-        content = content.replaceAll("Ｐ", "P");
-        content = content.replaceAll("Ｑ", "Q");
-        content = content.replaceAll("Ｒ", "R");
-        content = content.replaceAll("Ｓ", "S");
-        content = content.replaceAll("Ｔ", "T");
-        content = content.replaceAll("Ｕ", "U");
-        content = content.replaceAll("Ｖ", "V");
-        content = content.replaceAll("Ｗ", "W");
-        content = content.replaceAll("Ｘ", "X");
-        content = content.replaceAll("Ｙ", "Y");
-        content = content.replaceAll("Ｚ", "Z");
-        content = content.replaceAll("ａ", "a");
-        content = content.replaceAll("ｂ", "b");
-        content = content.replaceAll("ｃ", "c");
-        content = content.replaceAll("ｄ", "d");
-        content = content.replaceAll("ｅ", "e");
-        content = content.replaceAll("ｆ", "f");
-        content = content.replaceAll("ｇ", "g");
-        content = content.replaceAll("ｈ", "h");
-        content = content.replaceAll("ｉ", "i");
-        content = content.replaceAll("ｊ", "j");
-        content = content.replaceAll("ｋ", "k");
-        content = content.replaceAll("ｌ", "l");
-        content = content.replaceAll("ｍ", "m");
-        content = content.replaceAll("ｎ", "n");
-        content = content.replaceAll("ｏ", "o");
-        content = content.replaceAll("ｐ", "p");
-        content = content.replaceAll("ｑ", "q");
-        content = content.replaceAll("ｒ", "r");
-        content = content.replaceAll("ｓ", "s");
-        content = content.replaceAll("ｔ", "t");
-        content = content.replaceAll("ｕ", "u");
-        content = content.replaceAll("ｖ", "v");
-        content = content.replaceAll("ｗ", "w");
-        content = content.replaceAll("ｘ", "x");
-        content = content.replaceAll("ｙ", "y");
-        content = content.replaceAll("ｚ", "z");
 
-        // 替换全角字符
-        content = content.replaceAll("＠", "@");
-        content = content.replaceAll("，", ", ");
-        content = content.replaceAll("、", ", ");
-        content = content.replaceAll("。", ". ");
-        content = content.replaceAll("！", "! ");
-        content = content.replaceAll("？", "? ");
-        content = content.replaceAll("：", ": ");
-        content = content.replaceAll("；", "; ");
-        content = content.replaceAll("（", "(");
-        content = content.replaceAll("）", ") ");
-        content = content.replaceAll("【", "(");
-        content = content.replaceAll("】", ") ");
-        content = content.replaceAll("｛", "{");
-        content = content.replaceAll("｝", "} ");
-        content = content.replaceAll("＞", "> ");
-        content = content.replaceAll("＜", "< ");
-        content = content.replaceAll("》", "> ");
-        content = content.replaceAll("《", "< ");
-        content = content.replaceAll("≤", ">=");
-        content = content.replaceAll("≥", "<=");
-        content = content.replaceAll("‘", "\'");
-        content = content.replaceAll("’", "\'");
-        content = content.replaceAll("“", "\"");
-        content = content.replaceAll("”", "\"");
+}
 
-        return content;
+// !! T3: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
+function restReplace(content) {
+
+    // 修复 markdown 链接所使用的标点。
+    content = content.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
+    content = content.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
+
+    // 注释处理
+    if (content.trim().search(/^<!--.*-->$/) != -1) {
+        // 注释前后加入空行
+        content = content.replace(/(^\s*<!--.*-->)([\r\n]*)/, "\n$1\n");
     }
 
-    replaceOtherChars(content) {
-        // 去掉特殊格式
-        content = content.replaceAll("\\mathbb{", "{");
-        content = content.replaceAll("\\mathrm{", "{");
-        content = content.replaceAll("\\mathcal{", "{");
-        content = content.replaceAll("\\mathbf{", "{");
-        content = content.replaceAll("\\textit{", "{");
-        content = content.replaceAll("\\textrm{", "{");
-        content = content.replaceAll("\\boldsymbol{", "{");
+    // 忽略链接以及注释格式
+    if (is_non_link(content)) {
+        content = replaceMathChars(content);
+        content = replaceOtherChars(content);
 
-        // 替换括号
-        content = content.replace(/\\left\s*\\{/g, "{");
-        content = content.replace(/\\left\s*\\}/g, "}");
-        content = content.replace(/\\right\s*\\}/g, "}");
-        content = content.replace(/\\right\s*\\{/g, "{");
-        content = content.replace(/\\left\s*\./g, "");
-        content = content.replace(/\\right\s*\./g, "");
-        content = content.replace(/\\((left)|(right))\s*([[\]{}\(\)|<>])/g, "$4");
+        // 汉字与其前后的英文字符、英文标点、数字间增加空白。
+        //     // 汉字修改
+        //     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+        //     content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
 
-        // 去掉 operatorname
-        content = content.replace(/\\operatorname\s*{([A-Za-z0-9]+)}/g, "$1");
+        // 英文修改, 英文字符间如果有相关符号, 则增加空格
+        // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
+        // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
+        const pattern = /(.*)(\(|\[|\")(.*)(\)|\]|\")(.*)/g
+        if (content.match(pattern)) {
+            let element_formatted = ""
+            const parts = content.split(pattern)
+            for (let i = 0; i < parts.length; i++) {
+                let part = parts[i]
+                if ((i == 1 || i == 5) && part.match(pattern)) {
+                    let subParts = part.split(pattern)
+                    let subElement_formatted = ""
 
-        // 替换数学符号, 便于识别
-        content = content.replace(/\\top([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "T$1");
-        content = content.replaceAll("\\cdot", "×");
-        content = content.replaceAll("\\times", "×");
-        // content = content.replaceAll("\\pm", "±");
-        content = content.replace(/\\pm([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "±$1");
-        // content = content.replaceAll("\\mid", "|"); // 间隔
-        content = content.replace(/\\mid([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "|$1"); // 间隔
-        content = content.replaceAll("\\|", "||");
-        // content = content.replaceAll("\\gets", "←");
-        content = content.replace(/\\gets([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "←$1");
-        content = content.replaceAll("\\longleftarrow", "←");
-        content = content.replaceAll("\\Longleftarrow", "←");
-        content = content.replaceAll("\\Leftarrow", "←");
-        // content = content.replaceAll("\\to", "→");
-        content = content.replace(/\\to([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "→$1");
-        content = content.replaceAll("\\longrightarrow", "→");
-        content = content.replaceAll("\\Rightarrow", "→");
-        content = content.replaceAll("\\Longrightarrow", "→");
-        content = content.replaceAll("\\leftrightarrow", "↔");
-        content = content.replaceAll("\\longleftrightarrow", "↔");
-        content = content.replaceAll("\\Leftrightarrow", "↔");
-        content = content.replaceAll("\\Longleftrightarrow", "↔");
-        content = content.replaceAll("\\because", "∵");
-        content = content.replaceAll("\\therefore", "∴");
-        content = content.replaceAll("\\approx", "≈");
-        content = content.replaceAll("\\propto", "∝");
-        // content = content.replaceAll("\\sim", "∼");
-        content = content.replace(/\\sim([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "∼$1");
-        content = content.replaceAll("\\nabla", "▽");
+                    for (let j = 0; j < subParts.length; j++) {
+                        let subPart = subParts[j]
+                        if (j == 1 || j == 5) {
+                            subPart = subPart.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
+                            subPart = subPart.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
+                        }
+                        subElement_formatted += subPart
+                    }
+                    element_formatted += subElement_formatted
+                } else if (i == 1 || i == 5) {
+                    part = part.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
+                    part = part.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
 
-        // 替换希腊字母, 便于识别
-        content = content.replaceAll("\\alpha", "α");
-        content = content.replaceAll("\\beta", "β");
-        content = content.replaceAll("\\gamma", "γ");
-        content = content.replaceAll("\\Gamma", "Γ");
-        content = content.replaceAll("\\delta", "δ");
-        content = content.replaceAll("\\epsilon", "ε");
-        content = content.replaceAll("\\varepsilon", "ε");
-        content = content.replaceAll("\\zeta", "ζ");
-        content = content.replaceAll("\\eta", "η");
-        content = content.replaceAll("\\Theta", "Θ");
-        content = content.replaceAll("\\theta", "θ");
-        content = content.replaceAll("\\iota", "ι");
-        content = content.replaceAll("\\kappa", "κ");
-        content = content.replaceAll("\\lambda", "λ");
-        // content = content.replaceAll("\\mu", "μ");
-        // content = content.replaceAll("\\xi", "ξ");
-        // content = content.replaceAll("\\pi", "π");
-        content = content.replace(/\\mu([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "μ$1");
-        content = content.replace(/\\xi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "ξ$1");
-        content = content.replace(/\\pi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "π$1");
-        content = content.replaceAll("\\rho", "ρ");
-        content = content.replaceAll("\\sigma", "σ");
-        content = content.replaceAll("\\tau", "τ");
-        content = content.replaceAll("\\Phi", "Φ");
-        content = content.replaceAll("\\phi", "Φ");
-        content = content.replaceAll("\\varphi", "φ");
-        // content = content.replaceAll("\\chi", "χ");
-        content = content.replace(/\\chi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "χ$1");
-        content = content.replaceAll("\\psi", "ψ");
-        content = content.replaceAll("\\omega", "ω");
-        content = content.replaceAll("\\partial", "∂"); // 偏导
-
-        // 替换数学花写字体, 便于识别
-        content = content.replaceAll("\\ell", "l");
-        content = content.replaceAll("\\imath", "i");
-        content = content.replaceAll("\\jmath", "j");
-        content = content.replaceAll("\\hbar", "h");
-        content = content.replaceAll("^{\\prime}", "'");
-        content = content.replaceAll("\\prime", "'");
-
-        // 连加/连乘/max/min规范化
-        content = content.replace(/\\sum\s*_/g, "\\sum\\limits_");
-        content = content.replace(/\\prod\s*_/g, "\\prod\\limits_");
-        content = content.replace(/\\min\s*_/g, "\\min\\limits_");
-        content = content.replace(/\\max\s*_/g, "\\max\\limits_");
-
-        // 如果括号内只有单个字符, 则去掉括号 { X } -> X
-        content = content.replace(/(^|[[{\(\^_=<>\+\-\*/\|&%$@#!`~]){(\s*)(\w)(\s*)}/g, '$1$3');
-        content = content.replace(/(^|[[{\(\^_=<>\+\-\*/\|&%$@#!`~]){{(\s*)(\w)(\s*)}}/g, '$1$3');
-
-        // 独立的单行公式换成多行公式 -> $$ XXXX $$$$ 的内容变成新行显示
-        content = content.replace(/^\s*\$\$(.*)\$\$\s*$/g, '$$$$\n$1\n$$$$');
-
-        content = content.replace(/\\text\s*\{\s*([\sa-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~]+)\s*\}/g, '$1'); // 公式中的 \text 删除掉, \text {overall } -> overall
-        content = content.replace(/([a-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~])\s*(\}\])/g, '$1$2'); // {overall } -> {overall}
-
-        // ! 一些特殊替换
-        // content = content.replace(/[^\.]\.\s*$/g, ''); // 去掉行末的句号
-        // content = content.replaceAll("\\*", " * "); 
-        content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
-        content = content.replaceAll("\\_", "_"); // 还原prettier替换的 _
-        content = content.replaceAll("> >", ">>"); // 0.2.17: 还原prettier替换的 >>
-        // content = content.replace(/^_(.*)_$/g, "*$1*"); // 0.2.17: 还原prettier替换的 *123* -> _123_
-
-        // 非 "-  [ ]" (todo list)
-        // 非 "|    |" (table)
-        // 则多空格转成一个空格
-        if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
-            content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
+                    element_formatted += part
+                } else {
+                    element_formatted += part
+                }
+            }
+            content = element_formatted
         }
-
-        // content = content.replace(/\s+([_\^\)\}])/g, '$1'); // 去掉部分符号前的空格, "abc ]" -> "abc]"
-
-        // 0.2.13: "abc ]" -> "abc]", "[ abc" -> "[abc"
-        content = content.replace(/(\w+)\s*([\]\)}_\^])/g, "$1$2");
-        content = content.replace(/([\[\({_\^])\s*(\w+)/g, "$1$2");
-
-        // 0.2.13: keep markdown todo list tag
-        content = content.replaceAll("-  []", "-  [ ]");
-        content = content.replaceAll("- []", "- [ ]");
-
-        return content;
+        else {
+            content = content.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
+            // content = content.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3'); // 前空格: a(123) -> a (123)
+            content = content.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
+        }
     }
+
+    return content;
+}
+
+// !! T2: 非代码块内生效, 即 ```content``` 外生效
+function noncodeBlockReplace(content) {
+    // 0.3.4: ``与其他内容之间增加空格
+    content = content.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
+    content = content.replace(/(`[^`]+`)(([\u4e00-\u9fa5\u3040-\u30FF])|([a-zA-Z0-9]))/g, '$1 $2'); // 后空格
+
+    return content;
+}
+
+// !! T1: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+function codeBlockReplace(content) {
+    // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+    content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+
+    return content;
+}
+
+// !! T0: 全局生效
+function globalReplace(content) {
+    content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
+
+    content = replaceFullChars(content); // 全角英文和标点
+
+    // 0.2.12: [ ( -> [(
+    content = content.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
+
+    // 0.2.13: ) ] -> )]
+    content = content.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
+
+    return content
+}
+
+// 替换全角字符
+function replaceFullChars(content) {
+    // 替换全角数字
+    content = content.replaceAll("０", "0");
+    content = content.replaceAll("１", "1");
+    content = content.replaceAll("２", "2");
+    content = content.replaceAll("３", "3");
+    content = content.replaceAll("４", "4");
+    content = content.replaceAll("５", "5");
+    content = content.replaceAll("６", "6");
+    content = content.replaceAll("７", "7");
+    content = content.replaceAll("８", "8");
+    content = content.replaceAll("９", "9");
+
+    // 全角英文
+    content = content.replaceAll("Ａ", "A");
+    content = content.replaceAll("Ｂ", "B");
+    content = content.replaceAll("Ｃ", "C");
+    content = content.replaceAll("Ｄ", "D");
+    content = content.replaceAll("Ｅ", "E");
+    content = content.replaceAll("Ｆ", "F");
+    content = content.replaceAll("Ｇ", "G");
+    content = content.replaceAll("Ｈ", "H");
+    content = content.replaceAll("Ｉ", "I");
+    content = content.replaceAll("Ｊ", "J");
+    content = content.replaceAll("Ｋ", "K");
+    content = content.replaceAll("Ｌ", "L");
+    content = content.replaceAll("Ｍ", "M");
+    content = content.replaceAll("Ｎ", "N");
+    content = content.replaceAll("Ｏ", "O");
+    content = content.replaceAll("Ｐ", "P");
+    content = content.replaceAll("Ｑ", "Q");
+    content = content.replaceAll("Ｒ", "R");
+    content = content.replaceAll("Ｓ", "S");
+    content = content.replaceAll("Ｔ", "T");
+    content = content.replaceAll("Ｕ", "U");
+    content = content.replaceAll("Ｖ", "V");
+    content = content.replaceAll("Ｗ", "W");
+    content = content.replaceAll("Ｘ", "X");
+    content = content.replaceAll("Ｙ", "Y");
+    content = content.replaceAll("Ｚ", "Z");
+    content = content.replaceAll("ａ", "a");
+    content = content.replaceAll("ｂ", "b");
+    content = content.replaceAll("ｃ", "c");
+    content = content.replaceAll("ｄ", "d");
+    content = content.replaceAll("ｅ", "e");
+    content = content.replaceAll("ｆ", "f");
+    content = content.replaceAll("ｇ", "g");
+    content = content.replaceAll("ｈ", "h");
+    content = content.replaceAll("ｉ", "i");
+    content = content.replaceAll("ｊ", "j");
+    content = content.replaceAll("ｋ", "k");
+    content = content.replaceAll("ｌ", "l");
+    content = content.replaceAll("ｍ", "m");
+    content = content.replaceAll("ｎ", "n");
+    content = content.replaceAll("ｏ", "o");
+    content = content.replaceAll("ｐ", "p");
+    content = content.replaceAll("ｑ", "q");
+    content = content.replaceAll("ｒ", "r");
+    content = content.replaceAll("ｓ", "s");
+    content = content.replaceAll("ｔ", "t");
+    content = content.replaceAll("ｕ", "u");
+    content = content.replaceAll("ｖ", "v");
+    content = content.replaceAll("ｗ", "w");
+    content = content.replaceAll("ｘ", "x");
+    content = content.replaceAll("ｙ", "y");
+    content = content.replaceAll("ｚ", "z");
+
+    // 替换全角字符
+    content = content.replaceAll("＠", "@");
+    content = content.replaceAll("，", ", ");
+    content = content.replaceAll("、", ", ");
+    content = content.replaceAll("。", ". ");
+    content = content.replaceAll("！", "! ");
+    content = content.replaceAll("？", "? ");
+    content = content.replaceAll("：", ": ");
+    content = content.replaceAll("；", "; ");
+    content = content.replaceAll("（", "(");
+    content = content.replaceAll("）", ") ");
+    content = content.replaceAll("【", "(");
+    content = content.replaceAll("】", ") ");
+    content = content.replaceAll("｛", "{");
+    content = content.replaceAll("｝", "} ");
+    content = content.replaceAll("＞", "> ");
+    content = content.replaceAll("＜", "< ");
+    content = content.replaceAll("》", "> ");
+    content = content.replaceAll("《", "< ");
+    content = content.replaceAll("≤", ">=");
+    content = content.replaceAll("≥", "<=");
+    content = content.replaceAll("‘", "\'");
+    content = content.replaceAll("’", "\'");
+    content = content.replaceAll("“", "\"");
+    content = content.replaceAll("”", "\"");
+
+    return content;
+}
+
+// 数学公式符号替换
+function replaceMathChars(content) {
+    // 简化数学符号, 便于识别
+    content = content.replaceAll("\\cdot", "×");
+    content = content.replaceAll("\\times", "×");
+    content = content.replaceAll("\\|", "||");
+    content = content.replaceAll("\\longleftarrow", "←");
+    content = content.replaceAll("\\Longleftarrow", "←");
+    content = content.replaceAll("\\Leftarrow", "←");
+    content = content.replaceAll("\\longrightarrow", "→");
+    content = content.replaceAll("\\Rightarrow", "→");
+    content = content.replaceAll("\\Longrightarrow", "→");
+    content = content.replaceAll("\\leftrightarrow", "↔");
+    content = content.replaceAll("\\longleftrightarrow", "↔");
+    content = content.replaceAll("\\Leftrightarrow", "↔");
+    content = content.replaceAll("\\Longleftrightarrow", "↔");
+    content = content.replaceAll("\\because", "∵");
+    content = content.replaceAll("\\therefore", "∴");
+    content = content.replaceAll("\\approx", "≈");
+    content = content.replaceAll("\\propto", "∝");
+    content = content.replaceAll("\\nabla", "▽");
+    content = content.replace(/\\top([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "T$1");
+    content = content.replace(/\\pm([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "±$1");
+    content = content.replace(/\\mid([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "|$1"); // 间隔
+    content = content.replace(/\\gets([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "←$1");
+    content = content.replace(/\\to([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "→$1");
+    content = content.replace(/\\sim([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "∼$1");
+
+    // 替换希腊字母, 便于识别
+    content = content.replaceAll("\\alpha", "α");
+    content = content.replaceAll("\\beta", "β");
+    content = content.replaceAll("\\gamma", "γ");
+    content = content.replaceAll("\\Gamma", "Γ");
+    content = content.replaceAll("\\delta", "δ");
+    content = content.replaceAll("\\epsilon", "ε");
+    content = content.replaceAll("\\varepsilon", "ε");
+    content = content.replaceAll("\\zeta", "ζ");
+    content = content.replaceAll("\\eta", "η");
+    content = content.replaceAll("\\Theta", "Θ");
+    content = content.replaceAll("\\theta", "θ");
+    content = content.replaceAll("\\iota", "ι");
+    content = content.replaceAll("\\kappa", "κ");
+    content = content.replaceAll("\\lambda", "λ");
+    content = content.replaceAll("\\rho", "ρ");
+    content = content.replaceAll("\\sigma", "σ");
+    content = content.replaceAll("\\tau", "τ");
+    content = content.replaceAll("\\Phi", "Φ");
+    content = content.replaceAll("\\phi", "Φ");
+    content = content.replaceAll("\\varphi", "φ");
+    content = content.replaceAll("\\psi", "ψ");
+    content = content.replaceAll("\\omega", "ω");
+    content = content.replaceAll("\\partial", "∂"); // 偏导
+    content = content.replace(/\\mu([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "μ$1");
+    content = content.replace(/\\xi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "ξ$1");
+    content = content.replace(/\\pi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "π$1");
+    content = content.replace(/\\chi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "χ$1");
+
+    // 替换数学花写字体, 便于识别
+    content = content.replaceAll("\\ell", "l");
+    content = content.replaceAll("\\imath", "i");
+    content = content.replaceAll("\\jmath", "j");
+    content = content.replaceAll("\\hbar", "h");
+    content = content.replaceAll("^{\\prime}", "'");
+    content = content.replaceAll("\\prime", "'");
+
+    // 去掉括号的修饰符
+    content = content.replaceAll("\\mathbb{", "{");
+    content = content.replaceAll("\\mathrm{", "{");
+    content = content.replaceAll("\\mathcal{", "{");
+    content = content.replaceAll("\\mathbf{", "{");
+    content = content.replaceAll("\\textit{", "{");
+    content = content.replaceAll("\\textrm{", "{");
+    content = content.replaceAll("\\boldsymbol{", "{");
+    content = content.replace(/\\left\s*\\{/g, "{");
+    content = content.replace(/\\left\s*\\}/g, "}");
+    content = content.replace(/\\right\s*\\}/g, "}");
+    content = content.replace(/\\right\s*\\{/g, "{");
+    content = content.replace(/\\left\s*\./g, "");
+    content = content.replace(/\\right\s*\./g, "");
+    content = content.replace(/\\((left)|(right))\s*([[\]{}\(\)|<>])/g, "$4");
+
+    // 去掉 operatorname
+    content = content.replace(/\\operatorname\s*{([A-Za-z0-9]+)}/g, "$1");
+
+    // 去掉修饰符 \\:
+    content = content.replaceAll(/\\:(\S)\\:/g, "$1"); // =+ 等符号去掉周围的修饰符, 如: `\\:=\\:` -> `=`
+    content = content.replaceAll("\\:\\", "\\"); // `\:\cos` -> `\cos`
+
+    // 连加/连乘/max/min规范化
+    content = content.replace(/\\Sigma\s*_/g, "\\sum\\limits_");
+    content = content.replace(/\\sum\s*_/g, "\\sum\\limits_");
+    content = content.replace(/\\prod\s*_/g, "\\prod\\limits_");
+    content = content.replace(/\\min\s*_/g, "\\min\\limits_");
+    content = content.replace(/\\max\s*_/g, "\\max\\limits_");
+
+    // 如果是独立的括号+word, 则去掉括号, 如: `={ 100 }` -> `=100`
+    content = content.replace(/(^|[[{\(\^_=<>\+\-\*/\|&%$@#!`~])\s*{{1,2}(\s*)(\w)(\s*)}{1,2}/g, '$1$3');
+    // 如果括号内只有单个字符, 则去掉括号 { X } -> X, 带个空格防止出错
+    content = content.replace(/{\s*(\S)\s*}/g, ' $1');
+
+    // 独立的单行公式换成多行公式 -> $$ XXXX $$$$ 的内容变成新行显示
+    // TODO: newline is not working
+    content = content.replace(/^\s*\$\$(.*)\$\$\s*$/g, `$$$$\n$1\n$$$$`);
+
+    content = content.replace(/\\text\s*\{\s*([\sa-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~]+)\s*\}/g, '$1'); // 公式中的 \text 删除掉, \text {overall } -> overall
+    content = content.replace(/([a-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~])\s*(\}\])/g, '$1$2'); // {overall } -> {overall}
+
+    // 换行符替换成多个$$, 用于换行
+    // TODO: newline is not working
+    content = content.replace(/(\\begin{aligned.?})(.*)(\\end{aligned.?})/g, '$1\n$2\n$3');
+
+    return content;
+}
+
+function replaceOtherChars(content) {
+    // ! 一些特殊替换
+    // content = content.replace(/[^\.]\.\s*$/g, ''); // 去掉行末的句号
+    // content = content.replaceAll("\\*", " * "); 
+    content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
+    content = content.replaceAll("\\_", "_"); // 还原prettier替换的 _
+    content = content.replaceAll("> >", ">>"); // 0.2.17: 还原prettier替换的 >>
+    // content = content.replace(/^_(.*)_$/g, "*$1*"); // 0.2.17: 还原prettier替换的 *123* -> _123_
+
+    // 非 "-  [ ]" (todo list)
+    // 非 "|    |" (table)
+    // 则多空格转成一个空格
+    if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
+        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
+    }
+
+    // content = content.replace(/\s+([_\^\)\}])/g, '$1'); // 去掉部分符号前的空格, "abc ]" -> "abc]"
+
+    // 0.2.13: "abc ]" -> "abc]", "[ abc" -> "[abc"
+    content = content.replace(/(\w+)\s*([\]\)}_\^])/g, "$1$2");
+    content = content.replace(/([\[\({_\^])\s*(\w+)/g, "$1$2");
+
+    // 0.2.13: keep markdown todo list tag
+    content = content.replaceAll("-  []", "-  [ ]");
+    content = content.replaceAll("- []", "- [ ]");
+
+    return content;
+}
+
+// !! 替换标题
+function headerReplace(content) {
+    // 标题后加入一个空格
+    if (content.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
+        // 0.2.16: skip md tags: #XX
+        // content = content.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
+    } else {
+        content = content.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
+    }
+    // 标题前后加入空行
+    content = content.trim().replace(/(^#{1,6}.*)([\r\n]*)/, "\n$1\n");
+
+    return content
+}
+
+function is_non_link(content) {
+    return !content.match(/tags:.*/g) &&               //0.2.15: obsidian - tags: XX
+        !content.match(/(\[.*\])(\(.*\))/g) &&      //[XX](XX)
+        !content.match(/(^\s*\[.*\]$)/g) &&         //[XX]
+        !content.match(/(^\s*\(.*\)$)/g) &&         //(XX)
+        !content.match(/(^\s*{.*}$)/g) &&           //{XX}
+        !content.match(/(^\s*<.*>$)/g) &&           //<XX>
+        !content.match(/(^\s*`.*`$)/g) &&           //`XX`
+        !content.match(/(^\s*\".*\"$)/g) &&         //"XX"
+        !content.match(/(^\s*\'.*\'$)/g)            //'XX'
 }

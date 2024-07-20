@@ -2,6 +2,12 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.4.0] - 2024-07-20
+
+1. 重构代码
+2. 添加了几个math相关的替换
+3. 去掉了没用的config
+
 ## [0.3.5] - 2024-07-14
 
 `cont` 前后加空格
