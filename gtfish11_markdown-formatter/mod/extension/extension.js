@@ -8,7 +8,6 @@ function activate(context) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
-    console.log('"MarkdownFormat" 现在已激活!');
     let documentFormatter = new DocumentFormatter();
 
     // The command has been defined in the package.json file
@@ -320,8 +319,8 @@ class DocumentFormatter {
         let tag = true;
         // 每行操作
         lines = content.split("\n").map((line) => {
-            // !! T0: 全局生效
-            line = globalReplace(line);
+            // !! T1: 全局逐行生效
+            line = globalReplaceOnLine(line);
 
             // 0.2.14: 增加全局生效的条件, 非链接, 不在括号内
             let line_tmp_global = "";
@@ -329,7 +328,7 @@ class DocumentFormatter {
             line.split(/(`.*?`)/).forEach(element => {
                 // 跳过各种括号内的内容, 防止链接被断开
                 if (is_non_link(element)) {
-                    // !! T1: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+                    // !! T2: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
                     element = codeBlockReplace(element);
                 }
                 line_tmp_global += element;
@@ -347,14 +346,14 @@ class DocumentFormatter {
             } else if (tag) {
                 // 忽略 @import 语法
                 if (line.trim().search(/^@import /) == -1) {
-                    // !! T2: 非代码块内生效, 即 ```content``` 外生效
+                    // !! T3: 非代码块内生效, 即 ```content``` 外生效
                     line = noncodeBlockReplace(line);
 
                     let line_tmp = "";
                     // 使用行中代码块为分割
                     line.split(/(`.*?`)/).forEach(element => {
                         if (element.search(/(`.*`)/) == -1) {
-                            // !! T3: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
+                            // !! T4: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
                             element = restReplace(element);
                         }
                         line_tmp += element;
@@ -400,12 +399,14 @@ class DocumentFormatter {
             }
         });
         content = content.trim() + "\n";
+
+        // !! T0: 全局整个文件生效
+        content = globalReplaceOnFile(content);
         return content;
     }
-
 }
 
-// !! T3: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
+// !! T4: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
 function restReplace(content) {
 
     // 修复 markdown 链接所使用的标点。
@@ -471,7 +472,7 @@ function restReplace(content) {
     return content;
 }
 
-// !! T2: 非代码块内生效, 即 ```content``` 外生效
+// !! T3: 非代码块内生效, 即 ```content``` 外生效
 function noncodeBlockReplace(content) {
     // 0.3.4: ``与其他内容之间增加空格
     content = content.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
@@ -480,7 +481,7 @@ function noncodeBlockReplace(content) {
     return content;
 }
 
-// !! T1: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+// !! T2: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
 function codeBlockReplace(content) {
     // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
@@ -489,8 +490,8 @@ function codeBlockReplace(content) {
     return content;
 }
 
-// !! T0: 全局生效
-function globalReplace(content) {
+// !! T1: 全局逐行生效, \n等特殊符号替换时可能有问题
+function globalReplaceOnLine(content) {
     content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
     content = replaceFullChars(content); // 全角英文和标点
@@ -500,6 +501,26 @@ function globalReplace(content) {
 
     // 0.2.13: ) ] -> )]
     content = content.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
+
+    // ! super ugly way to deal with the case of \\\\ - part 1
+    // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
+    content = content.replace(/\\\\((?!$))/g, '\\\\¶$1');
+    return content
+}
+
+// !! T0: 全局整个文件生效
+function globalReplaceOnFile(content) {
+    // ! 只有在别的地方修改有问题的才需要在这里改, 比如不能插入换行符的
+
+    // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
+    content = content.replace(/\$\$\s*(.*)\s*\$\$/g, `$$$$\n$1\n$$$$`);
+
+    // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
+    content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
+
+    // ! super ugly way to deal with the case of \\\\ - part 2
+    // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
+    content = content.replace(/\\\\¶/g, '\\\\\n');
 
     return content
 }
@@ -701,16 +722,8 @@ function replaceMathChars(content) {
     // 如果括号内只有单个字符, 则去掉括号 { X } -> X, 带个空格防止出错
     content = content.replace(/{\s*(\S)\s*}/g, ' $1');
 
-    // 独立的单行公式换成多行公式 -> $$ XXXX $$$$ 的内容变成新行显示
-    // TODO: newline is not working
-    content = content.replace(/^\s*\$\$(.*)\$\$\s*$/g, `$$$$\n$1\n$$$$`);
-
     content = content.replace(/\\text\s*\{\s*([\sa-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~]+)\s*\}/g, '$1'); // 公式中的 \text 删除掉, \text {overall } -> overall
     content = content.replace(/([a-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~])\s*(\}\])/g, '$1$2'); // {overall } -> {overall}
-
-    // 换行符替换成多个$$, 用于换行
-    // TODO: newline is not working
-    content = content.replace(/(\\begin{aligned.?})(.*)(\\end{aligned.?})/g, '$1\n$2\n$3');
 
     return content;
 }

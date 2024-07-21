@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.4.1] - 2024-07-20
+
+1. 实现了多行公式自动换行
+
 ## [0.4.0] - 2024-07-20
 
 1. 重构代码
