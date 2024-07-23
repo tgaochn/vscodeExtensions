@@ -413,11 +413,10 @@ function restReplace(content) {
     content = content.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
     content = content.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
 
-    // 注释处理
-    if (content.trim().search(/^<!--.*-->$/) != -1) {
-        // 注释前后加入空行
-        content = content.replace(/(^\s*<!--.*-->)([\r\n]*)/, "\n$1\n");
-    }
+    // 注释前后加入空行 - prettier 已经自带了
+    // content = content.replace(/(^<!-- \!\! ↑={100,110} -->$)/, "\n$1");
+    // content = content.replace(/(^<!-- \!\! ↓={100,110} -->$)/, "$1\n");
+    // content = content.replace(/(^<!-- \!\! ={100,110} -->$)/, "\n$1\n");
 
     // 忽略链接以及注释格式
     if (is_non_link(content)) {
@@ -510,7 +509,7 @@ function globalReplaceOnLine(content) {
 
 // !! T0: 全局整个文件生效
 function globalReplaceOnFile(content) {
-    // ! 只有在别的地方修改有问题的才需要在这里改, 比如不能插入换行符的
+    // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
 
     // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
     content = content.replace(/\$\$\s*(.*)\s*\$\$/g, `$$$$\n$1\n$$$$`);
