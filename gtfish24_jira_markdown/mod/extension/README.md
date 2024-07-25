@@ -2,6 +2,11 @@ forked version from chintans98.markdown-jira-1.1.0.
 
 # changelog
 
+## [0.0.3] - 2024-07-24
+
+1. `text` -> {color:#DE350B}text{color}
+2. (`link`) -> (link)
+
 ## [0.0.2] - 2024-07-12
 
 1. fixed readme

@@ -249,44 +249,60 @@ function toJiraString(text) {
                 default: return wrapper + content * wrapper;
             }
         })
+
         // All Headers (# format)
         .replace(/^([#]+)(.*?)$/gm, function (match, level, content) {
             return 'h' + level.length + '.' + content;
         })
+
         // Headers (H1 and H2 underlines)
         .replace(/^(.*?)\n([=-]+)$/gm, function (match, content, level) {
             return 'h' + (level[0] === '=' ? 1 : 2) + '. ' + content;
         })
+
         // Ordered lists
         .replace(/^([ \t]*)\d+\.\s+/gm, function (match, spaces) {
             return Array(Math.floor(spaces.length / 2 + 1)).join("#") + '# ';
         })
+
         // Un-Ordered Lists
         .replace(/^([ \t]*)\*\s+/gm, function (match, spaces) {
             return Array(Math.floor(spaces.length / 2 + 1)).join("*") + '* ';
         })
+
         // Headers (h1 or h2) (lines "underlined" by ---- or =====)
         // Citations, Inserts, Subscripts, Superscripts, and Strikethroughs
         .replace(new RegExp('<(' + Object.keys(map).join('|') + ')>(.*?)<\/\\1>', 'g'), function (match, from, content) {
             var to = map[from];
             return to + content + to;
         })
+
         // Other kind of strikethrough
         .replace(/\s+~~(.*?)~~\s+/g, ' -$1- ')
+
         // Named/Un-Named Code Block
         .replace(/`{3,}(\w+)?((?:\n|[^`])+)`{3,}/g, function (match, synt, content) {
             var code = '{code';
             if (synt) code += ':' + synt;
             return code + '}' + content + '{code}';
         })
+
+        // special link: (`link`) -> (link)
+        .replace(/\(`([^`]+)`\)/g, '($1)')
+
         // Inline-Preformatted Text
-        .replace(/`([^`]+)`/g, '{{$1}}')
-        // Named Link
+        // .replace(/`([^`]+)`/g, '{{$1}}') // `text` -> {{text}}
+        .replace(/`([^`]+)`/g, '{color:#DE350B}$1{color}') // `text` -> {color:#DE350B}text{color}
+
+        // Named Link: [text](url) -> [text|url]
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '[$1|$2]')
-        // Un-Named Link
+
+        // Un-Named Link: <url> -> [text]
         .replace(/<([^>]+)>/g, '[$1]')
+
         // Single Paragraph Blockquote
         .replace(/^>/gm, 'bq.')
+
         // ! tables - still buggy but it seems that most of the time it works
         .replace(/^\s*(\|(?:.*?\|)+)\s*\n\s*(\|(?:\s*:?-+:?\s*\|)+)\s*\n((?:\s*\|(?:.*?\|)+\s*\n?)*)/gm,
             function (match, headerLine, separatorLine, rowstr) {
