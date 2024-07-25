@@ -474,8 +474,8 @@ function restReplace(content) {
 // !! T3: 非代码块内生效, 即 ```content``` 外生效
 function noncodeBlockReplace(content) {
     // 0.3.4: ``与其他内容之间增加空格
-    content = content.replace(/(\S)(`[^`]+`)/g, '$1 $2'); // 前空格
-    content = content.replace(/(`[^`]+`)(([\u4e00-\u9fa5\u3040-\u30FF])|([a-zA-Z0-9]))/g, '$1 $2'); // 后空格
+    content = content.replace(/([^\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
+    content = content.replace(/(`[^`]+`)([^\)\]\}>"'])/g, '$1 $2'); // 后空格
 
     return content;
 }

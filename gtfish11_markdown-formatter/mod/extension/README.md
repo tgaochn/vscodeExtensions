@@ -2,6 +2,11 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.4.3] - 2024-07-24
+
+1. (\` 不要分开
+2. \\` 不要分开
+
 ## [0.4.1] - 2024-07-20
 
 1. 实现了多行公式自动换行
