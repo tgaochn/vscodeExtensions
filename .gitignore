@@ -3,3 +3,4 @@ README.txt
 node_modules
 .vscode/
 tempfile/*
+gtfish11_markdown-formatter/mod/extension/extension.test.js

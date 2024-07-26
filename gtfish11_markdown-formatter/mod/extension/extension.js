@@ -121,367 +121,262 @@ class DocumentFormatter {
         return range;
     }
 
-
     updateDocument_md2html(document) {
-        // 按照每行进行搞定
-        let content = document.getText(this.current_document_range(document));
-        let lines = [];
-        let tag = true;
-        // 每行操作
-        lines = content.split("\n").map((line) => {
-            line = line.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
-            // 代码块
-            if (line.trim().search("```") === 0) {
-                if (tag) {
-                    line = line.replace("```sql", "{code:sql}");
-                    line = line.replace("```bash", "{code:bash}");
-                    line = line.replace("```go", "{code:go}");
-                    line = line.replace("```scala", "{code:scala}");
-                    line = line.replace("```java", "{code:java}");
-                    line = line.replace("```xml", "{code:xml}");
-                    line = line.replace("```json", "{code:json}");
-                    line = line.replace("```python", "{code:python}");
-                    line = line.replace("```conf", "{code:conf}");
-                    line = line.replace("```config", "{code:config}");
-                    line = line.replace("```cfg", "{code:cfg}");
-                    line = line.replace("```", "{code}");
+        const content = document.getText(this.current_document_range(document));
+        let inCodeBlock = false;
 
-                    return line
-                } else {
-                    return "\n" + line;
-                }
-            } else if (tag) {
-                // 忽略 @import 语法
-                if (line.trim().search(/^@import /) == -1) {
-                    let line_tmp = "";
-
-                    // 使用行中代码块为分割
-                    line.split(/(`.*?`)/).forEach(element => {
-
-                        // md2html - 非代码块
-                        if (element.search(/(`.*`)/) == -1) {
-                            // title
-                            element = element.replace(/^# (.*)/g, "h1. $1");
-                            element = element.replace(/^## (.*)/g, "h2. $1");
-                            element = element.replace(/^### (.*)/g, "h3. $1");
-                            element = element.replace(/^#### (.*)/g, "h4. $1");
-                            element = element.replace(/^##### (.*)/g, "h5. $1");
-                            element = element.replace(/^###### (.*)/g, "h6. $1");
-
-                            // bold
-                            element = element.replace(/^_(.*)_/g, "*$1*");
-
-                            // align
-                            element = element.replace(/^  \* (.*)/g, "\*\* $1");
-                            element = element.replace(/^    \* (.*)/g, "\*\*\* $1");
-                            element = element.replace(/^      \* (.*)/g, "\*\*\*\* $1");
-                        }
-
-                        line_tmp += element;
-                    });
-
-                    line = line_tmp;
-                }
-
+        const processLine = (line) => {
+            line = line.trim();
+            
+            if (this.isCodeBlockStart(line)) {
+                inCodeBlock = !inCodeBlock;
+                return this.processCodeBlockStart_md2html(line);
             }
-            return line;
-        });
 
-        let i = 1;
-        content = "";
-        tag = true;
-        lines.join("\n").split("\n").forEach(line => {
-            if (line.trim().search("```") === 0) {
-                tag = !tag;
-                if (tag) {
-                    content += line + "\n";
-                } else {
-                    content += line + "\n";
-                }
-                i = 0;
-            } else if (tag) {
-                if (line.trim().length === 0) {
-                    if (i == 0) {
-                        content += "\n";
-                    }
-                    i += 1;
-                } else {
-                    i = 0;
-                }
-                if (i == 0) {
-                    content += line.replace(/(.*)[\r\n]$/g, "$1") + "\n";
-                }
-            } else {
-                content += line + "\n";
+            if (inCodeBlock) {
+                return line;
             }
-        });
-        content = content.trim() + "\n";
-        return content;
+
+            if (line.startsWith('@import')) {
+                return line;
+            }
+
+            return this.processNonCodeLine_md2html(line);
+        };
+
+        const lines = content.split("\n").map(processLine);
+        return this.assembleContent(lines);
     }
 
     updateDocument_html2md(document) {
-        // 按照每行进行搞定
-        let content = document.getText(this.current_document_range(document));
-        let lines = [];
-        let tag = true;
-        // 每行操作
-        lines = content.split("\n").map((line) => {
-            line = line.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
-            // 忽略代码块
-            if (line.trim().search("```") === 0) {
-                tag = !tag;
-                if (tag) {
-                    return line + "\n";
-                } else {
-                    return "\n" + line;
-                }
-            } else if (tag) {
-                // 忽略 @import 语法
-                if (line.trim().search(/^@import /) == -1) {
-                    let line_tmp = "";
-                    // 使用行中代码块为分割
-                    line.split(/(`.*?`)/).forEach(element => {
+        const content = document.getText(this.current_document_range(document));
+        let inCodeBlock = false;
 
-                        // html2md
-                        if (element.search(/(`.*`)/) == -1) {
-                            // title
-                            element = element.replace(/^h1\. (.*)/g, "# $1");
-                            element = element.replace(/^h2\. (.*)/g, "## $1");
-                            element = element.replace(/^h3\. (.*)/g, "### $1");
-                            element = element.replace(/^h4\. (.*)/g, "#### $1");
-                            element = element.replace(/^h5\. (.*)/g, "##### $1");
-                            element = element.replace(/^h6\. (.*)/g, "###### $1");
-
-                            // code block
-                            element = element.replace("{code:sql}", "```sql");
-                            element = element.replace("{code:bash}", "```bash");
-                            element = element.replace("{code:go}", "```go");
-                            element = element.replace("{code:scala}", "```scala");
-                            element = element.replace("{code:java}", "```java");
-                            element = element.replace("{code:xml}", "```xml");
-                            element = element.replace("{code:json}", "```json");
-                            element = element.replace("{code:python}", "```python");
-                            element = element.replace("{code:conf}", "```conf");
-                            element = element.replace("{code:config}", "```config");
-                            element = element.replace("{code:cfg}", "```cfg");
-                            element = element.replace("{code}", "```");
-
-                            // align
-                            element = element.replace(/^ *\*\* (.*)/g, "  \* $1");
-                            element = element.replace(/^ *\*\*\* (.*)/g, "    \* $1");
-                            element = element.replace(/^ *\*\*\*\* (.*)/g, "      \* $1");
-                        }
-                        line_tmp += element;
-                    });
-
-                    line = line_tmp;
-                }
-
+        const processLine = (line) => {
+            line = line.trim();
+            
+            if (this.isCodeBlockStart(line)) {
+                inCodeBlock = !inCodeBlock;
+                return this.processCodeBlockStart_html2md(line);
             }
-            return line;
+
+            if (inCodeBlock) {
+                return line;
+            }
+
+            if (line.startsWith('@import')) {
+                return line;
+            }
+
+            return this.processNonCodeLine_html2md(line);
+        };
+
+        const lines = content.split("\n").map(processLine);
+        return this.assembleContent(lines);
+    }
+
+    processCodeBlockStart_md2html(line) {
+        const codeTypes = ['sql', 'bash', 'go', 'scala', 'java', 'xml', 'json', 'python', 'conf', 'config', 'cfg'];
+        for (let type of codeTypes) {
+            if (line === `\`\`\`${type}`) {
+                return `{code:${type}}`;
+            }
+        }
+        return line.replace('```', '{code}');
+    }
+
+    processCodeBlockStart_html2md(line) {
+        const codeTypes = ['sql', 'bash', 'go', 'scala', 'java', 'xml', 'json', 'python', 'conf', 'config', 'cfg'];
+        for (let type of codeTypes) {
+            if (line === `{code:${type}}`) {
+                return `\`\`\`${type}`;
+            }
+        }
+        return line.replace('{code}', '```');
+    }
+
+    processNonCodeLine_md2html(line) {
+        let line_tmp = "";
+
+        // 使用行中代码块为分割
+        line.split(/(`.*?`)/).forEach(element => {
+            if (element.search(/(`.*`)/) == -1) {
+                // title
+                element = element.replace(/^# (.*)/g, "h1. $1");
+                element = element.replace(/^## (.*)/g, "h2. $1");
+                element = element.replace(/^### (.*)/g, "h3. $1");
+                element = element.replace(/^#### (.*)/g, "h4. $1");
+                element = element.replace(/^##### (.*)/g, "h5. $1");
+                element = element.replace(/^###### (.*)/g, "h6. $1");
+
+                // bold
+                element = element.replace(/^_(.*)_/g, "*$1*");
+
+                // align
+                element = element.replace(/^  \* (.*)/g, "\*\* $1");
+                element = element.replace(/^    \* (.*)/g, "\*\*\* $1");
+                element = element.replace(/^      \* (.*)/g, "\*\*\*\* $1");
+            }
+
+            line_tmp += element;
         });
 
-        let i = 1;
-        content = "";
-        tag = true;
-        lines.join("\n").split("\n").forEach(line => {
-            if (line.trim().search("```") === 0) {
-                tag = !tag;
-                if (tag) {
-                    content += line + "\n";
-                } else {
-                    content += line + "\n";
-                }
-                i = 0;
-            } else if (tag) {
+        line = line_tmp;
+
+        return line;
+    }
+
+    processNonCodeLine_html2md(line) {
+        let line_tmp = "";
+        // 使用行中代码块为分割
+        line.split(/(`.*?`)/).forEach(element => {
+
+            // html2md
+            if (element.search(/(`.*`)/) == -1) {
+                // title
+                element = element.replace(/^h1\. (.*)/g, "# $1");
+                element = element.replace(/^h2\. (.*)/g, "## $1");
+                element = element.replace(/^h3\. (.*)/g, "### $1");
+                element = element.replace(/^h4\. (.*)/g, "#### $1");
+                element = element.replace(/^h5\. (.*)/g, "##### $1");
+                element = element.replace(/^h6\. (.*)/g, "###### $1");
+
+                // code block
+                element = element.replace("{code:sql}", "```sql");
+                element = element.replace("{code:bash}", "```bash");
+                element = element.replace("{code:go}", "```go");
+                element = element.replace("{code:scala}", "```scala");
+                element = element.replace("{code:java}", "```java");
+                element = element.replace("{code:xml}", "```xml");
+                element = element.replace("{code:json}", "```json");
+                element = element.replace("{code:python}", "```python");
+                element = element.replace("{code:conf}", "```conf");
+                element = element.replace("{code:config}", "```config");
+                element = element.replace("{code:cfg}", "```cfg");
+                element = element.replace("{code}", "```");
+
+                // align
+                element = element.replace(/^ *\*\* (.*)/g, "  \* $1");
+                element = element.replace(/^ *\*\*\* (.*)/g, "    \* $1");
+                element = element.replace(/^ *\*\*\*\* (.*)/g, "      \* $1");
+            }
+            line_tmp += element;
+        });
+
+        line = line_tmp;
+
+        return line;
+    }
+
+    assembleContent(lines) {
+        let content = "";
+        let isInCodeBlock = false;
+        let consecutiveBlankLines = 0;
+
+        for (let line of lines) {
+            if (this.isCodeBlockStart(line)) {
+                isInCodeBlock = !isInCodeBlock;
+                content += line + "\n";
+                consecutiveBlankLines = 0;
+            } else if (isInCodeBlock) {
+                content += line + "\n";
+            } else {
                 if (line.trim().length === 0) {
-                    if (i == 0) {
+                    if (consecutiveBlankLines === 0) {
                         content += "\n";
                     }
-                    i += 1;
+                    consecutiveBlankLines++;
                 } else {
-                    i = 0;
+                    content += line + "\n";
+                    consecutiveBlankLines = 0;
                 }
-                if (i == 0) {
-                    content += line.replace(/(.*)[\r\n]$/g, "$1") + "\n";
-                }
-            } else {
-                content += line + "\n";
             }
-        });
-        content = content.trim() + "\n";
-        return content;
+        }
+
+        return content.trim() + "\n";
     }
 
     updateDocument(document) {
-        let content = document.getText(this.current_document_range(document));
-        let lines = [];
-        let tag = true;
-        // 每行操作
-        lines = content.split("\n").map((line) => {
-            // !! T1: 全局逐行生效
+        const content = document.getText(this.current_document_range(document));
+        let inCodeBlock = false;
+
+        const processLine = (line) => {
+            // !! T1: 全局生效, 输入为单行, \n等特殊符号替换时可能有问题
             line = globalReplaceOnLine(line);
 
-            // 0.2.14: 增加全局生效的条件, 非链接, 不在括号内
-            let line_tmp_global = "";
-
-            line.split(/(`.*?`)/).forEach(element => {
-                // 跳过各种括号内的内容, 防止链接被断开
-                if (is_non_link(element)) {
-                    // !! T2: 链接内不生效, 如 [content] (content) `content`, 代码块内生效
-                    element = codeBlockReplace(element);
-                }
-                line_tmp_global += element;
-            });
-            line = line_tmp_global;
-
-            // 忽略代码块
-            if (line.trim().search("```") === 0) {
-                tag = !tag;
-                if (tag) {
-                    return line + "\n";
-                } else {
-                    return "\n" + line;
-                }
-            } else if (tag) {
-                // 忽略 @import 语法
-                if (line.trim().search(/^@import /) == -1) {
-                    // !! T3: 非代码块内生效, 即 ```content``` 外生效
-                    line = noncodeBlockReplace(line);
-
-                    let line_tmp = "";
-                    // 使用行中代码块为分割
-                    line.split(/(`.*?`)/).forEach(element => {
-                        if (element.search(/(`.*`)/) == -1) {
-                            // !! T4: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
-                            element = restReplace(element);
-                        }
-                        line_tmp += element;
-                    });
-                    // 标题处理
-                    if (line_tmp.trim().search(/(^#{1,6}.*)([\r\n]*)/) != -1) {
-                        // !! 替换标题
-                        line_tmp = headerReplace(line_tmp);
-                    }
-                    line = line_tmp;
-                }
-
+            if (this.isCodeBlockStart(line)) {
+                inCodeBlock = !inCodeBlock;
+                return inCodeBlock ? "\n" + line : line + "\n";
             }
-            return line;
-        });
 
-        let i = 1;
-        content = "";
-        tag = true;
-        lines.join("\n").split("\n").forEach(line => {
-            if (line.trim().search("```") === 0) {
-                tag = !tag;
-                if (tag) {
-                    content += line + "\n";
-                } else {
-                    content += line + "\n";
-                }
-                i = 0;
-            } else if (tag) {
-                if (line.trim().length === 0) {
-                    if (i == 0) {
-                        content += "\n";
-                    }
-                    i += 1;
-                } else {
-                    i = 0;
-                }
-                if (i == 0) {
-                    content += line.replace(/(.*)[\r\n]$/g, "$1") + "\n";
+            if (/^@import /.test(line.trim())) {
+                return line;
+            }
+
+            // !! T2: links 内生效, 即 [content] (content) `content`
+            if (isLink(line)) {
+                return linkReplace(line);
+            }
+
+            // !! T3: 代码块内生效, 即 ```content``` 内生效
+            if (inCodeBlock) {
+                return codeBlockReplace(line);
+            }
+
+            // !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
+            line = regularReplace(line);
+
+            return line;
+        };
+
+        let lines = content.split("\n").map(processLine);
+        let finalContent = this.assembleFormattedContent(lines);
+
+        // !! T0: 全局生效, 输入为整个文件 (方便处理换行等)
+        finalContent = globalReplaceOnFile(finalContent);
+
+        return finalContent;
+    }
+
+    // Assemble the final content while managing newlines
+    assembleFormattedContent(lines) {
+        let content = "";
+        let lastWasEmptyLine = false;
+
+        lines.forEach(line => {
+            if (line.trim().length === 0) {
+                if (!lastWasEmptyLine) {
+                    content += "\n";
+                    lastWasEmptyLine = true;
                 }
             } else {
                 content += line + "\n";
+                lastWasEmptyLine = false;
             }
         });
-        content = content.trim() + "\n";
 
-        // !! T0: 全局整个文件生效
-        content = globalReplaceOnFile(content);
-        return content;
+        return content.trim() + "\n";
+    }
+
+    // Check if a line starts a code block
+    isCodeBlockStart(line) {
+        return line.trim().startsWith("```") || line.trim().startsWith('{code');
     }
 }
 
-// !! T4: 其他范围内生效, 即md内的常规内容, 非链接, 非代码部分
-function restReplace(content) {
-
-    // 修复 markdown 链接所使用的标点。
-    content = content.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
-    content = content.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
+// !! T4: 生效范围: 常规md范围, 排除 inline `content` 的部分
+function noInlineLinkReplace(content) {
+    // 0.2.17: 还原分开的 > >
+    content = content.replaceAll("> >", ">>");
 
     // 注释前后加入空行 - prettier 已经自带了
     // content = content.replace(/(^<!-- \!\! ↑={100,110} -->$)/, "\n$1");
     // content = content.replace(/(^<!-- \!\! ↓={100,110} -->$)/, "$1\n");
     // content = content.replace(/(^<!-- \!\! ={100,110} -->$)/, "\n$1\n");
 
-    // ! 忽略链接以及注释格式: 即 [XX], <XX> 等
-    if (is_non_link(content)) {
-        content = replaceMathChars(content);
-        content = replaceOtherChars(content);
+    content = replaceMathChars(content);
+    content = replaceOtherChars(content);
 
-        // 汉字与其前后的英文字符、英文标点、数字间增加空白。
-        //     // 汉字修改
-        //     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-        //     content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
-
-        // 英文修改, 英文字符间如果有相关符号, 则增加空格
-        // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
-        // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
-        const pattern = /(.*)(\(|\[|\"\'|<)(.*)(\)|\]|\"\'|>)(.*)/g
-
-        // ! 对于非链接, 但是内容中有括号的情况, 分段处理
-        if (content.match(pattern)) {
-            let element_formatted = ""
-            const parts = content.split(pattern)
-            for (let i = 0; i < parts.length; i++) {
-                let part = parts[i]
-                if ((i == 1 || i == 5) && part.match(pattern)) {
-                    let subParts = part.split(pattern)
-                    let subElement_formatted = ""
-
-                    for (let j = 0; j < subParts.length; j++) {
-                        let subPart = subParts[j]
-                        if (j == 1 || j == 5) {
-                            subPart = add_space_front_end(subPart)
-                            subPart = add_space_front(subPart)
-                            subPart = add_space_end(subPart)
-                        }
-                        subElement_formatted += subPart
-                    }
-                    element_formatted += subElement_formatted
-                } else if (i == 1 || i == 5) {
-                    part = add_space_front_end(part)
-                    part = add_space_front(part)
-                    part = add_space_end(part)
-
-                    element_formatted += part
-                } else {
-                    element_formatted += part
-                }
-            }
-            content = element_formatted
-        }
-        else {
-            content = add_space_front_end(content)
-            content = add_space_front(content)
-            content = add_space_end(content)
-        }
-    }
-
-    return content;
-}
-
-// !! T3: 非代码块内生效, 即 ```content``` 外生效
-function noncodeBlockReplace(content) {
-    // 0.3.4: `content` 与其他内容之间增加空格
-    content = content.replace(/([^\s\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
-    content = content.replace(/(`[^`]+`)([^\s\)\]\}>"'])/g, '$1 $2'); // 后空格
-    content = content.replaceAll("> >", ">>"); // 0.2.17: 还原prettier替换的 >>
-    
     // 0.4.4: 部分字符后增加空格
     content = content.replace(/([,\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
     // content = content.replace(/([^\s}\]\)])([,}\]\)])([^\s}\]\)])/g, '$1$2 $3');
@@ -493,23 +388,108 @@ function noncodeBlockReplace(content) {
     // 0.4.4: 部分字符前减少空格
     content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
 
+    // 汉字与其前后的英文字符、英文标点、数字间增加空白。
+    //     // 汉字修改
+    //     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+    //     content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
+
+    // 英文修改, 英文字符间如果有相关符号, 则增加空格
+    // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
+    // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
+    const pattern = /(.*)(\(|\[|\"\'|<)(.*)(\)|\]|\"\'|>)(.*)/g
+
+    // ! 对于非链接, 但是内容中有括号的情况, 分段处理
+    if (content.match(pattern)) {
+        let element_formatted = ""
+        const parts = content.split(pattern)
+        for (let i = 0; i < parts.length; i++) {
+            let part = parts[i]
+            if ((i == 1 || i == 5) && part.match(pattern)) {
+                let subParts = part.split(pattern)
+                let subElement_formatted = ""
+
+                for (let j = 0; j < subParts.length; j++) {
+                    let subPart = subParts[j]
+                    if (j == 1 || j == 5) {
+                        subPart = add_space_front_end(subPart)
+                        subPart = add_space_front(subPart)
+                        subPart = add_space_end(subPart)
+                    }
+                    subElement_formatted += subPart
+                }
+                element_formatted += subElement_formatted
+            } else if (i == 1 || i == 5) {
+                part = add_space_front_end(part)
+                part = add_space_front(part)
+                part = add_space_end(part)
+
+                element_formatted += part
+            } else {
+                element_formatted += part
+            }
+        }
+        content = element_formatted
+    }
+    else {
+        content = add_space_front_end(content)
+        content = add_space_front(content)
+        content = add_space_end(content)
+    }
+
     return content;
 }
 
-// !! T2: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+// !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
+function regularReplace(content) {
+    // ! 整行处理
+    // 处理标题 header
+    content = processHeaders(content);
+
+    // 0.2.11: 汉字和英文之间加空格
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+    content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+
+    // 0.3.4: `content` 与其他内容之间增加空格
+    content = content.replace(/([^\s\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
+    content = content.replace(/(`[^`]+`)([^\s\)\]\}>"'])/g, '$1 $2'); // 后空格
+
+    // ! 处理被链接分开的部分, 即: cont1`cont2`cont3, 只修改 cont1, cont3, 里面可能包含括号 (), []
+    let lineTmp = "";
+    content.split(/(`.*?`)/).forEach(element => {
+        if (!isLink(element)) {
+            element = noInlineLinkReplace(element);
+        }
+        lineTmp += element;
+    });
+    content = lineTmp;
+
+    return content;
+}
+
+// !! T3: 代码块内生效, 即 ```content``` 内生效
 function codeBlockReplace(content) {
-    // 0.2.11: 无论是不是代码块都在汉字和英文之间加空格
+    // 0.2.11: 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
     content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
 
     return content;
 }
 
-// !! T1: 全局逐行生效, \n等特殊符号替换时可能有问题
-function globalReplaceOnLine(content) {
-    content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
+// !! T2: links 内生效, 即 [content] (content) `content`
+function linkReplace(content) {
+    // 修复 markdown 链接所使用的标点。
+    content = content.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
+    content = content.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
 
+    return content;
+}
+
+// !! T1: 全局生效, 输入为单行, \n等特殊符号替换时可能有问题
+function globalReplaceOnLine(content) {
     content = replaceFullChars(content); // 全角英文和标点
+
+    // 移除行尾空格
+    content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
     // 0.2.12: [ ( -> [(
     content = content.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
@@ -520,10 +500,11 @@ function globalReplaceOnLine(content) {
     // ! super ugly way to deal with the case of \\\\ - part 1
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
     content = content.replace(/\\\\((?!$))/g, '\\\\¶$1');
+
     return content
 }
 
-// !! T0: 全局整个文件生效
+// !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
 function globalReplaceOnFile(content) {
     // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
 
@@ -536,6 +517,9 @@ function globalReplaceOnFile(content) {
     // ! super ugly way to deal with the case of \\\\ - part 2
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
     content = content.replace(/\\\\¶/g, '\\\\\n');
+
+    // 多个空行缩成一行
+    content = content.replace(/\n\n+/g, '\n\n');
 
     return content
 }
@@ -786,20 +770,21 @@ function headerReplace(content) {
     return content
 }
 
-function is_non_link(content) {
-    return !content.match(/tags:.*/g) &&               //0.2.15: obsidian - tags: XX
-        !content.match(/(\[.*\])(\(.*\))/g) &&      //[XX](XX)
-        !content.match(/(^\s*\[.*\]$)/g) &&         //[XX]
-        !content.match(/(^\s*\(.*\)$)/g) &&         //(XX)
-        !content.match(/(^\s*{.*}$)/g) &&           //{XX}
-        !content.match(/(^\s*<.*>$)/g) &&           //<XX>
-        !content.match(/(^\s*`.*`$)/g) &&           //`XX`
-        !content.match(/(^\s*\".*\"$)/g) &&         //"XX"
-        !content.match(/(^\s*\'.*\'$)/g)            //'XX'
+// 检测当前行是不是链接行
+function isLink(content) {
+    return content.match(/tags:.*/g) ||               //0.2.15: obsidian - tags: XX
+        content.match(/(\[.*\])(\(.*\))/g) ||      //[XX](XX)
+        content.match(/(^\s*\[.*\]$)/g) ||         //[XX]
+        content.match(/(^\s*\(.*\)$)/g) ||         //(XX)
+        content.match(/(^\s*{.*}$)/g) ||           //{XX}
+        content.match(/(^\s*<.*>$)/g) ||           //<XX>
+        content.match(/(^\s*`.*`$)/g) ||           //`XX`
+        content.match(/(^\s*\".*\"$)/g) ||         //"XX"
+        content.match(/(^\s*\'.*\'$)/g)            //'XX'
 }
 
 function add_space_front(content) {
-     // 前空格: a(123) -> a (123)
+    // 前空格: a(123) -> a (123)
     // content = content.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3');
 
     return content;
@@ -817,4 +802,13 @@ function add_space_front_end(content) {
     content = content.replace(/(\S)\s+(\S)/g, '$1 $2');
 
     return content;
+}
+
+// 处理标题行
+function processHeaders(line) {
+    const headerRegex = /(^#{1,6}.*)([\r\n]*)/;
+    if (headerRegex.test(line.trim())) {
+        return headerReplace(line);
+    }
+    return line;
 }

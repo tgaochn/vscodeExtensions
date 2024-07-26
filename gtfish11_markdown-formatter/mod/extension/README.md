@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.5.0] - 2024-07-26
+
+重构项目
+
 ## [0.4.4] - 2024-07-25
 
 1. `)a` -> `) a`
