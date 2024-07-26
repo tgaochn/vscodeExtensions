@@ -328,7 +328,7 @@ class DocumentFormatter {
             line.split(/(`.*?`)/).forEach(element => {
                 // 跳过各种括号内的内容, 防止链接被断开
                 if (is_non_link(element)) {
-                    // !! T2: 代码块内生效, 链接内不生效, 如 [content] (content) `content`
+                    // !! T2: 链接内不生效, 如 [content] (content) `content`, 代码块内生效
                     element = codeBlockReplace(element);
                 }
                 line_tmp_global += element;
@@ -418,7 +418,7 @@ function restReplace(content) {
     // content = content.replace(/(^<!-- \!\! ↓={100,110} -->$)/, "$1\n");
     // content = content.replace(/(^<!-- \!\! ={100,110} -->$)/, "\n$1\n");
 
-    // 忽略链接以及注释格式
+    // ! 忽略链接以及注释格式: 即 [XX], <XX> 等
     if (is_non_link(content)) {
         content = replaceMathChars(content);
         content = replaceOtherChars(content);
@@ -431,7 +431,9 @@ function restReplace(content) {
         // 英文修改, 英文字符间如果有相关符号, 则增加空格
         // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
         // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
-        const pattern = /(.*)(\(|\[|\")(.*)(\)|\]|\")(.*)/g
+        const pattern = /(.*)(\(|\[|\"\'|<)(.*)(\)|\]|\"\'|>)(.*)/g
+
+        // ! 对于非链接, 但是内容中有括号的情况, 分段处理
         if (content.match(pattern)) {
             let element_formatted = ""
             const parts = content.split(pattern)
@@ -444,15 +446,17 @@ function restReplace(content) {
                     for (let j = 0; j < subParts.length; j++) {
                         let subPart = subParts[j]
                         if (j == 1 || j == 5) {
-                            subPart = subPart.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-                            subPart = subPart.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
+                            subPart = add_space_front_end(subPart)
+                            subPart = add_space_front(subPart)
+                            subPart = add_space_end(subPart)
                         }
                         subElement_formatted += subPart
                     }
                     element_formatted += subElement_formatted
                 } else if (i == 1 || i == 5) {
-                    part = part.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-                    part = part.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
+                    part = add_space_front_end(part)
+                    part = add_space_front(part)
+                    part = add_space_end(part)
 
                     element_formatted += part
                 } else {
@@ -462,9 +466,9 @@ function restReplace(content) {
             content = element_formatted
         }
         else {
-            content = content.replace(/([a-zA-Z])([=\+])([a-zA-Z])/g, '$1 $2 $3'); // 前后空格: a+b -> a + b
-            // content = content.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3'); // 前空格: a(123) -> a (123)
-            content = content.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3'); // 后空格: a,b -> a, b
+            content = add_space_front_end(content)
+            content = add_space_front(content)
+            content = add_space_end(content)
         }
     }
 
@@ -473,9 +477,21 @@ function restReplace(content) {
 
 // !! T3: 非代码块内生效, 即 ```content``` 外生效
 function noncodeBlockReplace(content) {
-    // 0.3.4: ``与其他内容之间增加空格
-    content = content.replace(/([^\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
-    content = content.replace(/(`[^`]+`)([^\)\]\}>"'])/g, '$1 $2'); // 后空格
+    // 0.3.4: `content` 与其他内容之间增加空格
+    content = content.replace(/([^\s\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
+    content = content.replace(/(`[^`]+`)([^\s\)\]\}>"'])/g, '$1 $2'); // 后空格
+    content = content.replaceAll("> >", ">>"); // 0.2.17: 还原prettier替换的 >>
+    
+    // 0.4.4: 部分字符后增加空格
+    content = content.replace(/([,\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
+    // content = content.replace(/([^\s}\]\)])([,}\]\)])([^\s}\]\)])/g, '$1$2 $3');
+
+    // 0.4.4: 部分字符前增加空格
+    content = content.replace(/([^\s{\[\(}\]\)!])([\[\(])/g, '$1 $2'); // `a(` -> `a (`
+    // content = content.replace(/([^\s{\[\(])([{\[\(])([^\s{\[\(])/g, '$1 $2$3');
+
+    // 0.4.4: 部分字符前减少空格
+    content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
 
     return content;
 }
@@ -733,7 +749,6 @@ function replaceOtherChars(content) {
     // content = content.replaceAll("\\*", " * "); 
     content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
     content = content.replaceAll("\\_", "_"); // 还原prettier替换的 _
-    content = content.replaceAll("> >", ">>"); // 0.2.17: 还原prettier替换的 >>
     // content = content.replace(/^_(.*)_$/g, "*$1*"); // 0.2.17: 还原prettier替换的 *123* -> _123_
 
     // 非 "-  [ ]" (todo list)
@@ -781,4 +796,25 @@ function is_non_link(content) {
         !content.match(/(^\s*`.*`$)/g) &&           //`XX`
         !content.match(/(^\s*\".*\"$)/g) &&         //"XX"
         !content.match(/(^\s*\'.*\'$)/g)            //'XX'
+}
+
+function add_space_front(content) {
+     // 前空格: a(123) -> a (123)
+    // content = content.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3');
+
+    return content;
+}
+
+function add_space_end(content) {
+    // 后空格: a,b -> a, b
+    // content = content.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3');
+
+    return content;
+}
+
+function add_space_front_end(content) {
+    // 前后空格: a+b -> a + b
+    content = content.replace(/(\S)\s+(\S)/g, '$1 $2');
+
+    return content;
 }

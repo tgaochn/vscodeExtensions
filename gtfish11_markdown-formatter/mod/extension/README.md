@@ -2,6 +2,12 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.4.4] - 2024-07-25
+
+1. `)a` -> `) a`
+2. `a(` -> `a (`
+3. ` ,` -> `,`
+
 ## [0.4.3] - 2024-07-24
 
 1. (\` 不要分开
