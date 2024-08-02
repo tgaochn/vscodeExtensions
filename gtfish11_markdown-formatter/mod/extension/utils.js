@@ -38,7 +38,8 @@ function noInlineLinkReplace(content) {
     content = content.replaceAll("- []", "- [ ]");
     
     // 0.4.4: 部分字符后增加空格
-    content = content.replace(/([,\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
+    content = content.replace(/([\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
+    content = content.replace(/(,)([^\d\s}\]\){\[\(,:])/g, '$1 $2'); // 逗号特殊处理, `,a` -> `, a` / `1,000` -> `1,000`
     content = content.replace(/(:)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])/g, '$1 $2'); // `:a` -> `: a`
     // content = content.replace(/([^\s}\]\)])([,}\]\)])([^\s}\]\)])/g, '$1$2 $3');
 
@@ -52,7 +53,7 @@ function noInlineLinkReplace(content) {
     // 汉字与其前后的英文字符、英文标点、数字间增加空白。
     //     // 汉字修改
     //     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    //     content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
+    //     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
 
     // 英文修改, 英文字符间如果有相关符号, 则增加空格
     // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
@@ -108,7 +109,7 @@ function regularReplace(content) {
 
     // 0.2.11: 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+    content = content.replace(/([a-zA-Z0-9!&;=\],\.:\?\$%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
 
     // 0.3.4: `content` 与其他内容之间增加空格
     content = content.replace(/([^\s\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
@@ -131,7 +132,7 @@ function regularReplace(content) {
 function codeBlockReplace(content) {
     // 0.2.11: 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    content = content.replace(/([a-zA-Z0-9!&;=\]\,\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+    content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
 
     return content;
 }
@@ -414,7 +415,7 @@ function add_space_front(content) {
 
 function add_space_end(content) {
     // 后空格: a,b -> a, b
-    // content = content.replace(/([a-zA-Z])([\,])([a-zA-Z])/g, '$1$2 $3');
+    // content = content.replace(/([a-zA-Z])([,])([a-zA-Z])/g, '$1$2 $3');
 
     return content;
 }

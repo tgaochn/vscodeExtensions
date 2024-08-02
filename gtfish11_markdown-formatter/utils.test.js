@@ -21,22 +21,20 @@ describe('不应该改动的部分', () => {
     });
 
     test('整个文件检测', () => {
-        const input = readFile('./input.md');
-        const expectedOutput = readFile('./expect_output.md');
-
-        // const lines = input.split('\n');
-        // const processedLines = lines.map(line => globalReplaceOnLine(line));
-        // const actualOutput = processedLines.join('\n');
-
-        expect(processMdContent(input).trim()).toBe(expectedOutput.trim());
-
-
+        const input = normalizeLineEndings(readFile('./input.md').trim());
+        const expectedOutput = normalizeLineEndings(readFile('./expect_output.md').trim());
+    
+        expect(processMdContent(input).trim()).toEqual(expectedOutput.trim());
     });
 
 });
 
+function normalizeLineEndings(str) {
+    return str.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+}
+
 function readFile(filePath) {
-    return fs.readFileSync(path.join(__dirname, filePath), 'utf8').trim();
+    return fs.readFileSync(path.join(__dirname, filePath), 'utf8');
 }
 
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
@@ -110,6 +108,10 @@ describe('T3: 代码块内生效', () => {
 
 // !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
 describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
+    test('有些特殊规则不应该变化', () => {
+        expect(regularReplace('1,000').trim()).toBe('1,000');
+    });
+    
     test('`content` 与其他内容之间增加空格', () => {
         expect(regularReplace('a`content`a')).toBe('a `content` a');
         expect(regularReplace('(`content`a')).toBe('(`content` a');
@@ -132,11 +134,11 @@ describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
 
     test('部分字符前后增加空格', () => {
         // 字符前后增加空格
-        
+
         // 字符后增加空格
         expect(regularReplace('a)a')).toBe('a) a');
         expect(regularReplace(':a')).toBe(': a');
-        
+
         // 字符前减少空格
         expect(regularReplace('a ,a')).toBe('a, a');
 
