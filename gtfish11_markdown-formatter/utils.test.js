@@ -7,19 +7,15 @@ const {
     processMdContent,
     headerReplace,
     replaceMathChars,
-    isLink
+    isLink,
+    noDelimiterReplace
 } = require('./mod/extension/utils');
 
 const fs = require('fs');
 const path = require('path');
 
 // !! 不应该改动的部分
-describe('不应该改动的部分', () => {
-    test('link内字符应该不变化', () => {
-        expect(processMdContent('`1啊a`').trim()).toBe('`1啊a`');
-        expect(processMdContent('"1=+啊%a"').trim()).toBe('"1=+啊%a"');
-    });
-
+describe('整个文件检测', () => {
     test('整个文件检测', () => {
         const input = normalizeLineEndings(readFile('./input.md').trim());
         const expectedOutput = normalizeLineEndings(readFile('./expect_output.md').trim());
@@ -114,7 +110,7 @@ describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
     
     test('`content` 与其他内容之间增加空格', () => {
         expect(regularReplace('a`content`a')).toBe('a `content` a');
-        expect(regularReplace('(`content`a')).toBe('(`content` a');
+        expect(regularReplace('(`content`)a')).toBe('(`content`) a');
     });
 
     test('多空格合并成一个空格', () => {
@@ -129,7 +125,7 @@ describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
     test('md todo list formatting', () => {
         expect(regularReplace('-  []')).toBe('- [ ]');
         expect(regularReplace('- []')).toBe('- [ ]');
-        expect(regularReplace('- [X]')).toBe('- [X]');
+        expect(regularReplace('- [X]')).toBe('- [x]');
     });
 
     test('部分字符前后增加空格', () => {

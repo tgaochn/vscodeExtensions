@@ -1,129 +1,71 @@
-const { log } = require("console");
-
-// !! T4: 生效范围: 常规md范围, 排除 inline `content` 的部分
-function noInlineLinkReplace(content) {
+// !! T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符, 如: (), [], {}, ``, ""
+function noDelimiterReplace(content) {
     content = replaceMathChars(content);
 
-    // 0.2.17: 还原分开的 > >
-    content = content.replaceAll("> >", ">>");
-
-    // 注释前后加入空行 - prettier 已经自带了
-    // content = content.replace(/(^<!-- \!\! ↑={100,110} -->$)/, "\n$1");
-    // content = content.replace(/(^<!-- \!\! ↓={100,110} -->$)/, "$1\n");
-    // content = content.replace(/(^<!-- \!\! ={100,110} -->$)/, "\n$1\n");
-
     // ! 一些特殊替换
-    // content = content.replace(/[^\.]\.\s*$/g, ''); // 去掉行末的句号
     // content = content.replaceAll("\\*", " * "); 
     content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
     content = content.replaceAll("\\_", "_"); // 还原prettier替换的 _
     // content = content.replace(/^_(.*)_$/g, "*$1*"); // 0.2.17: 还原prettier替换的 *123* -> _123_
 
-    // 非 "-  [ ]" (todo list)
-    // 非 "|    |" (table)
-    // 则多空格转成一个空格
-    if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
-        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
-    }
-
-    // content = content.replace(/\s+([_\^\)\}])/g, '$1'); // 去掉部分符号前的空格, "abc ]" -> "abc]"
-
     // 0.2.13: "abc ]" -> "abc]", "[ abc" -> "[abc"
     content = content.replace(/(\w+)\s*([\]\)}_\^])/g, "$1$2");
     content = content.replace(/([\[\({_\^])\s*(\w+)/g, "$1$2");
 
-    // 0.2.13: keep markdown todo list tag
-    content = content.replaceAll("-  [x]", "- [x]");
-    content = content.replaceAll("-  []", "-  [ ]");
-    content = content.replaceAll("- []", "- [ ]");
-    
-    // 0.4.4: 部分字符后增加空格
+    // // 0.4.4: 部分字符前增加空格
+    content = content.replace(/([^\s{\[\(}\]\)!])([\[\(])/g, '$1 $2'); // `a(` -> `a (`
+
+    // // 0.4.4: 部分字符后增加空格
     content = content.replace(/([\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
     content = content.replace(/(,)([^\d\s}\]\){\[\(,:])/g, '$1 $2'); // 逗号特殊处理, `,a` -> `, a` / `1,000` -> `1,000`
     content = content.replace(/(:)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])/g, '$1 $2'); // `:a` -> `: a`
-    // content = content.replace(/([^\s}\]\)])([,}\]\)])([^\s}\]\)])/g, '$1$2 $3');
 
-    // 0.4.4: 部分字符前增加空格
-    content = content.replace(/([^\s{\[\(}\]\)!])([\[\(])/g, '$1 $2'); // `a(` -> `a (`
-    // content = content.replace(/([^\s{\[\(])([{\[\(])([^\s{\[\(])/g, '$1 $2$3');
+    // 0.4.4: 部分字符前/后增加空格
+    content = content.replace(/(\S)\s*(\+|-|=)\s*(\S)/g, "$1 $2 $3"); // `a+b` -> `a + b`
 
     // 0.4.4: 部分字符前减少空格
     content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
-
-    // 汉字与其前后的英文字符、英文标点、数字间增加空白。
-    //     // 汉字修改
-    //     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    //     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2"); // 不修改正反斜杠, 避免路径被改乱
-
-    // 英文修改, 英文字符间如果有相关符号, 则增加空格
-    // ![](http://pic-gtfish.oss-us-west-1.aliyuncs.com/pic/2023-02-09_210659_075.png)
-    // "T+he (qui+ck) a+b [br+own] fox+x" -> "T + he (qui+ck) a + b [br+own] fox + x"
-    const pattern = /(.*)(\(|\[|\"\'|<)(.*)(\)|\]|\"\'|>)(.*)/g
-
-    // ! 对于非链接, 但是内容中有括号的情况, 分段处理
-    if (content.match(pattern)) {
-        let element_formatted = ""
-        const parts = content.split(pattern)
-        for (let i = 0; i < parts.length; i++) {
-            let part = parts[i]
-            if ((i == 1 || i == 5) && part.match(pattern)) {
-                let subParts = part.split(pattern)
-                let subElement_formatted = ""
-
-                for (let j = 0; j < subParts.length; j++) {
-                    let subPart = subParts[j]
-                    if (j == 1 || j == 5) {
-                        subPart = add_space_front_end(subPart)
-                        subPart = add_space_front(subPart)
-                        subPart = add_space_end(subPart)
-                    }
-                    subElement_formatted += subPart
-                }
-                element_formatted += subElement_formatted
-            } else if (i == 1 || i == 5) {
-                part = add_space_front_end(part)
-                part = add_space_front(part)
-                part = add_space_end(part)
-
-                element_formatted += part
-            } else {
-                element_formatted += part
-            }
-        }
-        content = element_formatted
-    }
-    else {
-        content = add_space_front_end(content)
-        content = add_space_front(content)
-        content = add_space_end(content)
-    }
+    content = content.replace(/\s+$/g, ''); // 移除每个部分的尾部空格
+    content = content.replace(/(\(|\[|\"|\'|<)\s+(\(|\[|\"|\'|<)/g, '$1$2'); // `[ (` -> `[(`
+    content = content.replace(/(\)|\]|\"|\'|>)\s+(\)|\]|\"|\'|>)/g, '$1$2'); // `] )` -> `])`
 
     return content;
 }
 
-// !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
+// !! T4: 生效范围: 常规md范围, 非代码内部, 处理带分隔符的内容, 如: (), [], {}, ``, ""
+// 一般每行只有一个的标志符在这里处理
 function regularReplace(content) {
-    // ! 整行处理
     // 处理标题 header
     content = processHeaders(content);
 
+    // 0.2.17: 还原分开的 > >
+    content = content.replaceAll("> >", ">>");
+
+    // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 只修改 cont1, cont3
+    content = processContentWithDelimiters(content);
+
+    // ! cont1, cont2, cont3 之间不应该加空格的情况则删掉空格
+    content = content.replace(/([\(\[\{<"'])\s*`/g, '$1`'); // 前空格
+    content = content.replace(/`\s*([\)\]\}>"'])/g, '`$1'); // 后空格
+
     // 0.2.11: 汉字和英文之间加空格
-    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    content = content.replace(/([a-zA-Z0-9!&;=\],\.:\?\$%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*([a-zA-Z0-9]|(@|&|=|\[|\$|\%|\^|\-|\+|\(|`))/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+    content = content.replace(/([a-zA-Z0-9]|(!|&|;|=|\]|,|\.|:|\?|\$|%|\^|\-|\+|\)|`))\s*([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $3");
 
-    // 0.3.4: `content` 与其他内容之间增加空格
-    content = content.replace(/([^\s\(\[\{<"'\\])(`[^`]+`)/g, '$1 $2'); // 前空格
-    content = content.replace(/(`[^`]+`)([^\s\)\]\}>"'])/g, '$1 $2'); // 后空格
+    // 0.2.13: keep markdown todo list tag
+    content = content.replace(/-\s+\[\s*\]/g, "- [ ]");
+    content = content.replace(/-\s+\[[xX]\]/g, "- [x]");
 
-    // ! 处理被链接分开的部分, 即: cont1`cont2`cont3, 只修改 cont1, cont3, 里面可能包含括号 (), []
-    let lineTmp = "";
-    content.split(/(`.*?`)/).forEach(element => {
-        if (!isLink(element)) {
-            element = noInlineLinkReplace(element);
-        }
-        lineTmp += element;
-    });
-    content = lineTmp;
+    // 非 "-  [ ]" (todo list)
+    // 非 "|    |" (table)
+    // 则多空格转成一个空格
+    // if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
+    if (content.search(/^\|.*\|$/) == -1) {
+        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
+    }
+
+    // 移除行尾空格
+    // content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
     return content;
 }
@@ -149,6 +91,14 @@ function linkReplace(content) {
 // !! T1: 全局生效, 输入为单行, \n等特殊符号替换时可能有问题
 function globalReplaceOnLine(content) {
     content = replaceFullChars(content); // 全角英文和标点
+
+    // 非 "-  [ ]" (todo list)
+    // 非 "|    |" (table)
+    // 则多空格转成一个空格
+    // if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
+    if (content.search(/^\|.*\|$/) == -1) {
+        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
+    }
 
     // 移除行尾空格
     content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
@@ -406,27 +356,6 @@ function headerReplace(content) {
     return content
 }
 
-function add_space_front(content) {
-    // 前空格: a(123) -> a (123)
-    // content = content.replace(/([a-zA-Z])([\[(\{])([a-zA-Z])/g, '$1 $2$3');
-
-    return content;
-}
-
-function add_space_end(content) {
-    // 后空格: a,b -> a, b
-    // content = content.replace(/([a-zA-Z])([,])([a-zA-Z])/g, '$1$2 $3');
-
-    return content;
-}
-
-function add_space_front_end(content) {
-    // 前后空格: a+b -> a + b
-    content = content.replace(/(\S)\s+(\S)/g, '$1 $2');
-
-    return content;
-}
-
 // 处理标题行
 function processHeaders(line) {
     const headerRegex = /(^#{1,6}.*)([\r\n]*)/;
@@ -438,15 +367,15 @@ function processHeaders(line) {
 
 // 检测当前行是不是链接行
 function isLink(content) {
-    return content.match(/tags:.*/g) ||               //0.2.15: obsidian - tags: XX
-        content.match(/(\[.*\])(\(.*\))/g) ||      //[XX](XX)
-        content.match(/(^\s*\[.*\]$)/g) ||         //[XX]
-        content.match(/(^\s*\(.*\)$)/g) ||         //(XX)
-        content.match(/(^\s*{.*}$)/g) ||           //{XX}
-        content.match(/(^\s*<.*>$)/g) ||           //<XX>
-        content.match(/(^\s*`.*`$)/g) ||           //`XX`
-        content.match(/(^\s*\".*\"$)/g) ||         //"XX"
-        content.match(/(^\s*\'.*\'$)/g)            //'XX'
+    return /tags:.*/.test(content) ||               // obsidian - tags: XX
+        /^\s*\[.*\]\(.*\)\s*$/.test(content) ||     // [XX](XX)
+        /^\s*\[.*\]\s*$/.test(content) ||           // [XX]
+        /^\s*\(.*\)\s*$/.test(content) ||           // (XX)
+        /^\s*{.*}\s*$/.test(content) ||             // {XX}
+        /^\s*<.*>\s*$/.test(content) ||             // <XX>
+        /^\s*`[^`]+`\s*$/.test(content) ||          // `XX`
+        /^\s*"[^"]+"\s*$/.test(content) ||          // "XX"
+        /^\s*'[^']+'\s*$/.test(content);            // 'XX'
 }
 
 // Assemble the final content while managing newlines
@@ -515,6 +444,79 @@ function processMdContent(content) {
     return finalContent;
 }
 
+function processContentWithDelimiters(content) {
+    const delimiters = [
+        { start: '(', end: ')' },
+        { start: '[', end: ']' },
+        { start: '{', end: '}' },
+        { start: '<', end: '>' },
+        { start: '`', end: '`' },
+        { start: '"', end: '"' },
+        { start: "'", end: "'" },
+        { start: "\\$", end: "\\$" }  // Note the escaped $
+    ];
+
+    let result_list = [];
+    let remaining = content;
+    let isFirstElement = true;
+
+    while (remaining.length > 0) {
+        let earliestMatch = { index: Infinity, delimiter: null };
+
+        // Find the earliest occurring delimiter
+        for (let delimiter of delimiters) {
+            let startIndex = remaining.indexOf(delimiter.start);
+            if (startIndex !== -1 && startIndex < earliestMatch.index) {
+                earliestMatch = { index: startIndex, delimiter: delimiter };
+            }
+        }
+
+        if (earliestMatch.index === Infinity) {
+            // No more delimiters found, process the remaining content
+            if (!isFirstElement) {
+                result_list.push(" ");
+            }
+            result_list.push(noDelimiterReplace(remaining));
+            break;
+        }
+
+        // Process content before the delimiter
+        if (earliestMatch.index > 0) {
+            if (!isFirstElement) {
+                result_list.push(" ");
+            }
+            result_list.push(noDelimiterReplace(remaining.slice(0, earliestMatch.index)));
+            isFirstElement = false;
+        }
+
+        // Find the end of the delimited content
+        let endIndex = remaining.indexOf(earliestMatch.delimiter.end, earliestMatch.index + 1);
+        if (endIndex === -1) {
+            // End delimiter not found, treat the rest as normal content
+            if (!isFirstElement) {
+                result_list.push(" ");
+            }
+            result_list.push(noDelimiterReplace(remaining.slice(earliestMatch.index)));
+            break;
+        }
+
+        // Add the delimited content without processing
+        if (!isFirstElement) {
+            result_list.push(" ");
+        }
+        let delimitedContent = remaining.slice(earliestMatch.index, endIndex + 1);
+        result_list.push(delimitedContent);
+        isFirstElement = false;
+
+        // Move to the remaining content
+        remaining = remaining.slice(endIndex + 1);
+    }
+
+    let result = result_list.join("");
+
+    return result;
+}
+
 module.exports = {
     regularReplace,
     codeBlockReplace,
@@ -525,5 +527,7 @@ module.exports = {
     isLink,
     processMdContent,
     replaceMathChars,
-    isCodeBlockStart
+    isCodeBlockStart,
+    noDelimiterReplace,
+    processContentWithDelimiters
 }

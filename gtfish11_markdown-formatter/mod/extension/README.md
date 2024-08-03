@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.7.0] - 2024-08-03
+
+重构项目, 增加功能, 完善测试
+
 ## [0.6.0] - 2024-08-01
 
 重构项目, 加入 unittest
