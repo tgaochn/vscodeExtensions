@@ -122,12 +122,6 @@ function globalReplaceOnLine(content) {
     // 移除行尾空格
     content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
-    // [ ( -> [(
-    content = content.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
-
-    // ) ] -> )]
-    content = content.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
-
     return content
 }
 
@@ -157,6 +151,10 @@ function globalReplaceOnFileAtEnd(content) {
 
     // 多个空行缩成一行
     content = content.replace(/\n\n+/g, '\n\n');
+
+    // 各种缩减空格
+    content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
+    content = content.replace(/(\]|\)|}|_|\^)\s*(\]|\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
 
     return content
 }
@@ -467,7 +465,7 @@ function processMdContent(content) {
 
         // !! T3: 处理标题行
         if (isHeaderLine(line)) {
-            return headerLineReplace(line);
+            line = headerLineReplace(line);
         }
 
         // !! T3.5: 其他不要改动的markdown结构, 如表格等

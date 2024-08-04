@@ -39,3 +39,8 @@ Cristine's Rifle
 `Gun-Fu`, 枪械格斗
 2024-05-15.00
 2024-08-04 01:12:40
+
+## test与模型修改
+
+非 incremental training model 改 incremental training: [desc](业务/model/模型修改/incremental_training.md)
+test img: ![](img.jpg)

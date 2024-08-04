@@ -85,11 +85,11 @@ describe('T1: 全局生效, 输入为单行', () => {
     });
 
     test('[ ( -> [(', () => {
-        expect(globalReplaceOnLine('123[ (123)]123')).toBe('123[(123)]123');
+        expect(globalReplaceOnFileAtEnd('123[ (123)]123')).toBe('123[(123)]123');
     });
 
     test(') ] -> )]', () => {
-        expect(globalReplaceOnLine('123[(123) ]123')).toBe('123[(123)]123');
+        expect(globalReplaceOnFileAtEnd('123[(123) ]123')).toBe('123[(123)]123');
     });
 });
 
