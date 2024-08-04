@@ -2,27 +2,27 @@
 function noDelimiterReplace(content) {
     // ! 一些特殊替换
     // content = content.replaceAll("\\*", " * "); 
-    content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
+    content = content.replaceAll("\\*", "*"); // 还原prettier替换的 *
     content = content.replaceAll("\\_", "_"); // 还原prettier替换的 _
-    // content = content.replace(/^_(.*)_$/g, "*$1*"); // 0.2.17: 还原prettier替换的 *123* -> _123_
+    // content = content.replace(/^_(.*)_$/g, "*$1*"); // 还原prettier替换的 *123* -> _123_
 
-    // 0.2.13: "abc ]" -> "abc]", "[ abc" -> "[abc"
+    // "abc ]" -> "abc]", "[ abc" -> "[abc"
     content = content.replace(/(\w+)\s*([\]\)}_\^])/g, "$1$2");
     content = content.replace(/([\[\({_\^])\s*(\w+)/g, "$1$2");
 
-    // // 0.4.4: 部分字符前增加空格
+    // 部分字符前增加空格
     content = content.replace(/([^\s{\[\(}\]\)!])([\[\(])/g, '$1 $2'); // `a(` -> `a (`
 
-    // // 0.4.4: 部分字符后增加空格
+    // 部分字符后增加空格
     content = content.replace(/([\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
     content = content.replace(/(,)([^\d\s}\]\){\[\(,:])/g, '$1 $2'); // 逗号特殊处理, `,a` -> `, a` / `1,000` -> `1,000`
 
-    // 0.4.4: 部分字符前/后增加空格
-    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])(\+|-)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a+b` -> `a + b`
+    // 部分字符前/后增加空格
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])(\+)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a+b` -> `a + b`
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s+(\+|-)\s+([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a  +  b` -> `a + b`, 不 match `a+ b`
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])\s*(:)\s*([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])/g, "$1$2 $3"); // `a    :b` -> `a: b`, 不 match `13:48:38`
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s*(=|<|>)\s*([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a  =b` -> `a = b`, 防止 <link>和大于/小于的歧义
-    content = content.replace(/(\/)\s*(\S)/g, "\/ $2"); // `a/b` -> `a / b`; 补充要加的空格
+    // content = content.replace(/(\/)\s*(\S)/g, "\/ $2"); // `a/b` -> `a / b`; 补充要加的空格
 
     // 移除每个部分的尾部空格
     content = content.replace(/\s+$/g, '');
@@ -33,7 +33,7 @@ function noDelimiterReplace(content) {
 // !! T4: 生效范围: 常规md范围, 非代码内部, 处理带分隔符的内容, 如: (), [], {}, ``, ""
 // 一般每行只有一个的标志符在这里处理
 function regularReplace(content) {
-    // 0.2.17: 还原分开的 > >
+    // 还原分开的 > >
     content = content.replaceAll("> >", ">>");
 
     // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 调用noDelimiterReplace修改 cont1, cont3; cont2 当做link调用linkReplace处理
@@ -44,21 +44,24 @@ function regularReplace(content) {
     content = content.replace(/([\(\[\{<"'])\s*`/g, '$1`'); // 前空格
     content = content.replace(/`\s*([\)\]\}>"'])/g, '`$1'); // 后空格
 
-    // 0.2.11: 汉字和英文之间加空格
+    // 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*([a-zA-Z0-9]|(@|&|=|\[|\$|\%|\^|\-|\+|\(|`))/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
     content = content.replace(/([a-zA-Z0-9]|(!|&|;|=|\]|,|\.|:|\?|\$|%|\^|\-|\+|\)|`))\s*([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $3");
 
-    // 0.2.13: keep markdown todo list tag
+    // keep markdown todo list tag
     content = content.replace(/-\s+\[\s*\]/g, "- [ ]");
     content = content.replace(/-\s+\[[xX]\]/g, "- [x]");
 
     content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
 
-    // 0.4.4: 部分字符前减少空格
+    // 部分字符前减少空格
     content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
     content = content.replace(/(\(|\[|\"|\'|<)\s+(\(|\[|\"|\'|<)/g, '$1$2'); // `[ (` -> `[(`
     content = content.replace(/(\)|\]|\"|\'|>)\s+(\)|\]|\"|\'|>|:)/g, '$1$2'); // `] )` -> `])`
+    content = content.replace(/(\/)\s+(\S)/g, "$1$2"); // `/ b` -> `/b`
 
+    // 部分字符后减少空格
+    content = content.replace(/(\S)\s+(\/)/g, "$1$2"); // `a /` -> `a/`
 
     return content;
 }
@@ -80,7 +83,7 @@ function linkReplace(content) {
 function headerLineReplace(content) {
     // 标题后加入一个空格
     if (content.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
-        // 0.2.16: skip md tags: #XX
+        // skip md tags: #XX
         // content = content.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
     } else {
         content = content.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
@@ -100,7 +103,7 @@ function mathLineReplace(content) {
 
 // !! T2: 代码块内生效, 即 ```content``` 内生效
 function codeLineReplace(content) {
-    // 0.2.11: 汉字和英文之间加空格
+    // 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
 
@@ -119,10 +122,10 @@ function globalReplaceOnLine(content) {
     // 移除行尾空格
     content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
-    // 0.2.12: [ ( -> [(
+    // [ ( -> [(
     content = content.replace(/([\[\({_\^])\s*([\[\({_\^])/g, "$1$2");
 
-    // 0.2.13: ) ] -> )]
+    // ) ] -> )]
     content = content.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
 
     return content
