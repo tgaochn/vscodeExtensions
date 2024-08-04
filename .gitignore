@@ -5,3 +5,7 @@ node_modules
 tempfile/*
 gtfish11_markdown-formatter/mod/extension/extension.test.js
 gtfish11_markdown-formatter/coverage/*
+gtfish11_markdown-formatter/package-lock.json
+gtfish11_markdown-formatter/tempCodeRunnerFile.js
+gtfish11_markdown-formatter/tmp*.js
+gtfish11_markdown-formatter/sqlParser.js

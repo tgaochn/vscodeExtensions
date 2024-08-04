@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.0] - 2024-08-03
+
+重构项目, 增加单独的数学公式处理
+
 ## [0.7.0] - 2024-08-03
 
 重构项目, 增加功能, 完善测试

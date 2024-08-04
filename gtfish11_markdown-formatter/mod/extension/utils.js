@@ -1,7 +1,5 @@
 // !! T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符, 如: (), [], {}, ``, ""
 function noDelimiterReplace(content) {
-    content = replaceMathChars(content);
-
     // ! 一些特殊替换
     // content = content.replaceAll("\\*", " * "); 
     content = content.replaceAll("\\*", "*"); // 0.2.17: 还原prettier替换的 *
@@ -18,16 +16,16 @@ function noDelimiterReplace(content) {
     // // 0.4.4: 部分字符后增加空格
     content = content.replace(/([\]\)])([^\s}\]\){\[\(,:])/g, '$1 $2'); // `)a` -> `) a`
     content = content.replace(/(,)([^\d\s}\]\){\[\(,:])/g, '$1 $2'); // 逗号特殊处理, `,a` -> `, a` / `1,000` -> `1,000`
-    content = content.replace(/(:)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])/g, '$1 $2'); // `:a` -> `: a`
 
     // 0.4.4: 部分字符前/后增加空格
-    content = content.replace(/(\S)\s*(\+|-|=)\s*(\S)/g, "$1 $2 $3"); // `a+b` -> `a + b`
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])(\+|-)([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a+b` -> `a + b`
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s+(\+|-)\s+([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a  +  b` -> `a + b`, 不 match `a+ b`
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])\s*(:)\s*([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z])/g, "$1$2 $3"); // `a    :b` -> `a: b`, 不 match `13:48:38`
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s*(=|<|>)\s*([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a  =b` -> `a = b`, 防止 <link>和大于/小于的歧义
+    content = content.replace(/(\/)\s*(\S)/g, "\/ $2"); // `a/b` -> `a / b`; 补充要加的空格
 
-    // 0.4.4: 部分字符前减少空格
-    content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
-    content = content.replace(/\s+$/g, ''); // 移除每个部分的尾部空格
-    content = content.replace(/(\(|\[|\"|\'|<)\s+(\(|\[|\"|\'|<)/g, '$1$2'); // `[ (` -> `[(`
-    content = content.replace(/(\)|\]|\"|\'|>)\s+(\)|\]|\"|\'|>)/g, '$1$2'); // `] )` -> `])`
+    // 移除每个部分的尾部空格
+    content = content.replace(/\s+$/g, '');
 
     return content;
 }
@@ -35,14 +33,12 @@ function noDelimiterReplace(content) {
 // !! T4: 生效范围: 常规md范围, 非代码内部, 处理带分隔符的内容, 如: (), [], {}, ``, ""
 // 一般每行只有一个的标志符在这里处理
 function regularReplace(content) {
-    // 处理标题 header
-    content = processHeaders(content);
-
     // 0.2.17: 还原分开的 > >
     content = content.replaceAll("> >", ">>");
 
-    // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 只修改 cont1, cont3
+    // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 调用noDelimiterReplace修改 cont1, cont3; cont2 当做link调用linkReplace处理
     content = processContentWithDelimiters(content);
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `a  >1` -> `a > 1`
 
     // ! cont1, cont2, cont3 之间不应该加空格的情况则删掉空格
     content = content.replace(/([\(\[\{<"'])\s*`/g, '$1`'); // 前空格
@@ -56,34 +52,57 @@ function regularReplace(content) {
     content = content.replace(/-\s+\[\s*\]/g, "- [ ]");
     content = content.replace(/-\s+\[[xX]\]/g, "- [x]");
 
-    // 非 "-  [ ]" (todo list)
-    // 非 "|    |" (table)
-    // 则多空格转成一个空格
-    // if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
-    if (content.search(/^\|.*\|$/) == -1) {
-        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
-    }
+    content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
 
-    // 移除行尾空格
-    // content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
+    // 0.4.4: 部分字符前减少空格
+    content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
+    content = content.replace(/(\(|\[|\"|\'|<)\s+(\(|\[|\"|\'|<)/g, '$1$2'); // `[ (` -> `[(`
+    content = content.replace(/(\)|\]|\"|\'|>)\s+(\)|\]|\"|\'|>|:)/g, '$1$2'); // `] )` -> `])`
+
 
     return content;
 }
 
-// !! T3: 代码块内生效, 即 ```content``` 内生效
-function codeBlockReplace(content) {
+// !! T3.5: 其他不要改动的markdown结构, 如表格等
+function isNotouchMd(line) {
+    return isMarkdownTable(line) // 表格
+        || isImgCiting(line) // 引用img
+        || /^@import /.test(line.trim()) // import
+}
+
+// !! T3: links 内生效, 即 [content] (content) `content`
+function linkReplace(content) {
+
+    return content;
+}
+
+// !! T3: 处理标题行
+function headerLineReplace(content) {
+    // 标题后加入一个空格
+    if (content.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
+        // 0.2.16: skip md tags: #XX
+        // content = content.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
+    } else {
+        content = content.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
+    }
+    // 标题前后加入空行
+    content = content.trim().replace(/(^#{1,6}.*)([\r\n]*)/, "\n$1\n");
+
+    return content
+}
+
+// !! T2.5: 数学公式内生效, 即 行间公式 ($$\n content \n$$), 行内公式 ($ content $)
+function mathLineReplace(content) {
+    content = replaceMathChars(content);
+
+    return content;
+}
+
+// !! T2: 代码块内生效, 即 ```content``` 内生效
+function codeLineReplace(content) {
     // 0.2.11: 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
-
-    return content;
-}
-
-// !! T2: links 内生效, 即 [content] (content) `content`
-function linkReplace(content) {
-    // 修复 markdown 链接所使用的标点。
-    // content = content.replace(/[『\[]([^』\]]+)[』\]][『\[]([^』\]]+)[』\]]/g, "[$1]($2)");
-    // content = content.replace(/[『\[]([^』\]]+)[』\]][（(]([^』)]+)[）)]/g, "[$1]($2)");
 
     return content;
 }
@@ -92,12 +111,9 @@ function linkReplace(content) {
 function globalReplaceOnLine(content) {
     content = replaceFullChars(content); // 全角英文和标点
 
-    // 非 "-  [ ]" (todo list)
-    // 非 "|    |" (table)
-    // 则多空格转成一个空格
-    // if ((content.search(/^\s*-\s{2}\[(\s|X|x)\]/) == -1) && (content.search(/^\|.*\|$/) == -1)) {
-    if (content.search(/^\|.*\|$/) == -1) {
-        content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
+    // 非 md table 则多空格转成一个空格
+    if (!isMarkdownTable(content)) {
+        content = content.replace(/(\S)\s+(\S)/g, '$1 $2');
     }
 
     // 移除行尾空格
@@ -109,23 +125,29 @@ function globalReplaceOnLine(content) {
     // 0.2.13: ) ] -> )]
     content = content.replace(/([\]\)}_\^])\s*([\]\)}_\^])/g, "$1$2");
 
+    return content
+}
+
+// !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
+function globalReplaceOnFileAtStart(content) {
+    // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
+
     // ! super ugly way to deal with the case of \\\\ - part 1
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
     content = content.replace(/\\\\((?!$))/g, '\\\\¶$1');
+
+    // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
+    content = content.replace(/\s*\$\$\s*(.*)\s*\$\$\s*/g, `\n$$$$\n$1\n$$$$\n`);
+
+    // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
+    content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
 
     return content
 }
 
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
-function globalReplaceOnFile(content) {
+function globalReplaceOnFileAtEnd(content) {
     // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
-
-    // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
-    content = content.replace(/\$\$\s*(.*)\s*\$\$/g, `$$$$\n$1\n$$$$`);
-
-    // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
-    content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
-
     // ! super ugly way to deal with the case of \\\\ - part 2
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
     content = content.replace(/\\\\¶/g, '\\\\\n');
@@ -251,11 +273,20 @@ function replaceMathChars(content) {
     content = content.replaceAll("\\longleftrightarrow", "↔");
     content = content.replaceAll("\\Leftrightarrow", "↔");
     content = content.replaceAll("\\Longleftrightarrow", "↔");
+    content = content.replaceAll("\\in", "∈");
+    content = content.replaceAll("\\notin", "∉");
+    content = content.replaceAll("\\subset", "⊂");
+    content = content.replaceAll("\\supset", "⊃");
+    content = content.replaceAll("\\subsetneqq", "⫋");
+    content = content.replaceAll("\\supsetneqq", "⫌");
+    content = content.replaceAll("\\cap", "∩");
+    content = content.replaceAll("\\cup", "∪");
     content = content.replaceAll("\\because", "∵");
     content = content.replaceAll("\\therefore", "∴");
     content = content.replaceAll("\\approx", "≈");
     content = content.replaceAll("\\propto", "∝");
     content = content.replaceAll("\\nabla", "▽");
+    content = content.replaceAll("\\emptyset", "∅");
     content = content.replace(/\\top([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "T$1");
     content = content.replace(/\\pm([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "±$1");
     content = content.replace(/\\mid([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "|$1"); // 间隔
@@ -336,37 +367,20 @@ function replaceMathChars(content) {
     content = content.replace(/{\s*(\S)\s*}/g, ' $1');
 
     content = content.replace(/\\text\s*\{\s*([\sa-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~]+)\s*\}/g, '$1'); // 公式中的 \text 删除掉, \text {overall } -> overall
-    content = content.replace(/([a-zA-Z0-9:=<>\+\-\*/\|&%$@#!`~])\s*(\}\])/g, '$1$2'); // {overall } -> {overall}
+    content = content.replace(/([a-zA-Z0-9]|:|=|<|>|\+|-|\*|\/|\||&|%|\$|@|#|!|`|~)\s*(\}|\]|\))/g, '$1$2'); // {overall } -> {overall}
+    content = content.replace(/(\{|\[|\()\s*([a-zA-Z0-9]|:|=|<|>|\+|-|\*|\/|\||&|%|\$|@|#|!|`|~)/g, '$1$2'); // { overall} -> {overall}
 
     return content;
 }
 
-// !! 替换标题
-function headerReplace(content) {
-    // 标题后加入一个空格
-    if (content.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
-        // 0.2.16: skip md tags: #XX
-        // content = content.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
-    } else {
-        content = content.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
-    }
-    // 标题前后加入空行
-    content = content.trim().replace(/(^#{1,6}.*)([\r\n]*)/, "\n$1\n");
-
-    return content
-}
-
-// 处理标题行
-function processHeaders(line) {
-    const headerRegex = /(^#{1,6}.*)([\r\n]*)/;
-    if (headerRegex.test(line.trim())) {
-        return headerReplace(line);
-    }
-    return line;
+// 检测当前行是不是标题行
+function isHeaderLine(content) {
+    const headerRegex = /(^#{1,6}.*)([\r\n]*)$/;
+    return headerRegex.test(content);
 }
 
 // 检测当前行是不是链接行
-function isLink(content) {
+function isLinkLine(content) {
     return /tags:.*/.test(content) ||               // obsidian - tags: XX
         /^\s*\[.*\]\(.*\)\s*$/.test(content) ||     // [XX](XX)
         /^\s*\[.*\]\s*$/.test(content) ||           // [XX]
@@ -398,36 +412,71 @@ function assembleFormattedContent(lines) {
     return content.trim() + "\n";
 }
 
-// Check if a line starts a code block
+// 检测当前行是否是代码块的开头
 function isCodeBlockStart(line) {
     return line.trim().startsWith("```") || line.trim().startsWith('{code');
 }
 
+// 检测当前行是否是 $$ (数学公式) 的开头
+function isMathBlockStart(line) {
+    return line.trim().startsWith("$$");
+}
+
+// 检测当前行是否是 md table
+function isMarkdownTable(line) {
+    const separatorRegex = /^\s*\|([-:\s]+\|)+\s*$/;
+    return separatorRegex.test(line);
+}
+
+// 检测当前行是否是图片引用
+function isImgCiting(line) {
+    return /^\s*!\[.*\]\(.*\)\s*$/.test(line);
+}
+
 function processMdContent(content) {
     let inCodeBlock = false;
+    let inMathBlock = false;
 
     const processLine = (line) => {
         // !! T1: 全局生效, 输入为单行, \n等特殊符号替换时可能有问题
         line = globalReplaceOnLine(line);
 
-        if (isCodeBlockStart(line)) {
+        // !! T2: 代码块内生效, 即 ```content``` 内生效
+        if (inCodeBlock) {
+            return codeLineReplace(line);
+        } else if (isCodeBlockStart(line)) {
             inCodeBlock = !inCodeBlock;
             return inCodeBlock ? "\n" + line : line + "\n";
         }
 
-        if (/^@import /.test(line.trim())) {
+        // !! T2.5: 数学公式内生效, 即 $$content$$
+        if (inMathBlock) {
+            return mathLineReplace(line);
+        } else if (isMathBlockStart(line)) {
+            inMathBlock = !inMathBlock;
             return line;
         }
 
-        // !! T2: links 内生效, 即 [content] (content) `content`
-        if (isLink(line)) {
+        // !! T3: links 内生效, 即 [content] (content) `content`
+        if (isLinkLine(line)) {
             return linkReplace(line);
         }
 
-        // !! T3: 代码块内生效, 即 ```content``` 内生效
-        if (inCodeBlock) {
-            return codeBlockReplace(line);
+        // !! T3: 处理标题行
+        if (isHeaderLine(line)) {
+            return headerLineReplace(line);
         }
+
+        // !! T3.5: 其他不要改动的markdown结构, 如表格等
+        if (isNotouchMd(line)) {
+            return line;
+        }
+
+        // !! T4: 处理 inline 数学公式
+        const inlineMathRegex = /\$[^$]+\$/g;
+        line = line.replace(inlineMathRegex, (formula) => {
+            return mathLineReplace(formula);
+        });
 
         // !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
         line = regularReplace(line);
@@ -435,11 +484,14 @@ function processMdContent(content) {
         return line;
     };
 
+    // !! T0: 全局生效, 输入为整个文件 (方便处理换行等)
+    content = globalReplaceOnFileAtStart(content);
+
     let lines = content.split("\n").map(processLine);
     let finalContent = assembleFormattedContent(lines);
 
     // !! T0: 全局生效, 输入为整个文件 (方便处理换行等)
-    finalContent = globalReplaceOnFile(finalContent);
+    finalContent = globalReplaceOnFileAtEnd(finalContent);
 
     return finalContent;
 }
@@ -449,11 +501,11 @@ function processContentWithDelimiters(content) {
         { start: '(', end: ')' },
         { start: '[', end: ']' },
         { start: '{', end: '}' },
-        { start: '<', end: '>' },
+        { start: '<', end: '>' }, // 有时候只是大于/小于号
         { start: '`', end: '`' },
         { start: '"', end: '"' },
-        { start: "'", end: "'" },
-        { start: "\\$", end: "\\$" }  // Note the escaped $
+        // { start: "'", end: "'" }, // 避免分开 Cristine's Rifle
+        { start: "\\$", end: "\\$" }  // 数学公式不处理
     ];
 
     let result_list = [];
@@ -480,7 +532,7 @@ function processContentWithDelimiters(content) {
             break;
         }
 
-        // Process content before the delimiter
+        // ! 处理分隔符前的内容
         if (earliestMatch.index > 0) {
             if (!isFirstElement) {
                 result_list.push(" ");
@@ -504,8 +556,10 @@ function processContentWithDelimiters(content) {
         if (!isFirstElement) {
             result_list.push(" ");
         }
+
+        // ! 分隔符内的内容当做link处理
         let delimitedContent = remaining.slice(earliestMatch.index, endIndex + 1);
-        result_list.push(delimitedContent);
+        result_list.push(linkReplace(delimitedContent));
         isFirstElement = false;
 
         // Move to the remaining content
@@ -519,12 +573,13 @@ function processContentWithDelimiters(content) {
 
 module.exports = {
     regularReplace,
-    codeBlockReplace,
+    codeLineReplace,
     linkReplace,
     globalReplaceOnLine,
-    globalReplaceOnFile,
-    headerReplace,
-    isLink,
+    globalReplaceOnFileAtEnd,
+    globalReplaceOnFileAtStart,
+    headerLineReplace,
+    isLinkLine,
     processMdContent,
     replaceMathChars,
     isCodeBlockStart,

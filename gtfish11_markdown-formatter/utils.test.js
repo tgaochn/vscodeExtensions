@@ -1,9 +1,10 @@
 const {
     regularReplace,
-    codeBlockReplace,
+    codeLineReplace,
     linkReplace,
     globalReplaceOnLine,
-    globalReplaceOnFile,
+    globalReplaceOnFileAtEnd,
+    globalReplaceOnFileAtStart,
     processMdContent,
     headerReplace,
     replaceMathChars,
@@ -36,7 +37,7 @@ function readFile(filePath) {
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
 describe('T0: 全局生效, 输入为整个文件', () => {
     test('多个空行缩成一行', () => {
-        expect(globalReplaceOnFile(
+        expect(globalReplaceOnFileAtEnd(
             `123
 
 
@@ -49,21 +50,25 @@ describe('T0: 全局生效, 输入为整个文件', () => {
     });
 
     test('多行公式分行显示', () => {
-        expect(globalReplaceOnFile("$$\\begin{aligned}my_formula\\end{aligned}$$")).toBe(
-            `$$
+        expect(globalReplaceOnFileAtStart("$$\\begin{aligned}my_formula\\end{aligned}$$")).toBe(
+            `
+$$
 \\begin{aligned}
 my_formula
 \\end{aligned}
-$$`
+$$
+`
         );
     });
 
 
     test('独立的单行公式换成多行公式', () => {
-        expect(globalReplaceOnFile("$$my_formula$$")).toBe(
-            `$$
+        expect(globalReplaceOnFileAtStart("123$$my_formula$$123")).toBe(
+            `123
+$$
 my_formula
-$$`
+$$
+123`
         );
     });
 });
@@ -96,8 +101,8 @@ describe('T2: links 内生效', () => {
 // !! T3: 代码块内生效, 即 ```content``` 内生效
 describe('T3: 代码块内生效', () => {
     test('汉字和英文之间加空格', () => {
-        expect(codeBlockReplace('a你a')).toBe('a 你 a');
-        expect(codeBlockReplace(':你[1]')).toBe(': 你 [1]');
+        expect(codeLineReplace('a你a')).toBe('a 你 a');
+        expect(codeLineReplace(':你[1]')).toBe(': 你 [1]');
     });
 
 });
@@ -133,7 +138,7 @@ describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
 
         // 字符后增加空格
         expect(regularReplace('a)a')).toBe('a) a');
-        expect(regularReplace(':a')).toBe(': a');
+        expect(regularReplace('a    :b')).toBe('a: b');
 
         // 字符前减少空格
         expect(regularReplace('a ,a')).toBe('a, a');
@@ -149,6 +154,18 @@ describe('T4: 生效范围: 常规md范围, 非链接, 非代码部分', () => {
     });
 });
 
+// !! T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符, 如: (), [], {}, ``, ""
+describe('T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符', () => {
+    test('部分字符前/后增加空格', () => {
+        expect(regularReplace('a+b')).toBe('a + b');
+        expect(regularReplace('a    +  b')).toBe('a + b');
+        expect(regularReplace('a+  b')).toBe('a+ b');
+        expect(regularReplace('a=  b')).toBe('a = b');
+        expect(regularReplace('a:  b')).toBe('a: b');
+    });
+});
+
+
 describe('数学公式测试', () => {
     test('Math 字符替换', () => {
         expect(replaceMathChars('\\cdot \\alpha \\ell')).toBe('× α l');
@@ -161,6 +178,10 @@ describe('数学公式测试', () => {
 
     test('Math 去掉单字的括号', () => {
         expect(replaceMathChars('{ X }')).toBe('X');
+    });
+
+    test('Math 去掉空格', () => {
+        expect(replaceMathChars('{ overlap }')).toBe('{overlap}');
     });
 
 });
