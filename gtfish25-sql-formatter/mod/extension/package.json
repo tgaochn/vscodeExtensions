@@ -5,16 +5,8 @@
   "version": "0.0.1",
   "publisher": "gtfish1988",
   "license": "MIT",
-  "icon": "prettier-sql-clean.png",
   "engines": {
     "vscode": "^1.63.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sql-formatter-org/sql-formatter"
-  },
-  "bugs": {
-    "url": "https://github.com/sql-formatter-org/sql-formatter/issues"
   },
   "categories": [
     "Formatters",
