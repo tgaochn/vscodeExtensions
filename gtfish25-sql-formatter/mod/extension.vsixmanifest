@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 		<Metadata>
-			<Identity Language="en-US" Id="gtfish25-sql-formatter" Version="0.0.2" Publisher="gtfish1988" />
+			<Identity Language="en-US" Id="gtfish25-sql-formatter" Version="0.0.3" Publisher="gtfish1988" />
 			<DisplayName>gtfish25-sql-formatter</DisplayName>
 			<Description xml:space="preserve">VSCode Extension to format SQL files</Description>
 			<Tags>bigquery,db2,hive,formatter,mariadb,mssql,mysql,node,n1ql,plsql,pl/sql,postgres,postgresql,presto,prettier,redshift,singlestoredb,snowflake,spark,sparksql,sql,sqlite,sql server,trino,transactsql,tsql,SQL,__ext_sql,__ext_q,__web_extension</Tags>

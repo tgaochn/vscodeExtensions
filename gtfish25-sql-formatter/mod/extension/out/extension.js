@@ -15567,7 +15567,7 @@ function JS(T) {
                     let text_formatted = NE(text_mod, I);
 
                     // ! IQL的特殊格式 - part2
-                    text_formatted = text_formatted.replace(/\s*="α/, '=~"') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part2)
+                    text_formatted = text_formatted.replace(/\s*="α/g, '=~"') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part2)
                     text_formatted = text_formatted.replace(/\'(\(|\s)\s*(\d+)(m|d|M|y)\s*(\)|\s)\'/g, "$1$2$3$4") // 处理特殊的日期alias (60d, 20m): 先变成字符串再变回来 (part2)
 
                     // ! 增加空格与换行
@@ -15576,6 +15576,7 @@ function JS(T) {
                     text_formatted = text_formatted.replace(/([^\r\n]\s*)--/g, '$1\n--') // 注释--前增加空行
                     text_formatted = text_formatted.replace(/(=\"[a-zA-Z0-9_]+\")\s+([^\n,])/g, '$1\n    $2') // `country="us" clicked=1` -> `country="us"\nclicked=1`
                     text_formatted = text_formatted.replace(/((=|<|>)\d+)\s+([^\n,])/g, '$1\n    $3') // `seen=1 clicked=1` -> `seen=1\nclicked=1`
+                    text_formatted = text_formatted.replace(/(=~\"[^\n\"]+\")\s+([^\n])/g, '$1\n    $2') // `name=~"RJQ-.*" status="success"` -> `name=~"RJQ-.*"\n    status="success"`
                     
                     // ! 去掉多余空格和空行
                     text_formatted = text_formatted.replace(/((FROM(\s|\n)+)[^\n]+)\n\s*([a-zA-Z0-9])/g, '$1 $4') // 不需要的括号内换行去掉 (初始行: 前一行是`FROM`)
@@ -15585,6 +15586,7 @@ function JS(T) {
                     text_formatted = text_formatted.replace(/([^\n])\s+((WHERE)|(GROUP BY)|(SELECT)|(HAVING))/g, '$1\n$2') // 关键字行需要换行: 关键字前没有换行
                     text_formatted = text_formatted.replace(/((WHERE)|(GROUP BY)|(SELECT)|(HAVING))(\s+)([^\n])/g, '$1\n$6$7') // 关键字行需要换行: 关键字后没有换行
                     text_formatted = text_formatted.replace(/\n\s+((WHERE)|(GROUP BY)|(SELECT)|(HAVING))/g, '\n$1') // 关键字行需要换行: 关键字换行后不应该有缩进
+                    text_formatted = text_formatted.replace(/(\n|^)\s+(FROM)/g, '$1$2') // 关键字行需要换行: 关键字换行后不应该有缩进
 
                     text_formatted = text_formatted.replace(/(\n)\n+(\s)/g, '\n ') // 去掉连续多行空行
 
