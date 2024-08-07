@@ -15557,8 +15557,37 @@ function JS(T) {
             L.edit((e) => {
                 L.selections.forEach((M) => {
                     // !! 在这里可以用正则修改format结果
-                    let text_formatted = NE(L.document.getText(M), I);
-                    text_formatted = text_formatted.replace(/\s*-\s*/g, '-')
+                    let text_ori = L.document.getText(M)
+                    let text_mod = text_ori.replaceAll("'", "\"")
+                    
+                    // ! IQL的特殊格式 - part1
+                    text_mod = text_mod.replace(/(\(|\s)\s*(\d+)\s*(m|d|M|y)\s*(\)|\s)/g, "\'$1$2$3$4\'") // 处理特殊的日期alias (60d, 20m): 先变成字符串再变回来 (part1)
+                    text_mod = text_mod.replace(/=~\s*\"/g, '=\"α') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part1)
+
+                    let text_formatted = NE(text_mod, I);
+
+                    // ! IQL的特殊格式 - part2
+                    text_formatted = text_formatted.replace(/\s*="α/, '=~"') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part2)
+                    text_formatted = text_formatted.replace(/\'(\(|\s)\s*(\d+)(m|d|M|y)\s*(\)|\s)\'/g, "$1$2$3$4") // 处理特殊的日期alias (60d, 20m): 先变成字符串再变回来 (part2)
+
+                    // ! 增加空格与换行
+                    text_formatted = text_formatted.replaceAll(" ()", "()") // 去掉没有参数的函数名之后的空格: `dataset ()` -> `dataset()`
+                    text_formatted = text_formatted.replace(/\s*-\s*/g, '-') // 去掉错误添加的日期空格: `1900 -01 -01` -> `1900-01-01`
+                    text_formatted = text_formatted.replace(/([^\r\n]\s*)--/g, '$1\n--') // 注释--前增加空行
+                    text_formatted = text_formatted.replace(/(=\"[a-zA-Z0-9_]+\")\s+([^\n,])/g, '$1\n    $2') // `country="us" clicked=1` -> `country="us"\nclicked=1`
+                    text_formatted = text_formatted.replace(/((=|<|>)\d+)\s+([^\n,])/g, '$1\n    $3') // `seen=1 clicked=1` -> `seen=1\nclicked=1`
+                    
+                    // ! 去掉多余空格和空行
+                    text_formatted = text_formatted.replace(/((FROM(\s|\n)+)[^\n]+)\n\s*([a-zA-Z0-9])/g, '$1 $4') // 不需要的括号内换行去掉 (初始行: 前一行是`FROM`)
+                    text_formatted = text_formatted.replace(/(,[^\n]+)\n\s*([a-zA-Z0-9])/g, '$1 $2') // 不需要的括号内换行去掉 (中间行: `,`开头)
+
+                    // ! 关键字换行处理
+                    text_formatted = text_formatted.replace(/([^\n])\s+((WHERE)|(GROUP BY)|(SELECT)|(HAVING))/g, '$1\n$2') // 关键字行需要换行: 关键字前没有换行
+                    text_formatted = text_formatted.replace(/((WHERE)|(GROUP BY)|(SELECT)|(HAVING))(\s+)([^\n])/g, '$1\n$6$7') // 关键字行需要换行: 关键字后没有换行
+                    text_formatted = text_formatted.replace(/\n\s+((WHERE)|(GROUP BY)|(SELECT)|(HAVING))/g, '\n$1') // 关键字行需要换行: 关键字换行后不应该有缩进
+
+                    text_formatted = text_formatted.replace(/(\n)\n+(\s)/g, '\n ') // 去掉连续多行空行
+
                     e.replace(M, text_formatted);
                 });
             });
