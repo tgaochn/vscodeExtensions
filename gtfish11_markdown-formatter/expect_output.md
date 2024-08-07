@@ -44,3 +44,17 @@ Cristine's Rifle
 
 非 incremental training model 改 incremental training: [desc](业务/model/模型修改/incremental_training.md)
 test img: ![](img.jpg)
+
+## code
+
+```js
+function OnClick(clickData) {
+   // 0. 自改函数 - &close tag adv
+
+   if (DOpus.listers.lastactive.tabs.count > 1) {
+      clickData.func.command.RunCommand("Go TABCLOSE");
+   } else {
+      clickData.func.command.RunCommand("Go 此电脑");
+   }
+}
+```

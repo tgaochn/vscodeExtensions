@@ -83,14 +83,6 @@ describe('T1: 全局生效, 输入为单行', () => {
     test('移除行尾空格', () => {
         expect(globalReplaceOnLine('123  ')).toBe('123');
     });
-
-    test('[ ( -> [(', () => {
-        expect(globalReplaceOnFileAtEnd('123[ (123)]123')).toBe('123[(123)]123');
-    });
-
-    test(') ] -> )]', () => {
-        expect(globalReplaceOnFileAtEnd('123[(123) ]123')).toBe('123[(123)]123');
-    });
 });
 
 // !! T2: links 内生效, 即 [content] (content) `content`

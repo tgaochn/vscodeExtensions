@@ -1,3 +1,12 @@
+// 额外删除空格
+function trimExtraSpace(content) {
+    // 各种缩减空格
+    content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
+        content = content.replace(/(\]|\)|}|_|\^)\s*(\]|\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
+    
+    return content;
+}
+
 // !! T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符, 如: (), [], {}, ``, ""
 function noDelimiterReplace(content) {
     // ! 一些特殊替换
@@ -151,10 +160,6 @@ function globalReplaceOnFileAtEnd(content) {
 
     // 多个空行缩成一行
     content = content.replace(/\n\n+/g, '\n\n');
-
-    // 各种缩减空格
-    content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
-    content = content.replace(/(\]|\)|}|_|\^)\s*(\]|\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
 
     return content
 }
@@ -452,7 +457,9 @@ function processMdContent(content) {
 
         // !! T2.5: 数学公式内生效, 即 $$content$$
         if (inMathBlock) {
-            return mathLineReplace(line);
+            line = trimExtraSpace(line);
+            line = mathLineReplace(line);
+            return line;
         } else if (isMathBlockStart(line)) {
             inMathBlock = !inMathBlock;
             return line;
@@ -475,12 +482,14 @@ function processMdContent(content) {
 
         // !! T4: 处理 inline 数学公式
         const inlineMathRegex = /\$[^$]+\$/g;
+
         line = line.replace(inlineMathRegex, (formula) => {
             return mathLineReplace(formula);
         });
 
         // !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
         line = regularReplace(line);
+        line = trimExtraSpace(line);
 
         return line;
     };
