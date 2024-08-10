@@ -2,7 +2,7 @@
   "name": "gtfish25-sql-formatter",
   "displayName": "gtfish25-sql-formatter",
   "description": "VSCode Extension to format SQL files",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "gtfish1988",
   "license": "MIT",
   "engines": {
@@ -42,7 +42,7 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:prettier-sql-vscode.format-selection"
+    "onCommand:prettier-sql-vscode.format-selection-iql"
   ],
   "main": "./out/extension.js",
   "browser": "./out/extension.js",
@@ -97,9 +97,9 @@
     ],
     "commands": [
       {
-        "title": "Format Selection (Prettier-SQL)",
-        "shortTitle": "Format SQL",
-        "command": "prettier-sql-vscode.format-selection"
+        "title": "Format Selection (Simple-IQL)",
+        "shortTitle": "Format IQL",
+        "command": "prettier-sql-vscode.format-selection-iql"
       }
     ],
     "configuration": {

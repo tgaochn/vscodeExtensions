@@ -15545,7 +15545,7 @@ function JS(T) {
     Object.entries(R).forEach(([L, P]) =>
         T.subscriptions.push(Y.languages.registerDocumentFormattingEditProvider(L, E(P)))
     );
-    let A = Y.commands.registerCommand("prettier-sql-vscode.format-selection", () => {
+    let A = Y.commands.registerCommand("prettier-sql-vscode.format-selection-iql", () => {
         var C, _;
         let L = Y.window.activeTextEditor;
         if (!L) return;
