@@ -1,5 +1,9 @@
 Forked from inferrinizzard.prettier-sql-vscode-1.6.0
 
+[0.0.5] - 2024-08-10
+
+fixed bug
+
 [0.0.4] - 2024-08-10
 
 修改注册命令名称, 避免重复
