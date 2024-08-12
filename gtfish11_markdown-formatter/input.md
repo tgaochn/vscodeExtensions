@@ -39,6 +39,7 @@ Cristine's Rifle
 `Gun-Fu`, 枪械格斗
 2024-05-15.00
 2024-08-04 01:12:40
+不同比 sampling 策略的 offline [公平比较](业务/model/模型修改/修改sampling与公平比较.md)
 
 ## test与模型修改
 

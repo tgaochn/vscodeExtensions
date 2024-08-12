@@ -33,6 +33,11 @@ function noDelimiterReplace(content) {
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s*(=|<|>)\s*([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])/g, "$1 $2 $3"); // `a  =b` -> `a = b`, 防止 <link>和大于/小于的歧义
     // content = content.replace(/(\/)\s*(\S)/g, "\/ $2"); // `a/b` -> `a / b`; 补充要加的空格
 
+    // ! 汉字和英文/符号之间加空格 (part 1); 不修改正反斜杠, 避免路径被改乱 - 可能出现在路径里, 所以放在 noDelimiterReplace 函数中
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*([a-zA-Z0-9]|(@|&|=|\[|\$|\%|\^|\-|\+|\(|`))/g, '$1 $2'); // 汉字+字符/符号要分开
+    content = content.replace(/([a-zA-Z0-9]|(!|&|;|=|\]|,|\.|:|\?|\$|%|\^|\-|\+|\)|`))\s*([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $3"); // 字符/符号+汉字要分开
+
+
     // 移除每个部分的尾部空格
     content = content.replace(/\s+$/g, '');
 
@@ -47,15 +52,14 @@ function regularReplace(content) {
 
     // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 调用noDelimiterReplace修改 cont1, cont3; cont2 当做link调用linkReplace处理
     content = processContentWithDelimiters(content);
-    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FFa-zA-Z0-9])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `a  >1` -> `a > 1`
-
+    content = content.replace(/([a-zA-Z0-9])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `a  >1` -> `a > 1`
+    
     // ! cont1, cont2, cont3 之间不应该加空格的情况则删掉空格
     content = content.replace(/([\(\[\{<"'])\s*`/g, '$1`'); // 前空格
     content = content.replace(/`\s*([\)\]\}>"'])/g, '`$1'); // 后空格
-
-    // 汉字和英文之间加空格
-    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*([a-zA-Z0-9]|(@|&|=|\[|\$|\%|\^|\-|\+|\(|`))/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
-    content = content.replace(/([a-zA-Z0-9]|(!|&|;|=|\]|,|\.|:|\?|\$|%|\^|\-|\+|\)|`))\s*([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $3");
+    
+    // ! 汉字和英文/符号之间加空格 (part 2) - 不会出现在路径里, 所以放在 noDelimiterReplace 函数外面
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `数字  >1` -> `数字 > 1`
 
     // keep markdown todo list tag
     content = content.replace(/-\s+\[\s*\]/g, "- [ ]");
