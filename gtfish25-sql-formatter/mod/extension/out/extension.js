@@ -15563,21 +15563,21 @@ function JS(T) {
                     // ! IQL的特殊格式 - part1
                     text_mod = text_mod.replace(/(\(|\s)\s*(\d+)\s*(m|d|M|y)\s*(\)|\s)/g, "\'$1$2$3$4\'") // 处理特殊的日期alias (60d, 20m): 先变成字符串再变回来 (part1)
                     text_mod = text_mod.replace(/=~\s*\"/g, '=\"α') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part1)
-                    text_mod = text_mod.replace(/\[([a-zA-Z0-9_]+)\]/g, "\'β\[$1\]β\'") // [123]: 变成特殊符号再变回来 (part1): `[123]` -> `'β[123]β'`
-                    text_mod = text_mod.replace(/([a-zA-Z0-9_]+)\[(((bottom)|(top))\s*\d+)\]/g, "$1\(\'ε$2ε\'\)") // field[bottom 1]: 变成特殊符号再变回来 (part1): `field[bottom 1]` -> `field('εbottom 1ε')`
+                    text_mod = text_mod.replace(/([a-zA-Z0-9_]+)\s*\[([^\]]+)\]/g, "$1\(\'γ\[$2\]γ\'\)") // [XX] 变成特殊符号再变回来 (part1): `id [ top 1000 by count()]` -> `id(`γ[top 1000 by count()]γ`)`
 
                     let text_formatted = NE(text_mod, I);
 
                     // ! IQL的特殊格式 - part2
-                    text_formatted = text_formatted.replace(/([a-zA-Z0-9_]+)\s*\(\'ε(((bottom)|(top))\s*\d+)ε\'\)/g, "$1[$2]") // field[bottom 1]: 变成特殊符号再变回来 (part2): `field('εbottom 1ε')` -> `field[bottom 1]`
-                    text_formatted = text_formatted.replace(/\'β\[([a-zA-Z0-9_]+)\]β\'/g, "\[$1\]") // [123]: 变成特殊符号再变回来 (part2): `'β[123]β'` -> `[123]`
+                    text_formatted = text_formatted.replace(/([a-zA-Z0-9_]+)\s*\(\'γ\[([^\]]+)\]γ\'\)/g, "$1\[$2\]") // [XX] 变成特殊符号再变回来 (part2): `id(`γ[top 1000 by count()]γ`)` -> `id[top 1000 by count()]`
+
                     text_formatted = text_formatted.replace(/\s*="α/g, '=~"') // 处理正则匹配符号=~: 变成特殊符号再变回来 (part2)
                     text_formatted = text_formatted.replace(/\'(\(|\s)\s*(\d+)(m|d|M|y)\s*(\)|\s)\'/g, "$1$2$3$4") // 处理特殊的日期alias (60d, 20m): 先变成字符串再变回来 (part2)
 
                     // ! 增加空格与换行
                     text_formatted = text_formatted.replaceAll(" ()", "()") // 去掉没有参数的函数名之后的空格: `dataset ()` -> `dataset()`
                     text_formatted = text_formatted.replace(/\s*-\s*/g, '-') // 去掉错误添加的日期空格: `1900 -01 -01` -> `1900-01-01`
-                    text_formatted = text_formatted.replace(/([^\r\n]\s*)--/g, '$1\n--') // 注释--前增加空行
+                    text_formatted = text_formatted.replace(/([^\r\n]\s*)--/g, '$1\n    --') // 注释--前增加空行
+                    // text_formatted = text_formatted.replace(/(--.+)(,\s\w+)/g, '$1\n$2') // 注释--内容中如有`, `则换行
                     text_formatted = text_formatted.replace(/(=\"[a-zA-Z0-9_]+\")\s+([^\n,])/g, '$1\n    $2') // `country="us" clicked=1` -> `country="us"\nclicked=1`
                     text_formatted = text_formatted.replace(/((=|<|>)\d+)\s+([^\n,])/g, '$1\n    $3') // `seen=1 clicked=1` -> `seen=1\nclicked=1`
                     text_formatted = text_formatted.replace(/(=~\"[^\n\"]+\")\s+([^\n])/g, '$1\n    $2') // `name=~"RJQ-.*" status="success"` -> `name=~"RJQ-.*"\n    status="success"`
@@ -15585,7 +15585,7 @@ function JS(T) {
                     // ! 去掉多余空格和空行
                     text_formatted = text_formatted.replace(/((FROM(\s|\n)+)[^\n]+)\n\s*([a-zA-Z0-9])/g, '$1 $4') // 不需要的括号内换行去掉 (初始行: 前一行是`FROM`)
                     text_formatted = text_formatted.replace(/(,[^\n]+)\n\s*([a-zA-Z0-9])/g, '$1 $2') // 不需要的括号内换行去掉 (中间行: `,`开头)
-                    text_formatted = text_formatted.replace(/--([^\n]+)\n\s*,/g, '--$1,') // 注释 `--` 开头时逗号不换行
+                    // text_formatted = text_formatted.replace(/--([^\n]+)\n\s*,/g, '--$1,') // 注释 `--` 开头时逗号不换行
 
                     // ! 关键字换行处理
                     text_formatted = text_formatted.replace(/([^\n])\s+((WHERE)|(GROUP BY)|(SELECT)|(HAVING))/g, '$1\n$2') // 关键字行需要换行: 关键字前没有换行

@@ -2,7 +2,7 @@
   "name": "gtfish25-sql-formatter",
   "displayName": "gtfish25-sql-formatter",
   "description": "VSCode Extension to format SQL files",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "gtfish1988",
   "license": "MIT",
   "engines": {

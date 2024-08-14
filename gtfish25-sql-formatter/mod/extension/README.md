@@ -1,5 +1,9 @@
 Forked from inferrinizzard.prettier-sql-vscode-1.6.0
 
+[0.0.6] - 2024-08-13
+
+fixed bug
+
 [0.0.5] - 2024-08-10
 
 fixed bug
