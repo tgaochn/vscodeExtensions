@@ -68,7 +68,7 @@ function regularReplace(content) {
     content = content.replace(/(\S)\s+(\S)/g, '$1 $2'); // 多空格转成一个空格
 
     // 部分字符前减少空格
-    content = content.replace(/\s+[,]/g, ','); // ` ,` -> `,`
+    content = content.replace(/\s+(,|\.)/g, '$1'); // ` ,` -> `,`; ` .` -> `.`
     content = content.replace(/(\(|\[|\"|\'|<)\s+(\(|\[|\"|\'|<)/g, '$1$2'); // `[ (` -> `[(`
     content = content.replace(/(\)|\]|\"|\'|>)\s+(\)|\]|\"|\'|>|:)/g, '$1$2'); // `] )` -> `])`
     content = content.replace(/(\/)\s+(\S)/g, "$1$2"); // `/ b` -> `/b`
