@@ -18,66 +18,83 @@ function activate(context) {
 }
 exports.activate = activate;
 // from https://stackoverflow.com/a/42264780/1013
-const NUMERIC_REGEXP = /[-]{0,1}[\d]*[\.]{0,1}[\d]+/g;
+// const NUMERIC_REGEXP = /[-]{0,1}[\d]*[\.]{0,1}[\d]+/g;
+const MAX_NUMBER_LENGTH = 8; // max number of digits in a number, 8 digit = 12345.00
+
 class WordCounter {
     constructor() {
         this._statusBarItem = vscode_1.window.createStatusBarItem(vscode_1.StatusBarAlignment.Left);
     }
+
     updateWordCount() {
-        // Get the current text editor
         let editor = vscode_1.window.activeTextEditor;
         if (!editor) {
             this._statusBarItem.hide();
             return;
         }
 
-        var text = "";
-        for (const selection of editor.selections) {
-            text += "\n" + editor.document.getText(selection);
+        // more accurate line count
+        const lineCnt = editor.selections.reduce((pre, selection) => pre + selection.end.line - selection.start.line + (selection.end.character == 0 ? 0 : 1), 0);
+        let statusText = ``;
+
+        // get the numbers from selected lines
+        var text = editor.selections.map(selection =>
+            editor.document.getText(selection)).join("\n");
+        let numList = this._getNumList(text);
+
+        if (lineCnt > 1) {
+            statusText += `#Line: ${lineCnt}`;
         }
 
-        let numLines = this._getWordCount(text);
+        if (numList.length > 0) {
+            const [minNum, maxNum, sumNum] = numList.reduce(
+                ([min, max, sum], num) => [
+                    Math.min(min, num),
+                    Math.max(max, num),
+                    sum + num
+                ],
+                [numList[0], numList[0], 0]
+            );
+            const avgNum = sumNum / numList.length;
 
-        if (numLines.length > 0) {
-            var minNum = numLines[0]
-            var maxNum = numLines[0]
-            var sumNum = numLines[0]
+            const formatNumber = (num) => {
+                const fixed = num.toFixed(2); // round to 2 decimal places
+                if (fixed.length > MAX_NUMBER_LENGTH) {
+                    return num.toExponential(2); // use exponential notation (2 decimal) if the number is too long
+                }
+                return fixed;
+            };
 
-            for (var i = 1; i < numLines.length; i++) {
-                minNum = Math.min(minNum, numLines[i])
-                maxNum = Math.max(maxNum, numLines[i])
-                sumNum = sumNum + numLines[i];
+            const sum = formatNumber(sumNum);
+            const avg = formatNumber(avgNum);
+            const min = formatNumber(minNum);
+            const max = formatNumber(maxNum);
+
+            let numText = `Sum: ${sum}; Avg: ${avg}`;
+            statusText = statusText.length == 0 ? numText : statusText + '; ' + numText;
+            if (statusText.length < MAX_NUMBER_LENGTH * 12) { // if the status text is too long, only show the sum and avg
+                statusText += `; Min: ${min}; Max: ${max}`;
             }
+        }
 
-            var avgNum = sumNum / numLines.length;
-
-            // Update the status bar around to 2 digit
-            this._statusBarItem.text = `Sum: ${sumNum.toFixed(2)}, Avg: ${avgNum.toFixed(2)}, Min: ${minNum.toFixed(2)}, Max: ${maxNum.toFixed(2)}`;
+        if (statusText.length > 0) {
+            this._statusBarItem.text = statusText;
             this._statusBarItem.show();
         } else {
             this._statusBarItem.hide();
         }
-
-
     }
-    _getWordCount(doc) {
-        let lines = doc.trim().split('\n');
-        // extracts all the numbers in the selected lines
-        // and converts them to floats
-        // and if there is a number, get only the first one found
-        let numLines = lines.map((line) => {
-            const nums = line.match(NUMERIC_REGEXP);
-            // the +(thingy) is doing the conversion of string to float
-            if (nums && nums.length > 0) {
-                return +(nums[0]);
-            }
-        });
-        numLines = numLines.filter(function (x) {
-            return x !== undefined;
-        });
 
-        return numLines;
+    _getNumList(text) {
+        // This regex matches integers and floating point numbers
+        const regex = /-?\d+(\.\d+)?/g;
+
+        // Use match() to find all occurrences and map them to numbers
+        const numbers = (text.match(regex) || []).map(Number);
+
+        return numbers;
     }
+
     dispose() {
         this._statusBarItem.dispose();
     }
