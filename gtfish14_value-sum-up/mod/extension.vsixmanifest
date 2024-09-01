@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish14" Version="0.1.2" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish14" Version="0.2.0" Publisher="gtfish1988"/>
         <DisplayName>gtfish14_value-sum-up</DisplayName>
         <Description xml:space="preserve">value-sum-up</Description>
         <Tags></Tags>
