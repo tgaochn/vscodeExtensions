@@ -116,6 +116,11 @@ function mathLineReplace(content) {
 
 // !! T2: 代码块内生效, 即 ```content``` 内生效
 function codeLineReplace(content) {
+    // 代码块内 `content` 不处理, 防止破坏文件地址
+    if (content.trim().search(/`[^`]+`/g) != -1) {
+        return content;
+    }
+
     // 汉字和英文之间加空格
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");

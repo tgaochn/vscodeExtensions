@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish11" Version="0.8.5" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish11" Version="0.8.6" Publisher="gtfish1988"/>
         <DisplayName>gtfish11_markdown-formatter</DisplayName>
         <Description xml:space="preserve">markdown-formatter</Description>
         <Tags>markdown</Tags>

@@ -60,3 +60,12 @@ function OnClick(clickData) {
    }
 }
 ```
+
+```sql
+-- 较长的完整例子见: [IQL 常见实例](业务/IQL/IQL 例子/IQL 常见实例.md)
+-- 较长的完整例子见: `[IQL常见实例](业务/IQL/IQL例子/IQL常见实例.md)`
+from feed select
+    AVG([ji=0]), -- overall ZRP
+    AVG([sji=0]), -- sponsored job ZRP
+    AVG([oji=0]) -- organic job ZRP
+```
