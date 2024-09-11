@@ -3,7 +3,6 @@
 `1啊a`
 "1=+啊%a"
 regex format sql: <https://github.com/clarkyu2016/sql-beautify/blob/main/node_modules/vkbeautify/index.js>
-regex format sql:https://github.com/clarkyu2016/sql-beautify/blob/main/node_modules/vkbeautify/index.js
 
 | header1 | header2 | header3 | header4 |
 |---------|---------|---------|---------|
@@ -22,7 +21,6 @@ $1\times2$
 a(aa)a ,a
 
 - `,1`不分开, 因为有    `1,000,000`1
-`,1`不分开, 因为有    `1,000,000`1
 
 T+he(qui+ck)   a-b  [br-own] fox=x "fox=x"
 
@@ -69,3 +67,22 @@ from feed select
     AVG([sji=0]), -- sponsored job ZRP
     AVG([oji=0]) -- organic job ZRP
 ```
+
+$$
+\begin{aligned}
+CPc
+&= \frac{P(as | seen) × CPas}{P(click |seen)} \\
+&= \frac{P(as | click) × P(click |seen) × CPas}{P(click |seen)} \\
+&= P(as | click) × CPas
+\end{aligned}
+$$
+
+### p(click|seen) -> Sponsored job ranking
+
+$$
+\begin{aligned}
+rankingScore
+&= k * posOutcomeProb + expectedRevenue \\
+&= k * organicScore + [P(click |seen) × CPc]
+\end{aligned}
+$$

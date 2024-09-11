@@ -149,10 +149,10 @@ function globalReplaceOnFileAtStart(content) {
 
     // ! super ugly way to deal with the case of \\\\ - part 1
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
-    content = content.replace(/\\\\((?!$))/g, '\\\\¶$1');
+    content = content.replace(/\\\\((?!($|\n)))/g, '\\\\¶$1');
 
     // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
-    content = content.replace(/\s*\$\$\s*(.*)\s*\$\$\s*/g, `\n$$$$\n$1\n$$$$\n`);
+    content = content.replace(/\s*\$\$ *(.*) *\$\$\s*/g, `\n$$$$\n$1\n$$$$\n`);
 
     // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
     content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
@@ -471,7 +471,7 @@ function processMdContent(content) {
             return line;
         } else if (isMathBlockStart(line)) {
             inMathBlock = !inMathBlock;
-            return line;
+            return inMathBlock ? "\n" + line : line + "\n";
         }
 
         // !! T3: links 内生效, 即 [content] (content) `content`
