@@ -2,6 +2,10 @@ forked version from chintans98.markdown-jira-1.1.0.
 
 # changelog
 
+## [0.0.5] - 2024-09-11
+
+修改 `content` 的转化颜色
+
 ## [0.0.4] - 2024-08-14
 
 1. 转化选中的md文本而不是整个文件, 避免md文件太长时速度太慢

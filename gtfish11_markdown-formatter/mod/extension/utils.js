@@ -149,7 +149,7 @@ function globalReplaceOnFileAtStart(content) {
 
     // ! super ugly way to deal with the case of \\\\ - part 1
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
-    content = content.replace(/\\\\((?!($|\n)))/g, '\\\\¶$1');
+    content = content.replace(/\\\\([^(\n)(\r\n)])/g, '\\\\¶$1');
 
     // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
     content = content.replace(/\s*\$\$ *(.*) *\$\$\s*/g, `\n$$$$\n$1\n$$$$\n`);
@@ -163,6 +163,7 @@ function globalReplaceOnFileAtStart(content) {
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
 function globalReplaceOnFileAtEnd(content) {
     // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
+
     // ! super ugly way to deal with the case of \\\\ - part 2
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
     content = content.replace(/\\\\¶/g, '\\\\\n');

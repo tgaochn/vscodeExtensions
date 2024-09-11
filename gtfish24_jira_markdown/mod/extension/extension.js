@@ -208,7 +208,8 @@ function toJiraString(text) {
         // .replace(/`([^`]+)`/g, '{{$1}}') // `text` -> {{text}}
         // .replace(/`([^`]+)`/g, '{color:#DE350B}$1{color}') // `text` -> {color:#DE350B}text{color}
         // .replace(/`([^`]+)`/g, '{color:#FFE536}$1{color}') // `text` -> {color:#FFE536}text{color}
-        .replace(/`([^`]+)`/g, '{color:#77FF92}$1{color}') // `text` -> {color:#77FF92}text{color}
+        // .replace(/`([^`]+)`/g, '{color:#77FF92}$1{color}') // `text` -> {color:#77FF92}text{color}
+        .replace(/`([^`]+)`/g, '{color:#159788}$1{color}') // `text` -> {color:#159788}text{color}
 
         // Named Link: [text](url) -> [text|url]
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '[$1|$2]')

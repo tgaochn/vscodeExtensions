@@ -86,3 +86,24 @@ rankingScore
 &= k * organicScore + [P(click |seen) × CPc]
 \end{aligned}
 $$
+
+### p(ac|click) -> Bid scaling for CPac
+
+假设用不同标准得到的 expectedRevenue 应该一直, 则有
+
+$$
+\begin{aligned}
+expectedRevenue
+&=P(ac | seen) × CPac \\
+&=P(click |seen) × CPc
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+CPc
+&= \frac{P(ac | seen) × CPac}{P(click |seen)} \\
+&= \frac{P(ac | click) × P(click |seen) × CPac}{P(click |seen)} \\
+&= P(ac | click) × CPac
+\end{aligned}
+$$
