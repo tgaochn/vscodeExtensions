@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Language="en-US" Id="gtfish24-jira-markdown" Version="0.0.5" Publisher="gtfish1988"/>
+    <Identity Language="en-US" Id="gtfish24-jira-markdown" Version="0.0.6" Publisher="gtfish1988"/>
     <DisplayName>gtfish24-jira-markdown</DisplayName>
     <Description xml:space="preserve">VSCode Extension for converting Markdown formatting to JIRA or vice-versa easily</Description>
     <Tags></Tags>

@@ -2,6 +2,10 @@ forked version from chintans98.markdown-jira-1.1.0.
 
 # changelog
 
+## [0.0.6] - 2024-09-13
+
+bug fix
+
 ## [0.0.5] - 2024-09-11
 
 修改 `content` 的转化颜色

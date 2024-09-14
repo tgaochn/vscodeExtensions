@@ -201,8 +201,9 @@ function toJiraString(text) {
             return code + '}' + content + '{code}';
         })
 
+        // ! this one is removed since it will cancel the color replacement in the next regex
         // special link: (`link`) -> (link)
-        .replace(/\(`([^`]+)`\)/g, '($1)')
+        // .replace(/\(`([^`]+)`\)/g, '($1)')
 
         // Inline-Preformatted Text
         // .replace(/`([^`]+)`/g, '{{$1}}') // `text` -> {{text}}
