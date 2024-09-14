@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.9] - 2024-09-13
+
+bug-fix
+
 ## [0.8.8] - 2024-09-11
 
 bug-fix

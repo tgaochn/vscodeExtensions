@@ -107,3 +107,7 @@ CPc
 &= P(ac | click) × CPac
 \end{aligned}
 $$
+
+#
+
+- [ ] [杂事]
