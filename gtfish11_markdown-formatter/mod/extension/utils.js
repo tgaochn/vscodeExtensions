@@ -3,7 +3,7 @@ function trimExtraSpace(content) {
     // 各种缩减空格
     content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
     content = content.replace(/(\]|\)|}|_|\^)\s*(\]|\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
-    
+
     // todo pattern 的空格要保留 (- [ ] [content] content)
     content = content.replace(/- \[(x|X| )\]\[/g, "- [$1] ["); // `- [ ][content] content` -> `- [ ] [content] content`
 
@@ -56,11 +56,11 @@ function regularReplace(content) {
     // ! 处理带有分隔符的字符, 即: cont1`cont2`cont3, 调用noDelimiterReplace修改 cont1, cont3; cont2 当做link调用linkReplace处理
     content = processContentWithDelimiters(content);
     content = content.replace(/([a-zA-Z0-9])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `a  >1` -> `a > 1`
-    
+
     // ! cont1, cont2, cont3 之间不应该加空格的情况则删掉空格
     content = content.replace(/([\(\[\{<"'])\s*`/g, '$1`'); // 前空格
     content = content.replace(/`\s*([\)\]\}>"'])/g, '`$1'); // 后空格
-    
+
     // ! 汉字和英文/符号之间加空格 (part 2) - 不会出现在路径里, 所以放在 noDelimiterReplace 函数外面
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\s*(<|>)([0-9])/g, "$1 $2 $3"); // `数字  >1` -> `数字 > 1`
 
@@ -120,7 +120,7 @@ function mathLineReplace(content) {
 // !! T2: 代码块内生效, 即 ```content``` 内生效
 function codeLineReplace(content) {
     // 代码块内 `content` 不处理, 防止破坏文件地址
-    if (content.trim().search(/`[^`]+`/g) != -1) {
+    if (content.trim().search(/`[^`]+`/g) != -1 || content.trim().search(/\([^\(]+\)/g) != -1) {
         return content;
     }
 
@@ -461,21 +461,21 @@ function processMdContent(content) {
         line = globalReplaceOnLine(line);
 
         // !! T2: 代码块内生效, 即 ```content``` 内生效
-        if (inCodeBlock) {
-            return codeLineReplace(line);
-        } else if (isCodeBlockStart(line)) {
+        if (isCodeBlockStart(line)) { // 切换代码块状态
             inCodeBlock = !inCodeBlock;
             return inCodeBlock ? "\n" + line : line + "\n";
+        } else if (inCodeBlock) { // 代码块内文字处理
+            return codeLineReplace(line); 
         }
 
         // !! T2.5: 数学公式内生效, 即 $$content$$
-        if (inMathBlock) {
+        if (isMathBlockStart(line)) { // 切换数学公式状态
+            inMathBlock = !inMathBlock;
+            return inMathBlock ? "\n" + line : line + "\n";
+        } else if (inMathBlock) { // 数学公式内文字处理
             line = trimExtraSpace(line);
             line = mathLineReplace(line);
             return line;
-        } else if (isMathBlockStart(line)) {
-            inMathBlock = !inMathBlock;
-            return inMathBlock ? "\n" + line : line + "\n";
         }
 
         // !! T3: links 内生效, 即 [content] (content) `content`

@@ -60,7 +60,7 @@ function OnClick(clickData) {
 ```
 
 ```sql
--- 较长的完整例子见: [IQL 常见实例](业务/IQL/IQL 例子/IQL 常见实例.md)
+-- 较长的完整例子见: [IQL常见实例](业务/IQL/IQL例子/IQL常见实例.md)
 -- 较长的完整例子见: `[IQL常见实例](业务/IQL/IQL例子/IQL常见实例.md)`
 from feed select
     AVG([ji=0]), -- overall ZRP
@@ -111,3 +111,16 @@ $$
 #
 
 - [ ] [杂事]
+
+#
+
+[优化latency](业务/model/模型修改/优化latency.md)
+
+```json
+{
+   "zoo.model_format": "saved_model.tf",
+   "zoo.inferrer_backend": "tensorflow"
+}
+```
+
+[优化latency](业务/model/模型修改/优化latency.md)

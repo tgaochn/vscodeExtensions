@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.10] - 2024-11-11
+
+bug-fix: 处理 code/math block 的判断条件
+
 ## [0.8.9] - 2024-09-13
 
 bug-fix
@@ -68,8 +72,8 @@ bug-fix
 ## [0.4.0] - 2024-07-20
 
 1. 重构代码
-2. 添加了几个math相关的替换
-3. 去掉了没用的config
+2. 添加了几个 math 相关的替换
+3. 去掉了没用的 config
 
 ## [0.3.5] - 2024-07-14
 
@@ -77,7 +81,7 @@ bug-fix
 
 ## [0.3.3] - 2023-11-11
 
-优化format范围
+优化 format 范围
 
 ## [0.3.2] - 2023-04-30
 
@@ -89,9 +93,9 @@ fixed a bug that only replace the first space in file path
 
 ## [0.2.17] - 2023-04-30
 
-还原prettier替换的部分修改
+还原 prettier 替换的部分修改
 
-1. \\* -> *
+1. \\_ -> _
 2. > > -> >>
 
 ## [0.2.16] - 2023-04-07
@@ -137,7 +141,7 @@ tags: 开头不会被修改 - obsidian
 
 table 的多空格不消除, 即
 
-|         |
+| |
 
 ## [0.2.9] - 2023-02-19
 
