@@ -77,7 +77,7 @@ CPc
 \end{aligned}
 $$
 
-### p(click|seen) -> Sponsored job ranking
+### p (click|seen) -> Sponsored job ranking
 
 $$
 \begin{aligned}
@@ -87,7 +87,7 @@ rankingScore
 \end{aligned}
 $$
 
-### p(ac|click) -> Bid scaling for CPac
+### p (ac|click) -> Bid scaling for CPac
 
 假设用不同标准得到的 expectedRevenue 应该一直, 则有
 
@@ -111,6 +111,7 @@ $$
 #
 
 - [ ] [杂事]
+- [ ] [杂事_1] 123
 
 #
 

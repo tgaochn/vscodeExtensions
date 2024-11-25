@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.11] - 2024-11-24
+
+`[杂事\_1] 123` -> `[杂事_1] 123`
+
 ## [0.8.10] - 2024-11-11
 
 bug-fix: 处理 code/math block 的判断条件

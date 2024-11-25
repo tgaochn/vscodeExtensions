@@ -79,6 +79,9 @@ function regularReplace(content) {
     // 部分字符后减少空格
     content = content.replace(/(\S)\s+(\/)/g, "$1$2"); // `a /` -> `a/`
 
+    // `[杂事\_1] 123` -> `[杂事_1] 123`
+    content = content.replace(/\[(\S+)\\_(\S+)]/g, "[$1_$2]"); 
+
     return content;
 }
 
