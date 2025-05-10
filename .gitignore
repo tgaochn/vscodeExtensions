@@ -9,3 +9,4 @@ gtfish11_markdown-formatter/package-lock.json
 gtfish11_markdown-formatter/tempCodeRunnerFile.js
 gtfish11_markdown-formatter/tmp*.js
 gtfish11_markdown-formatter/sqlParser.js
+*.url
