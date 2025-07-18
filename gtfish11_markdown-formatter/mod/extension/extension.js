@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
+const path = require('path');
 
 const {
     processMdContent,
@@ -104,9 +105,30 @@ function activate(context) {
         if (document.isUntitled) {
             throw new DocumentIsUntitled;
         }
-        // const relativePath = encodeURI(vscode.workspace.asRelativePath(vscode.window.activeTextEditor.document.uri).replace(/\\/g, '/'));
+        
         const relativePath = vscode.workspace.asRelativePath(vscode.window.activeTextEditor.document.uri).replace(/\\/g, '/').replaceAll(' ', '%20');
         const finalText = `[desc](${relativePath})`
+
+        vscode.env.clipboard.writeText(finalText);
+    }));
+
+    // 0.8.12: 添加 extension.copyEncodedRelativePathOfCurrentFileWithTitle 命令, 可以复制当前文件的相对路径_带标题
+    context.subscriptions.push(vscode.commands.registerCommand('extension.copyEncodedRelativePathOfCurrentFileWithTitle', () => {
+        if (!vscode.workspace.rootPath) {
+            throw new NoWorkspaceOpen;
+        }
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            throw new NoTextEditorOpen;
+        }
+        let document = editor.document;
+        if (document.isUntitled) {
+            throw new DocumentIsUntitled;
+        }
+        
+        const relativePath = vscode.workspace.asRelativePath(vscode.window.activeTextEditor.document.uri).replace(/\\/g, '/').replaceAll(' ', '%20');
+        const title = path.basename(document.fileName, path.extname(document.fileName));
+        const finalText = `[${title}](${relativePath})`
 
         vscode.env.clipboard.writeText(finalText);
     }));

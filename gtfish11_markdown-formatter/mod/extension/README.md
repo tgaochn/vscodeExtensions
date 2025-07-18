@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.12] - 2025-07-18
+
+添加 extension.copyEncodedRelativePathOfCurrentFileWithTitle 命令, 可以复制当前文件的相对路径并给定title
+
 ## [0.8.11] - 2024-11-24
 
 `[杂事\_1] 123` -> `[杂事_1] 123`

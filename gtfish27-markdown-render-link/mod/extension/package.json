@@ -1,0 +1,36 @@
+{
+    "name": "gtfish27-markdown-render-link",
+    "displayName": "gtfish27-markdown-render-link",
+    "description": "VSCode Extension to render markdown link",
+    "version": "0.0.1",
+    "publisher": "gtfish1988",
+	"keywords": [
+		"markdown",
+		"footnotes",
+		"md",
+		"documentation"
+	],
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.60.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"contributes": {
+		"markdown.markdownItPlugins": true
+	},
+    "main": "./extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "esbuild extension.js --format=cjs --bundle --minify --outfile=extension.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.60",
+		"esbuild": "^0.15.14"
+	},
+	"dependencies": {
+		"markdown-it-footnote": "^3.0.3"
+	}
+}
