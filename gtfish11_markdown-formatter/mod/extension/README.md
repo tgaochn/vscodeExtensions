@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.14] - 2025-07-25
+
+进一步改进匹配方式, 添加了几个新的字符替换
+
 ## [0.8.13] - 2025-07-25
 
 短字符使用正则避免错误替换
