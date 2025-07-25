@@ -2,6 +2,11 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.13] - 2025-07-25
+
+短字符使用正则避免错误替换
+改进匹配方式, 只要后面不是字母就替换
+
 ## [0.8.12] - 2025-07-18
 
 添加 extension.copyEncodedRelativePathOfCurrentFileWithTitle 命令, 可以复制当前文件的相对路径并给定title

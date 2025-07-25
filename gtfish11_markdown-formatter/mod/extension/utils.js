@@ -281,7 +281,7 @@ function replaceFullChars(content) {
 
 // 数学公式符号替换
 function replaceMathChars(content) {
-    // 简化数学符号, 便于识别
+    // ! 简化数学符号, 便于识别
     content = content.replaceAll("\\cdot", "×");
     content = content.replaceAll("\\times", "×");
     content = content.replaceAll("\\|", "||");
@@ -295,28 +295,40 @@ function replaceMathChars(content) {
     content = content.replaceAll("\\longleftrightarrow", "↔");
     content = content.replaceAll("\\Leftrightarrow", "↔");
     content = content.replaceAll("\\Longleftrightarrow", "↔");
-    content = content.replaceAll("\\in", "∈");
-    content = content.replaceAll("\\notin", "∉");
     content = content.replaceAll("\\subset", "⊂");
     content = content.replaceAll("\\supset", "⊃");
     content = content.replaceAll("\\subsetneqq", "⫋");
     content = content.replaceAll("\\supsetneqq", "⫌");
-    content = content.replaceAll("\\cap", "∩");
-    content = content.replaceAll("\\cup", "∪");
     content = content.replaceAll("\\because", "∵");
     content = content.replaceAll("\\therefore", "∴");
     content = content.replaceAll("\\approx", "≈");
+    content = content.replaceAll("\\infty", "∞");
     content = content.replaceAll("\\propto", "∝");
     content = content.replaceAll("\\nabla", "▽");
     content = content.replaceAll("\\emptyset", "∅");
-    content = content.replace(/\\top([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "T$1");
-    content = content.replace(/\\pm([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "±$1");
-    content = content.replace(/\\mid([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "|$1"); // 间隔
-    content = content.replace(/\\gets([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "←$1");
-    content = content.replace(/\\to([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "→$1");
-    content = content.replace(/\\sim([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "∼$1");
 
-    // 替换希腊字母, 便于识别
+    // 2025-07-25: 短字符使用正则避免错误替换
+    content = content.replace(/\\in([^a-zA-Z])/g, "∈$1");
+    content = content.replace(/\\notin([^a-zA-Z])/g, "∉$1");
+    content = content.replace(/\\cap([^a-zA-Z])/g, "∩$1");
+    content = content.replace(/\\cup([^a-zA-Z])/g, "∪$1");
+
+    // 2025-07-25: 改进匹配方式, 只要后面不是字母就替换
+    content = content.replace(/\\top([^a-zA-Z])/g, "T$1");
+    content = content.replace(/\\pm([^a-zA-Z])/g, "±$1");
+    content = content.replace(/\\mid([^a-zA-Z])/g, "|$1"); // 间隔
+    content = content.replace(/\\gets([^a-zA-Z])/g, "←$1");
+    content = content.replace(/\\to([^a-zA-Z])/g, "→$1");
+    content = content.replace(/\\sim([^a-zA-Z])/g, "∼$1");
+
+    // content = content.replace(/\\top([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "T$1");
+    // content = content.replace(/\\pm([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "±$1");
+    // content = content.replace(/\\mid([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "|$1"); // 间隔
+    // content = content.replace(/\\gets([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "←$1");
+    // content = content.replace(/\\to([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "→$1");
+    // content = content.replace(/\\sim([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "∼$1");
+
+    // ! 替换希腊字母, 便于识别
     content = content.replaceAll("\\alpha", "α");
     content = content.replaceAll("\\beta", "β");
     content = content.replaceAll("\\gamma", "γ");
@@ -325,35 +337,44 @@ function replaceMathChars(content) {
     content = content.replaceAll("\\epsilon", "ε");
     content = content.replaceAll("\\varepsilon", "ε");
     content = content.replaceAll("\\zeta", "ζ");
-    content = content.replaceAll("\\eta", "η");
     content = content.replaceAll("\\Theta", "Θ");
     content = content.replaceAll("\\theta", "θ");
     content = content.replaceAll("\\iota", "ι");
     content = content.replaceAll("\\kappa", "κ");
     content = content.replaceAll("\\lambda", "λ");
-    content = content.replaceAll("\\rho", "ρ");
     content = content.replaceAll("\\sigma", "σ");
-    content = content.replaceAll("\\tau", "τ");
-    content = content.replaceAll("\\Phi", "Φ");
-    content = content.replaceAll("\\phi", "Φ");
     content = content.replaceAll("\\varphi", "φ");
-    content = content.replaceAll("\\psi", "ψ");
     content = content.replaceAll("\\omega", "ω");
     content = content.replaceAll("\\partial", "∂"); // 偏导
-    content = content.replace(/\\mu([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "μ$1");
-    content = content.replace(/\\xi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "ξ$1");
-    content = content.replace(/\\pi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "π$1");
-    content = content.replace(/\\chi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "χ$1");
 
-    // 替换数学花写字体, 便于识别
-    content = content.replaceAll("\\ell", "l");
+    // 2025-07-25: 短字符使用正则避免错误替换
+    content = content.replace(/\\eta([^a-zA-Z])/g, "η$1");
+    content = content.replace(/\\rho([^a-zA-Z])/g, "ρ$1");
+    content = content.replace(/\\tau([^a-zA-Z])/g, "τ$1");
+    content = content.replace(/\\Phi([^a-zA-Z])/g, "Φ$1");
+    content = content.replace(/\\phi([^a-zA-Z])/g, "Φ$1");
+    content = content.replace(/\\psi([^a-zA-Z])/g, "ψ$1");
+
+    // 2025-07-25: 改进匹配方式, 只要后面不是字母就替换
+    content = content.replace(/\\mu([^a-zA-Z])/g, "μ$1");
+    content = content.replace(/\\xi([^a-zA-Z])/g, "ξ$1");
+    content = content.replace(/\\pi([^a-zA-Z])/g, "π$1");
+    content = content.replace(/\\chi([^a-zA-Z])/g, "χ$1");
+    // content = content.replace(/\\mu([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "μ$1");
+    // content = content.replace(/\\xi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "ξ$1");
+    // content = content.replace(/\\pi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "π$1");
+    // content = content.replace(/\\chi([\s[\^_=<>\+\-\*/\|&%$@#!`~[\]{}\(\)]|$)/g, "χ$1");
+
+    // ! 替换数学花写字体, 便于识别
     content = content.replaceAll("\\imath", "i");
     content = content.replaceAll("\\jmath", "j");
     content = content.replaceAll("\\hbar", "h");
     content = content.replaceAll("^{\\prime}", "'");
     content = content.replaceAll("\\prime", "'");
+    // 2025-07-25: 短字符使用正则避免错误替换
+    content = content.replace(/\\ell([^a-zA-Z])/g, "l$1");
 
-    // 去掉括号的修饰符
+    // ! 去掉无用修饰符并规范化
     content = content.replaceAll("\\mathbb{", "{");
     content = content.replaceAll("\\mathrm{", "{");
     content = content.replaceAll("\\mathcal{", "{");
@@ -394,6 +415,7 @@ function replaceMathChars(content) {
 
     return content;
 }
+
 
 // 检测当前行是不是标题行
 function isHeaderLine(content) {
