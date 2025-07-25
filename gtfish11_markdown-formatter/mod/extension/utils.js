@@ -179,6 +179,10 @@ function globalReplaceOnFileAtEnd(content) {
     // 多个空行缩成一行
     content = content.replace(/\n\n+/g, '\n\n');
 
+    // 2025-07-25: 行内公式首尾空格去掉, 防止公式不能识别
+    content = content.replace(/([^\$])\$\s+(\[|\(|\{)/g, '$1$$$2');
+    content = content.replace(/(\]|\)|\})\s+\$([^\$])/g, '$1$$$2');
+
     return content
 }
 
