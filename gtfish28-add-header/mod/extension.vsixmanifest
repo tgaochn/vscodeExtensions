@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish28-add-header" Version="0.0.2" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish28-add-header" Version="0.0.3" Publisher="gtfish1988"/>
         <DisplayName>gtfish28-add-header</DisplayName>
-        <Description xml:space="preserve">A VSCode Extension To Add Headers Source Code Headers.</Description>
+        <Description xml:space="preserve">A VSCode Extension To Add Headers for Source Code Files. Supports multiple languages and adds markdown frontmatter for .md files.</Description>
         <Tags></Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>

@@ -1,8 +1,8 @@
 {
-	"name": "addHeader",
+	"name": "gtfish28-add-header",
 	"displayName": "gtfish28-add-header",
 	"description": "gtfish28-add-header",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"galleryBanner": {
 		"theme": "dark"
 	},
@@ -59,6 +59,7 @@
 				},
 				"addHeader.addTimeCreated": {
 					"description": "Include file creation time in the header.",
+					"type": "boolean",
 					"default": true
 				}
 			}
