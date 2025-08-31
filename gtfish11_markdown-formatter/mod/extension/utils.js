@@ -2,7 +2,8 @@
 function trimExtraSpace(content) {
     // 各种缩减空格
     content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
-    content = content.replace(/(\]|\)|}|_|\^)\s*(\]|\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
+    content = content.replace(/(\)|}|_|\^)\s*(\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
+    content = content.replace(/\]\s*(\)|}|_|\^|\(|{)/g, "$1$2"); // 单独处理 `]`: ] ( -> ](; 但是 `[1] [2]` 不修改; 防止md渲染错误
 
     // todo pattern 的空格要保留 (- [ ] [content] content)
     content = content.replace(/- \[(x|X| )\]\[/g, "- [$1] ["); // `- [ ][content] content` -> `- [ ] [content] content`
@@ -82,7 +83,7 @@ function regularReplace(content) {
     content = content.replace(/(\S)\s+(\/)/g, "$1$2"); // `a /` -> `a/`
 
     // `[杂事\_1] 123` -> `[杂事_1] 123`
-    content = content.replace(/\[(\S+)\\_(\S+)]/g, "[$1_$2]"); 
+    content = content.replace(/\[(\S+)\\_(\S+)]/g, "[$1_$2]");
 
     return content;
 }
@@ -400,7 +401,6 @@ function replaceMathChars(content) {
     content = content.replaceAll("\\prime", "'");
     // 2025-07-25: 短字符使用正则避免错误替换
     content = content.replace(/\\ell([^a-zA-Z]|$)/g, "l$1");
-    
 
     // ! 去掉无用修饰符并规范化
     content = content.replaceAll("\\mathbb{", "{");
@@ -518,7 +518,7 @@ function processMdContent(content) {
             inCodeBlock = !inCodeBlock;
             return inCodeBlock ? "\n" + line : line + "\n";
         } else if (inCodeBlock) { // 代码块内文字处理
-            return codeLineReplace(line); 
+            return codeLineReplace(line);
         }
 
         // !! T2.5: 数学公式内生效, 即 $$content$$
