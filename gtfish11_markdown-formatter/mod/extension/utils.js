@@ -644,6 +644,9 @@ function processContentWithDelimiters(content) {
 
     let result = result_list.join("");
 
+    // 修复特定情况：移除各种分隔符后面跟标点符号时的多余空格
+    result = result.replace(/([)\]}>`"])\s+([;,.:!?])/g, '$1$2'); // 右分隔符 + 标点符号，去掉空格
+
     return result;
 }
 
