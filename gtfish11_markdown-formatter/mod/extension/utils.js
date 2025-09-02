@@ -3,7 +3,7 @@ function trimExtraSpace(content) {
     // 各种缩减空格
     content = content.replace(/(\[|\(|{|_|\^|!)\s*(\[|\(|{|_|\^)/g, "$1$2"); // [ ( -> [(
     content = content.replace(/(\)|}|_|\^)\s*(\)|}|_|\^|\[|\(|{)/g, "$1$2"); // ) ] -> )], ) [ -> )[
-    content = content.replace(/\]\s*(\)|}|_|\^|\(|{)/g, "$1$2"); // 单独处理 `]`: ] ( -> ](; 但是 `[1] [2]` 不修改; 防止md渲染错误
+    content = content.replace(/\]\s*(\)|}|_|\^|\(|{)/g, "]$1"); // 单独处理 `]`: ] ( -> ](; 但是 `[1] [2]` 不修改; 防止md渲染错误
 
     // todo pattern 的空格要保留 (- [ ] [content] content)
     content = content.replace(/- \[(x|X| )\]\[/g, "- [$1] ["); // `- [ ][content] content` -> `- [ ] [content] content`

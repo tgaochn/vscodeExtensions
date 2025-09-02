@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.18] - 2025-09-02
+
+bug fix
+
 ## [0.8.17] - 2025-08-31
 
 修复特定情况, 移除各种分隔符后面跟标点符号时的多余空格: 右分隔符 + 标点符号，去掉空格
