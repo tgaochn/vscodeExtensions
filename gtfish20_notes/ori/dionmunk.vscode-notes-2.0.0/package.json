@@ -1,0 +1,271 @@
+{
+	"name": "vscode-notes",
+	"displayName": "Notes",
+	"description": "Notes is a Markdown focused notes extension for Visual Studio Code that takes inspiration from Notational Velocity and nvAlt.",
+	"version": "2.0.0",
+	"publisher": "dionmunk",
+	"license": "CC-BY-NC-4.0",
+	"author": {
+		"name": "Dion Munk",
+		"url": "https://github.com/dionmunk"
+	},
+	"keywords": [
+		"notes",
+		"notational velocity",
+		"nvalt"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dionmunk/vscode-notes"
+	},
+	"homepage": "https://github.com/dionmunk/vscode-notes#readme",
+	"bugs": {
+		"url": "https://github.com/dionmunk/vscode-notes/issues"
+	},
+	"icon": "resources/icon.png",
+	"engines": {
+		"vscode": "^1.87.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./dist/extension",
+	"contributes": {
+		"configuration": {
+			"title": "Notes",
+			"properties": {
+				"notes.notesLocation": {
+					"type": "string",
+					"default": "",
+					"description": "Storage location for notes."
+				},
+				"notes.notesDefaultNoteExtension": {
+					"type": "string",
+					"default": "md",
+					"description": "The default extension to use for new notes. (do not include the dot)"
+				},
+				"notes.notesExtensions": {
+					"type": "string",
+					"default": "*",
+					"description": "A comma separated list of allowed extensions for notes. Use '*' (asterisk) to allow all file types. (do not include the dot or spaces)"
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "Notes.deleteNote",
+				"title": "Delete Note",
+				"icon": {
+					"light": "resources/light/delete.svg",
+					"dark": "resources/dark/delete.svg"
+				}
+			},
+			{
+				"command": "Notes.deleteFolder",
+				"title": "Delete Folder",
+				"icon": {
+					"light": "resources/light/delete.svg",
+					"dark": "resources/dark/delete.svg"
+				}
+			},
+			{
+				"command": "Notes.listNotes",
+				"title": "List Notes",
+				"category": "Notes"
+			},
+			{
+				"command": "Notes.newNote",
+				"title": "New Note",
+				"category": "Notes",
+				"icon": "$(new-file)"
+			},
+			{
+				"command": "Notes.newFolder",
+				"title": "New Folder",
+				"category": "Notes",
+				"icon": "$(new-folder)"
+			},
+			{
+				"command": "Notes.refreshNotes",
+				"title": "Refresh Notes",
+				"category": "Notes",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "Notes.renameNote",
+				"title": "Rename Note",
+				"icon": {
+					"light": "resources/light/rename.svg",
+					"dark": "resources/dark/rename.svg"
+				}
+			},
+			{
+				"command": "Notes.renameFolder",
+				"title": "Rename Folder",
+				"icon": {
+					"light": "resources/light/rename.svg",
+					"dark": "resources/dark/rename.svg"
+				}
+			},
+			{
+				"command": "Notes.setupNotes",
+				"title": "Settings",
+				"category": "Notes",
+				"icon": "$(gear)"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "Notes.listNotes",
+				"key": "alt+l",
+				"mac": "alt+l"
+			},
+			{
+				"command": "Notes.newNote",
+				"key": "alt+n",
+				"mac": "alt+n"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "Notes.newNote",
+					"when": "view == notes",
+					"group": "navigation@1"
+				},
+				{
+					"command": "Notes.newFolder",
+					"when": "view == notes",
+					"group": "navigation@2"
+				},
+				{
+					"command": "Notes.refreshNotes",
+					"when": "view == notes",
+					"group": "navigation@3"
+				},
+				{
+					"command": "Notes.setupNotes",
+					"when": "view == notes",
+					"group": "navigation@4"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "Notes.renameNote",
+					"when": "view == notes && viewItem == note",
+					"group": "1_modification@1"
+				},
+				{
+					"command": "Notes.deleteNote",
+					"when": "view == notes && viewItem == note",
+					"group": "1_modification@2"
+				},
+				{
+					"command": "Notes.renameFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "1_modification@1"
+				},
+				{
+					"command": "Notes.deleteFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "1_modification@2"
+				},
+				{
+					"command": "Notes.newNote",
+					"when": "view == notes && viewItem == folder",
+					"group": "2_workspace@1"
+				},
+				{
+					"command": "Notes.newFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "2_workspace@2"
+				},
+				{
+					"command": "Notes.newNote",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@1"
+				},
+				{
+					"command": "Notes.newFolder",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@2"
+				},
+				{
+					"command": "Notes.refreshNotes",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@3"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "vscode-notes",
+					"title": "Notes",
+					"icon": "resources/notes-light.svg"
+				}
+			]
+		},
+		"views": {
+			"vscode-notes": [
+				{
+					"id": "notes",
+					"name": "Notes"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "notes",
+				"contents": "To get started, you need to select a location to store your notes.\n[Select Location](command:Notes.setupNotes)"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js",
+		"webpack": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development",
+		"webpack-dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development --watch",
+		"test-compile": "tsc -p ./"
+	},
+	"devDependencies": {
+		"@types/glob": "^8.1.0",
+		"@types/mkdirp": "^2.0.0",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "^20.11.0",
+		"@types/rimraf": "^4.0.5",
+		"@types/vscode": "^1.87.0",
+		"@typescript-eslint/eslint-plugin": "^7.0.0",
+		"@typescript-eslint/parser": "^7.0.0",
+		"eslint": "^8.56.0",
+		"glob": "^10.3.10",
+		"mocha": "^10.2.0",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.3.3",
+		"vscode-test": "^1.6.1",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"dependencies": {
+		"vscode-uri": "^3.0.8"
+	},
+	"__metadata": {
+		"id": "7837012b-af9c-405a-b89c-e0de236a57a2",
+		"publisherId": "7f381be0-a46b-472a-b823-3dc7d8c7fefd",
+		"publisherDisplayName": "Dion Munk",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1745900526143,
+		"pinned": false,
+		"preRelease": false,
+		"source": "gallery",
+		"size": 400042
+	}
+}
