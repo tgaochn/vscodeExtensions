@@ -1,4 +1,8 @@
-personally forked version from dionmunk.vscode-notes-1.1.0
+personally forked version from dionmunk.vscode-notes-2.0.0
+
+# [0.1.0] - 2025-09-05
+
+update the forked version
 
 # [0.0.3] - 2023-12-08
 

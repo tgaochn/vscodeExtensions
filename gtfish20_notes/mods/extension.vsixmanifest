@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish20-notes" Version="0.0.3" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish20-notes" Version="0.1.0" Publisher="gtfish1988"/>
         <DisplayName>gtfish20-notes</DisplayName>
         <Description xml:space="preserve">Notes is a Markdown focused notes extension for Visual Studio Code that takes inspiration from Notational Velocity and nvAlt.</Description>
         <Tags>notes,notational velocity,nvalt,keybindings</Tags>

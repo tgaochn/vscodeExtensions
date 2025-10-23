@@ -47,6 +47,36 @@ const interopModule = (target, source, excludeKey, descriptor) => {
 // Create ES module
 const createESModule = (moduleContent) => interopModule(defineProperty({}, "__esModule", { value: true }), moduleContent);
 
+// Pattern configuration for auto-linking
+const linkPatterns = [
+    // RJQ tickets
+    {
+        regex: /\bRJQ-[0-9]{1,6}\b/gi,
+        urlTemplate: "https://indeed.atlassian.net/browse/$&",
+    },
+
+    // ! single/multiple target hp/serp models
+    // pre-apply/post-apply UDS: preapply_serp_row_6e1f741/postapply_hp_us_4a8ab91
+    // pre-apply/post-apply MTM: preapply_hp_row_6e1f741/postapply_hp_us_4a8ab91
+    // MTM: applyperseen_rj_hp_jp_52684ee / ctr_rj_sjhp_jp_a3683b0 / applyperseen_mobweb_rotw_a3683b0 / applyperseen_and_ctr_rj_hp_jp_15339e0
+    // bidding: ac-per-click_rj_hp_us_5a303d3 / apply_rj_hp_us_fbed164 / ac-per-click_sjmobweb_rotw_60306c6 / apply_sjmobweb_rotw_e60cca4
+    // post-apply: qualifiedapply_mob_global_6156574 / qualified_mob_global_e9b72c9
+    // glassdoor model: gd_sjmobweb_rotw_3c86644
+    // default MTM: multi_rj_hp_us_15339e0
+    // others: dislike_rj_hp_us_b734f31
+    {
+        regex: /\b((gd_)?((sjmobweb)|(applyperseen)|(ctr)|(applyperseen_and_ctr)|(dislike)|(apply)|(ac-per-click)|(qualifiedapply)|(qualified)|(multi)|(preapply)|(postapply))_(((rj_sjhp)|(rj_hp)|(mobweb)|(mob)|(sjmobweb)|(hp)|(serp))_)?((us)|(rot?w)|(jp)|(global))_[a-zA-Z0-9]{7})\b/g,
+        urlTemplate: "https://butterfly.sandbox.indeed.net/model/$&/PUBLISHED/config",
+    },
+
+    // ! I2A models: elephant-multi-en-all_en-4e18057
+    {
+        regex: /\b(elephant-multi-en-all_en-[a-f0-9]{7})\b/g,
+        urlTemplate: "https://butterfly.sandbox.indeed.net/model/$&/PUBLISHED/config",
+    },
+
+];
+
 // Backtick link plugin implementation
 const backtickLinkPlugin = createModule((exports, module) => {
     "use strict";
@@ -71,7 +101,7 @@ const backtickLinkPlugin = createModule((exports, module) => {
             // Find label end using markdown-it's built-in parser
             labelStart = start + 1;
             labelEnd = state.md.helpers.parseLinkLabel(state, start, false);
-            
+
             if (labelEnd < 0) {
                 return false;
             }
@@ -79,7 +109,7 @@ const backtickLinkPlugin = createModule((exports, module) => {
             pos = labelEnd + 1;
 
             // Check for opening parenthesis and backtick: ](`
-            if (pos >= max || 
+            if (pos >= max ||
                 state.src.charCodeAt(pos) !== 0x28 /* ( */ ||
                 pos + 1 >= max ||
                 state.src.charCodeAt(pos + 1) !== 0x60 /* ` */) {
@@ -131,8 +161,26 @@ const backtickLinkPlugin = createModule((exports, module) => {
             return true;
         }
 
-        // Register parsing rule before standard link parsing
+        // Register backtick link parsing rule
         markdownIt.inline.ruler.before("link", "backtick_link", parseBacktickLink);
+        
+        // Add pattern-based auto-linking using renderer approach
+        const defaultTextRule = markdownIt.renderer.rules.text;
+        
+        markdownIt.renderer.rules.text = function(tokens, idx, options, env, renderer) {
+            let text = tokens[idx].content;
+            
+            // Apply all patterns
+            for (const pattern of linkPatterns) {
+                pattern.regex.lastIndex = 0;
+                text = text.replace(pattern.regex, (match) => {
+                    const url = pattern.urlTemplate.replace('$&', match);
+                    return `<a href="${url}">${match}</a>`;
+                });
+            }
+            
+            return text;
+        };
     };
 });
 
