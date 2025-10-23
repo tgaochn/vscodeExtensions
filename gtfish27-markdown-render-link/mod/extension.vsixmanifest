@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish27-markdown-render-link" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish27-markdown-render-link" Version="0.1.0" Publisher="gtfish1988"/>
         <DisplayName>gtfish27-markdown-render-link</DisplayName>
         <Description xml:space="preserve">VSCode Extension to render markdown link</Description>
         <Tags>markdown, link, render</Tags>
