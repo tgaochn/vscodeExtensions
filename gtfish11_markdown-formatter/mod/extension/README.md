@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.19] - 2025-10-29
+
+移除 markdown 链接的可选标题: `[text](url "title") -> [text](url)`
+
 ## [0.8.18] - 2025-09-02
 
 bug fix

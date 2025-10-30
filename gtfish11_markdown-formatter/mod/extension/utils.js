@@ -149,7 +149,11 @@ function globalReplaceOnLine(content) {
     // 移除行尾空格
     content = content.replace(/(.*)[\r\n]$/g, "$1").replace(/(\s*$)/g, "");
 
-    return content
+    // 移除 markdown 链接的可选标题: [text](url "title") -> [text](url)
+    content = content.replace(/(\]\([^)]+)\s+"[^"]*"\s*\)/g, '$1)'); 
+    content = content.replace(/(\]\([^)]+)\s+'[^']*'\s*\)/g, '$1)'); 
+
+    return content;
 }
 
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
