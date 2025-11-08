@@ -125,13 +125,15 @@ function mathLineReplace(content) {
 
 // !! T2: 代码块内生效, 即 ```content``` 内生效
 function codeLineReplace(content) {
-    // 代码块内 `content` 不处理, 防止破坏文件地址
-    if (content.trim().search(/`[^`]+`/g) != -1 || content.trim().search(/\([^\(]+\)/g) != -1) {
+    // 代码块内 `content`, "content", 'content', "cont1/cont2", "cont1\\cont2" 跳过不处理, 防止破坏文件地址和字符串内容
+    if (content.trim().search(/`[^`]+`/g) != -1 || 
+        content.trim().search(/\([^\(]+\)/g) != -1 ||
+        /[\/\\"']/.test(content)) {
         return content;
     }
 
     // 汉字和英文之间加空格
-    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2'); // 不修改正反斜杠, 避免路径被改乱
+    content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])([a-zA-Z0-9@&=\[\$\%\^\-\+(])/g, '$1 $2');
     content = content.replace(/([a-zA-Z0-9!&;=\],\.\:\?\$\%\^\-\+\)])([\u4e00-\u9fa5\u3040-\u30FF])/g, "$1 $2");
 
     return content;
@@ -162,7 +164,8 @@ function globalReplaceOnFileAtStart(content) {
 
     // ! super ugly way to deal with the case of \\\\ - part 1
     // 如果\\后面没有换行符, 则在\\后面加一个空行 (先加一个特殊符号, 然后再替换)
-    content = content.replace(/\\\\([^(\n)(\r\n)])/g, '\\\\¶$1');
+    // Skip cases: backticks `\\xxx`, numbers \\192.168.x.x, and already has newline
+    content = content.replace(/(([^`])|^)\\\\(?![\n\r0-9])/g, '$2\\\\¶');
 
     // 独立的单行公式换成多行公式:  $$ XXXX $$ 的公式内容变成新行显示
     content = content.replace(/\s*\$\$ *(.*) *\$\$\s*/g, `\n$$$$\n$1\n$$$$\n`);

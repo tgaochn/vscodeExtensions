@@ -2,6 +2,11 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.20] - 2025-11-08
+
+1. 修正了 `\\` 在 `\\192.168.x.x` 的情况下自动添加换行符的问题
+2. 修正了代码块内汉字和英文之间加空格的几个例外情况, 防止路径等内容被错误分割
+
 ## [0.8.19] - 2025-10-29
 
 移除 markdown 链接的可选标题: `[text](url "title") -> [text](url)`
@@ -91,7 +96,7 @@ bug-fix
 
 1. `)a` -> `) a`
 2. `a(` -> `a (`
-3. ` ,` -> `,`
+3. `,` -> `,`
 
 ## [0.4.3] - 2024-07-24
 
@@ -128,7 +133,7 @@ fixed a bug that only replace the first space in file path
 
 还原 prettier 替换的部分修改
 
-1. \\_ -> _
+1. \\_->_
 2. > > -> >>
 
 ## [0.2.16] - 2023-04-07
