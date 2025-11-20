@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.21] - 2025-11-19
+
+1. `---` 内的内容不修改, 避免修改 md 的 tag 部分造成的格式问题
+
 ## [0.8.20] - 2025-11-08
 
 1. 修正了 `\\` 在 `\\192.168.x.x` 的情况下自动添加换行符的问题
@@ -21,7 +25,7 @@ bug fix
 
 ## [0.8.16] - 2025-08-30
 
-单独处理 `]`: `] (` -> `](`; 但是 `[1] [2]` 不修改; 防止md渲染错误
+单独处理 `]`: `] (` -> `](`; 但是 `[1] [2]` 不修改; 防止 md 渲染错误
 
 ## [0.8.15] - 2025-07-25
 
@@ -34,7 +38,7 @@ bug fix
 
 ## [0.8.12] - 2025-07-18
 
-添加 extension.copyEncodedRelativePathOfCurrentFileWithTitle 命令, 可以复制当前文件的相对路径并给定title
+添加 extension.copyEncodedRelativePathOfCurrentFileWithTitle 命令, 可以复制当前文件的相对路径并给定 title
 
 ## [0.8.11] - 2024-11-24
 

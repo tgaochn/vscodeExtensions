@@ -512,9 +512,15 @@ function isImgCiting(line) {
     return /^\s*!\[.*\]\(.*\)\s*$/.test(line);
 }
 
+// 检测当前行是否是分隔符块 (---)
+function isSeparatorBlockStart(line) {
+    return /^\s*---\s*$/.test(line);
+}
+
 function processMdContent(content) {
     let inCodeBlock = false;
     let inMathBlock = false;
+    let inSeparatorBlock = false;
 
     const processLine = (line) => {
         // !! T1: 全局生效, 输入为单行, \n等特殊符号替换时可能有问题
@@ -526,6 +532,14 @@ function processMdContent(content) {
             return inCodeBlock ? "\n" + line : line + "\n";
         } else if (inCodeBlock) { // 代码块内文字处理
             return codeLineReplace(line);
+        }
+
+        // !! T2.1: 分隔符块内生效, 即 --- 内生效, 避免修改md的tag部分造成的格式问题
+        if (isSeparatorBlockStart(line)) { // 切换分隔符块状态
+            inSeparatorBlock = !inSeparatorBlock;
+            return line;
+        } else if (inSeparatorBlock) { // 分隔符块内文字处理, 跳过不处理
+            return line;
         }
 
         // !! T2.5: 数学公式内生效, 即 $$content$$
