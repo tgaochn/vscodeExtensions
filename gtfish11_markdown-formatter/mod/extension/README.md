@@ -2,6 +2,11 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.22] - 2025-11-22
+
+1. 优化压缩空格的formatter位置
+2. 使用映射表优化代码量, 减少重复逻辑
+
 ## [0.8.21] - 2025-11-19
 
 1. `---` 内的内容不修改, 避免修改 md 的 tag 部分造成的格式问题
