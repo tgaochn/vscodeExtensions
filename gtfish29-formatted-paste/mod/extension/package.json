@@ -1,0 +1,35 @@
+{
+    "name": "gtfish29-formatted-paste",
+    "displayName": "gtfish29-formatted-paste",
+    "description": "Paste clipboard content with leading and trailing whitespace removed",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.97.0"
+    },
+    "publisher": "gtfish1988",
+    "categories": [
+        "Other"
+    ],
+    "license": "MIT",
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "formatted-paste.trimmed-paste",
+                "title": "Formatted Paste (Trimmed)"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "formatted-paste.trimmed-paste",
+                "key": "ctrl+shift+v",
+                "mac": "cmd+shift+v",
+                "when": "editorTextFocus"
+            }
+        ]
+    }
+}
+
