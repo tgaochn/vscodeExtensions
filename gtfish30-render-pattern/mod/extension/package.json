@@ -1,0 +1,100 @@
+{
+	"name": "gtfish30-render-pattern",
+	"displayName": "gtfish30-render-pattern",
+	"description": "Recognize custom patterns as clickable links and open them with configurable commands",
+	"version": "0.0.2",
+	"engines": {
+		"vscode": "^1.97.0"
+	},
+	"publisher": "gtfish1988",
+	"categories": [
+		"Other"
+	],
+	"license": "MIT",
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "render-pattern.openPath",
+				"title": "Open Path"
+			}
+		],
+		"configuration": {
+			"title": "Render Pattern",
+			"properties": {
+				"render-pattern.patterns": {
+					"type": "array",
+					"default": [
+						{
+							"name": "windowsPath",
+							"regex": "[A-Z]:[/\\\\][^\\s\"'<>|*?\\n`]+",
+							"commands": [
+								"\"D:/software/Directory Opus/dopusrt.exe\" /acmd Go \"${path}\" NEWTAB=findexisting,tofront",
+								"explorer \"${path}\""
+							],
+							"tooltip": "Open in Directory Opus",
+							"pathTransform": "forwardSlash"
+						},
+						{
+							"name": "uncPath",
+							"regex": "\\\\\\\\[^\\s\"'<>|*?\\n`]+",
+							"commands": [
+								"\"D:/software/Directory Opus/dopusrt.exe\" /acmd Go \"${path}\" NEWTAB=findexisting,tofront",
+								"explorer \"${path}\""
+							],
+							"tooltip": "Open in Directory Opus"
+						},
+						{
+							"name": "fileUrl",
+							"regex": "file:///[^\\s\"'<>|*?\\n`]+",
+							"commands": [
+								"\"D:/software/Directory Opus/dopusrt.exe\" /acmd Go \"${path}\" NEWTAB=findexisting,tofront",
+								"explorer \"${path}\""
+							],
+							"tooltip": "Open in Directory Opus",
+							"pathTransform": "fileUrl"
+						}
+					],
+					"description": "Array of pattern definitions for link recognition",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "Unique name for this pattern"
+							},
+							"regex": {
+								"type": "string",
+								"description": "Regular expression to match (without flags, 'g' flag is added automatically)"
+							},
+							"commands": {
+								"type": "array",
+								"items": { "type": "string" },
+								"description": "Array of commands to try in order. First command with existing executable will be used. Use ${path} as placeholder"
+							},
+							"tooltip": {
+								"type": "string",
+								"description": "Tooltip text shown on hover. Use ${path} as placeholder"
+							},
+							"pathTransform": {
+								"type": "string",
+								"enum": ["none", "forwardSlash", "fileUrl"],
+								"default": "none",
+								"description": "Transform to apply: 'forwardSlash' converts / to \\, 'fileUrl' converts file:///D:/path to D:\\path"
+							}
+						},
+						"required": ["name", "regex", "commands"]
+					}
+				}
+			}
+		}
+	},
+	"__metadata": {
+		"installedTimestamp": 1768712687223,
+		"targetPlatform": "undefined",
+		"size": 6205
+	}
+}
