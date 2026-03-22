@@ -2,7 +2,7 @@
 	"name": "gtfish01",
 	"displayName": "gtfish01_bracket-jumper",
 	"description": "bracket-jumper",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"publisher": "gtfish1988",
 	"engines": {
 		"vscode": "^1.30.0"
@@ -116,6 +116,7 @@
 				"bracket-jumper.openingBrackets": {
 					"type": "array",
 					"default": [
+                        "<",
 						"{",
 						"[",
 						"("
@@ -125,11 +126,21 @@
 				"bracket-jumper.closingBrackets": {
 					"type": "array",
 					"default": [
+                        ">",
 						"}",
 						"]",
 						")"
 					],
 					"description": "Characters to be recognized as closing brackets. MUST have a pair in openingBrackets."
+                },
+                "bracket-jumper.uniBrackets": {
+                    "type": "array",
+                    "default": [
+                        "`",
+                        "\"",
+                        "'"
+                    ],
+                    "description": "Characters that serve as both opening and closing brackets (e.g. quotes). Opening/closing is determined by context heuristics."
 				}
 			}
 		}

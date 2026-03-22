@@ -1,11 +1,26 @@
 {
   "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__init__.py": true,
+    "**/__pycache__": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/*.pyc": true,
+    "**/node_modules": true,
     "__error": "Not found",
     ".gitignore": true,
-    ".favorites.json": true
+    ".favorites.json": true,
+    "**/*.vsix": true
 },
 "git.ignoreLimitWarning": true,
 "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
+},
+"explorerExclude.backup": {}
 }
