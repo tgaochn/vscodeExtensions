@@ -175,6 +175,16 @@ function globalReplaceOnFileAtStart(content) {
     // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
     content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
 
+    // LLM output: wrap bare PLAINTEXT blocks in code fences (only outside code blocks)
+    content = applyOutsideCodeBlocks(content, seg =>
+        seg.replace(/(^|\n)PLAINTEXT\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, body, sep) =>
+            prefix + '```PLAINTEXT\n' + body.replace(/\n+$/, '') + '\n```' + sep));
+
+    // LLM output: remove blank lines between markdown table rows (only outside code blocks).
+    // Requires both the preceding and following lines to match |...|  table pattern.
+    content = applyOutsideCodeBlocks(content, seg =>
+        seg.replace(/(\|[^\n]*\|)[ \t]*\n(?:[ \t]*\n)+(?=\|[^\n]*\|)/g, '$1\n'));
+
     return content
 }
 
@@ -383,6 +393,25 @@ function assembleFormattedContent(lines) {
     return content.trim() + "\n";
 }
 
+// Apply fn only to text segments outside fenced code blocks. Code blocks are preserved as-is.
+function applyOutsideCodeBlocks(content, fn) {
+    const re = /^```[^\n]*\n[\s\S]*?^```[ \t]*$/gm;
+    const segments = [];
+    let lastEnd = 0;
+    let match;
+    while ((match = re.exec(content)) !== null) {
+        if (match.index > lastEnd) {
+            segments.push(fn(content.slice(lastEnd, match.index)));
+        }
+        segments.push(match[0]);
+        lastEnd = match.index + match[0].length;
+    }
+    if (lastEnd < content.length) {
+        segments.push(fn(content.slice(lastEnd)));
+    }
+    return segments.join('');
+}
+
 // 检测当前行是否是代码块的开头
 function isCodeBlockStart(line) {
     return line.trim().startsWith("```") || line.trim().startsWith('{code');
@@ -395,7 +424,7 @@ function isMathBlockStart(line) {
 
 // 检测当前行是否是 md table
 function isMarkdownTable(line) {
-    const separatorRegex = /^\s*\|([-:\s]+\|)+\s*$/;
+    const separatorRegex = /^\s*\|(.+\|)+\s*$/;
     return separatorRegex.test(line);
 }
 
@@ -410,6 +439,9 @@ function isSeparatorBlockStart(line) {
 }
 
 function processMdContent(content) {
+    const hasCRLF = content.includes('\r\n');
+    if (hasCRLF) content = content.replace(/\r\n/g, '\n');
+
     let inCodeBlock = false;
     let inMathBlock = false;
     let inSeparatorBlock = false;
@@ -481,6 +513,8 @@ function processMdContent(content) {
 
     // !! T0: 全局生效, 输入为整个文件 (方便处理换行等)
     finalContent = globalReplaceOnFileAtEnd(finalContent);
+
+    if (hasCRLF) finalContent = finalContent.replace(/\n/g, '\r\n');
 
     return finalContent;
 }
