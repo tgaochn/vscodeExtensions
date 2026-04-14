@@ -2,13 +2,16 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.24] - 2026-04-14
+
+1. 添加了MERMAID的format
+
 ## [0.8.23] - 2026-04-12
 
 1. 添加了CC原始输出的format
 2. 优化了table识别
 
 ## [0.8.22] - 2025-11-22
-
 
 1. 优化压缩空格的formatter位置
 2. 使用映射表优化代码量, 减少重复逻辑

@@ -175,10 +175,10 @@ function globalReplaceOnFileAtStart(content) {
     // 多行公式: \begin{aligned} formula \end{aligned} 分行显示
     content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
 
-    // LLM output: wrap bare PLAINTEXT blocks in code fences (only outside code blocks)
+    // LLM output: wrap bare PLAINTEXT/MERMAID blocks in code fences (only outside code blocks)
     content = applyOutsideCodeBlocks(content, seg =>
-        seg.replace(/(^|\n)PLAINTEXT\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, body, sep) =>
-            prefix + '```PLAINTEXT\n' + body.replace(/\n+$/, '') + '\n```' + sep));
+        seg.replace(/(^|\n)(PLAINTEXT|MERMAID)\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, lang, body, sep) =>
+            prefix + '```' + lang + '\n' + body.replace(/\n+$/, '') + '\n```' + sep));
 
     // LLM output: remove blank lines between markdown table rows (only outside code blocks).
     // Requires both the preceding and following lines to match |...|  table pattern.
