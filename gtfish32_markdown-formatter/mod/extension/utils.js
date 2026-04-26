@@ -177,7 +177,7 @@ function globalReplaceOnFileAtStart(content) {
 
     // LLM output: wrap bare PLAINTEXT/MERMAID blocks in code fences (only outside code blocks)
     content = applyOutsideCodeBlocks(content, seg =>
-        seg.replace(/(^|\n)(PLAINTEXT|MERMAID)\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, lang, body, sep) =>
+        seg.replace(/(^|\n)(PLAINTEXT|MERMAID|MD|MARKDOWN|PYTHON|POWERSHELL|BAT|VBS|CMD|REG)\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, lang, body, sep) =>
             prefix + '```' + lang + '\n' + body.replace(/\n+$/, '') + '\n```' + sep));
 
     // LLM output: remove blank lines between markdown table rows (only outside code blocks).

@@ -2,6 +2,10 @@
 
 personal modified version of liushilive.markdownformat-0.0.15
 
+## [0.8.25] - 2026-04-25
+
+1. 添加了更多的format: MD|MARKDOWN|PYTHON|POWERSHELL|BAT|VBS|CMD|REG
+
 ## [0.8.24] - 2026-04-14
 
 1. 添加了MERMAID的format
