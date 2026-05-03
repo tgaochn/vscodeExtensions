@@ -17,13 +17,13 @@ An advanced Markdown formatter for VS Code with strong CJK (Chinese/Japanese/Kor
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `MarkdownFormat: 格式化MD` | Format the current Markdown document |
-| `MarkdownFormat: 格式化MD_html2md` | Convert HTML description to Markdown |
-| `MarkdownFormat: 格式化MD_md2html` | Convert Markdown to HTML description |
-| `MarkdownFormat: 复制当前文件的相对路径` | Copy encoded relative path of current file |
-| `MarkdownFormat: 复制当前文件的相对路径_带标题` | Copy encoded relative path with filename as title |
+| Command                                          | Description                                       |
+| ------------------------------------------------ | ------------------------------------------------- |
+| `GF32 MdFormat: 格式化MD`                        | Format the current Markdown document              |
+| `GF32 MdFormat: 格式化MD_html2md`                | Convert HTML description to Markdown              |
+| `GF32 MdFormat: 格式化MD_md2html`                | Convert Markdown to HTML description              |
+| `GF32 MdFormat: 复制当前文件的相对路径`          | Copy encoded relative path of current file        |
+| `GF32 MdFormat: 复制当前文件的相对路径_带标题`   | Copy encoded relative path with filename as title |
 
 ## Key Modifications from Original
 
@@ -34,46 +34,6 @@ This is an extensively rewritten fork of [`liushilive.markdownformat`](https://m
 - **Removed all configuration options** in favor of always-on formatting
 - **Added**: CJK-English spacing, LaTeX symbol conversion, code block language detection, math formula line breaks, delimiter-aware processing, table detection, YAML frontmatter preservation
 - **Registered as Document Formatting Provider** for format-on-save support
-
-## Changelog
-
-See the full changelog in the [README changelog section](#changelog-details) below.
-
-### Changelog Details
-
-<details>
-<summary>Click to expand full changelog</summary>
-
-#### [0.8.25] - 2026-04-25
-- Added more code block language formats: MD, MARKDOWN, PYTHON, POWERSHELL, BAT, VBS, CMD, REG
-
-#### [0.8.24] - 2026-04-14
-- Added MERMAID code block format support
-
-#### [0.8.23] - 2026-04-12
-- Added plaintext output format handling
-- Optimized table recognition
-
-#### [0.8.22] - 2025-11-22
-- Optimized space compression formatter positioning
-- Used lookup tables to reduce duplicate logic
-
-#### [0.8.21] - 2025-11-19
-- Content inside `---` separators (YAML frontmatter) is now preserved
-
-#### [0.8.0] - 2024-08-03
-- Major refactoring with dedicated math formula processing
-
-#### [0.4.0] - 2024-07-20
-- Code refactoring, added math-related replacements, removed unused config
-
-#### [0.2.0] - 2022-08-15
-- Added HTML/Markdown conversion commands
-
-#### [0.1.0] - 2022-07-03
-- Initial fork: added full-width conversion, Greek letter replacement, math formula simplification
-
-</details>
 
 ## Attribution
 
