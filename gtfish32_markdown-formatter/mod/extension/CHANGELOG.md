@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.26] - 2026-05-03
+
+合规处理
+
 ## [0.8.25] - 2026-04-25
 
 - Added more code block language formats: MD, MARKDOWN, PYTHON, POWERSHELL, BAT, VBS, CMD, REG

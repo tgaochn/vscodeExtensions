@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish32-markdown-formatter" Version="0.8.25" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish32-markdown-formatter" Version="0.8.26" Publisher="gtfish1988"/>
         <DisplayName>gtfish32_markdown-formatter</DisplayName>
         <Description xml:space="preserve">Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.</Description>
         <Tags>markdown,formatter,cjk,chinese,latex,html-to-markdown,markdown-to-html,unicode,format-on-save</Tags>
