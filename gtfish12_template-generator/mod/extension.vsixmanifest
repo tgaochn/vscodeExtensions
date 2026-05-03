@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Language="en-US" Id="gtfish12" Version="0.1.1" Publisher="gtfish1988"/>
     <DisplayName>gtfish12_template-generator</DisplayName>
-    <Description xml:space="preserve">template-generator</Description>
+    <Description xml:space="preserve">Generate files and folders from customizable templates with keybinding support. Enhanced fork with additional keyboard shortcuts for template-based file scaffolding.</Description>
     <Tags>Template,File,Folder,keybindings</Tags>
     <Categories>Other</Categories>
     <GalleryFlags>Public</GalleryFlags>
@@ -12,10 +12,10 @@
       <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.12.0" />
       <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
       
-        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/DengSir/template-generator-vscode.git" />
-        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/DengSir/template-generator-vscode.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator" />
         
-          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/DengSir/template-generator-vscode.git" />
+          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator" />
         
       
       
@@ -27,7 +27,7 @@
       
     </Properties>
     <License>extension/LICENSE.md</License>
-    <Icon>extension/images/icon.jpg</Icon>
+    <Icon>extension/images/icon.png</Icon>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Code"/>

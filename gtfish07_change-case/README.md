@@ -1,3 +1,5 @@
-# gtfish07 README
-personal modified version from: wmaurer.change-case-1.0.0
-1. reorder the terms listed
+# gtfish07_change-case
+
+Change text case with reordered command list for frequently used transformations. Enhanced fork of wmaurer.change-case with reorganized command priorities.
+
+See [mod/extension/README.md](mod/extension/README.md) for full details.

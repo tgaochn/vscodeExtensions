@@ -1,20 +1,13 @@
-# README
+# gtfish14_value-sum-up
 
-personal modified version of arturbelico.code-sum-up-0.1.0
+## Description
 
-## [0.2.0] - 2024-09-01
+Calculate and display the sum of selected numeric values in the editor. Enhanced fork with improved number detection and status bar display.
 
-1. refactor the code
-2. add line cnt
-3. format the numbers if the shown text is too long
+## Installation
 
-## [0.1.2] - 2023-09-02
+Install from the VS Code Marketplace or manually via .vsix file.
 
-1. results only keep 2 digits
+## Attribution
 
-## [0.1.0] - 2022-07-03
-
-### Added
-
-1. added avg, min, max
-2. support multiple selections
+Based on code-sum-up by arturcarvalho. Independently modified and maintained.

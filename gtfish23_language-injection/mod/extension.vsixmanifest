@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish23-language-injection" Version="0.0.1" Publisher="gtfish1988" />
         <DisplayName>gtfish23-language-injection</DisplayName>
-        <Description xml:space="preserve">general language injection</Description>
+        <Description xml:space="preserve">Inject language syntax highlighting into code blocks across different languages, including markdown codeblocks and Python strings. Custom extension for general-purpose language injection.</Description>
         <Tags>markdown,python,sql</Tags>
         <Categories>Programming Languages</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -18,11 +18,11 @@
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/ptweir/python-string-sql/issues" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/ptweir/python-string-sql#readme" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection/issues" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection#readme" />
 
 
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
@@ -36,5 +36,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

@@ -1,25 +1,13 @@
-Forked from inferrinizzard.prettier-sql-vscode-1.6.0
+# gtfish25-sql-formatter
 
-[0.0.6] - 2024-08-13
+## Description
 
-fixed bug
+Format SQL files with support for multiple SQL dialects including BigQuery, PostgreSQL, MySQL, and more. Enhanced fork with customized formatting defaults and keybindings.
 
-[0.0.5] - 2024-08-10
+## Installation
 
-fixed bug
+Install from the VS Code Marketplace or manually via .vsix file.
 
-[0.0.4] - 2024-08-10
+## Attribution
 
-修改注册命令名称, 避免重复
-
-[0.0.3] - 2024-08-07
-
-fixed bug
-
-[0.0.2] - 2024-08-07
-
-fixed bug
-
-[0.0.1] - 2024-08-04
-
-用于 IQL, 去掉了日期上增加的空格
+Based on Prettier SQL VSCode. Independently modified and maintained.

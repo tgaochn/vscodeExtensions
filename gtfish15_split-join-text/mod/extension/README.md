@@ -1,10 +1,13 @@
-# README
+# gtfish15_split-join-text
 
-personal modified version of matsuyanagi.split-join-text-0.0.9
+## Description
 
-## [0.0.1] - 2022-09-11
+Split and join text lines with configurable separators and keybindings. Enhanced fork with custom keyboard shortcuts for text splitting and joining workflows.
 
-### Added
+## Installation
 
-1. split/join 增加字符说明
-2. split 的时候把句首空格去掉
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Split Join texts by Matsuyanagi. Independently modified and maintained.

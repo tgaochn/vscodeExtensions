@@ -1,25 +1,13 @@
-personally forked version from jayfidev.tablegenerator-1.0.4
+# gtfish19_wrap_selection
 
-# [0.0.2] - 2023-10-11
+## Description
 
-1. add a dropbox list for available keys
+Wrap selected text with configurable symbol combinations or custom patterns. Enhanced fork with additional wrapping pattern options and keybindings.
 
+## Installation
 
-# [0.0.1] - 2023-09-02
+Install from the VS Code Marketplace or manually via .vsix file.
 
-1. fixed default symbols cmd
+## Attribution
 
-Use the following setting:
-
-```json
-"wrapSelection.patterns": {
-    // default pattern triggered by cmd "Wrap selected text using custom pattern"
-    "default": "try",
-
-    // all the enabled patterns
-    "try": "try:\n    ${text}\n    except Exception as e:\n        print(e)\n        # raise e",
-    "log": "console.log(`${text}`, ${text})",
-    "promise": "new Promise((yeah, nah) => yeah(${text}))",
-    "=>": "() => ${text}",
-},
-```
+Based on wrap by gko. Independently modified and maintained.

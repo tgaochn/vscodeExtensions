@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish17-open-file" Version="0.0.1" Publisher="gtfish1988"/>
         <DisplayName>gtfish17-open-file</DisplayName>
-        <Description xml:space="preserve">gtfish17-open-file</Description>
+        <Description xml:space="preserve">Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.</Description>
         <Tags>shortcuts,open-files,path,vscode,vscode-extension,keybindings</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -16,10 +16,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/Jack89ita/vscode-open-file-from-path" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/Jack89ita/vscode-open-file-from-path" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/Jack89ita/vscode-open-file-from-path" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
 
 
 
@@ -38,5 +38,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

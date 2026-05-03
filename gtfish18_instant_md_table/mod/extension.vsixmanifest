@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish18-instant-md-table" Version="0.0.3" Publisher="gtfish1988"/>
         <DisplayName>gtfish18-instant-md-table</DisplayName>
-        <Description xml:space="preserve">gtfish18-instant-md-table</Description>
+        <Description xml:space="preserve">Generate Markdown tables instantly from selected text or clipboard data. Enhanced fork with improved table formatting and keybinding support.</Description>
         <Tags></Tags>
         <Categories>Other,Programming Languages</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -14,10 +14,10 @@
             <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.24.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/JayFiDev/MarkdownTablegenerator" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/JayFiDev/MarkdownTablegenerator" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish18_instant_md_table" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish18_instant_md_table" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/JayFiDev/MarkdownTablegenerator" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish18_instant_md_table" />
 
 
 
@@ -36,5 +36,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

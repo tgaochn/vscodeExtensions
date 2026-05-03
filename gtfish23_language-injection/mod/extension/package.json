@@ -1,17 +1,17 @@
 {
-    "name": "gtfish23-language-injection",
-    "displayName": "gtfish23-language-injection",
-    "description": "inject any language code blocks into any language (markdown codeblock/python string/etc.)",
-    "version": "0.0.1",
-    "publisher": "gtfish1988",
-    "engines": {
-        "vscode": "^1.32.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "grammars": [
+	"name": "gtfish23-language-injection",
+	"displayName": "gtfish23-language-injection",
+	"description": "Inject language syntax highlighting into code blocks across different languages, including markdown codeblocks and Python strings. Custom extension for general-purpose language injection.",
+	"version": "0.0.1",
+	"publisher": "gtfish1988",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"grammars": [
 			{
 				"path": "./syntaxes/ahk-inject-markdown.json",
 				"scopeName": "markdown.ahk.codeblock",
@@ -22,7 +22,6 @@
 					"meta.embedded.block.ahk": "ahk"
 				}
 			},
-
 			{
 				"path": "./syntaxes/tree-inject-markdown.json",
 				"scopeName": "markdown.tree.codeblock",
@@ -33,7 +32,6 @@
 					"meta.embedded.block.tree": "tree"
 				}
 			},
-
 			{
 				"path": "./syntaxes/avdl-inject-markdown.json",
 				"scopeName": "markdown.avro.codeblock",
@@ -44,7 +42,6 @@
 					"meta.embedded.block.avro": "avro"
 				}
 			},
-
 			{
 				"path": "./syntaxes/julia-inject-markdown.json",
 				"scopeName": "markdown.julia.codeblock",
@@ -55,18 +52,22 @@
 					"meta.embedded.block.julia": "julia"
 				}
 			},
-
-            {
-                "path": "./syntaxes/sql-inject-python.json",
-                "scopeName": "sql-inject-python.multi-line-text",
-                "injectTo": [
-                    "source.python",
-                    "source.coconut"
-                ],
-                "embeddedLanguages": {
-                    "meta.embedded.sql": "sql"
-                }
-            }
-        ]
-    }
+			{
+				"path": "./syntaxes/sql-inject-python.json",
+				"scopeName": "sql-inject-python.multi-line-text",
+				"injectTo": [
+					"source.python",
+					"source.coconut"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.sql": "sql"
+				}
+			}
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection"
+	},
+	"icon": "images/icon.png"
 }

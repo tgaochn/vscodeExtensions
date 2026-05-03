@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish16-auto-align" Version="0.0.1" Publisher="gtfish1988"/>
         <DisplayName>gtfish16-auto-align</DisplayName>
-        <Description xml:space="preserve">Automatically align by commas, vertical bars, etc.</Description>
+        <Description xml:space="preserve">Auto-align columnar data with configurable pre-separator spacing. Enhanced fork adding space before separators for balanced column alignment in CSV and delimited files.</Description>
         <Tags>keybindings</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -22,9 +22,10 @@
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
 
 
-        </Properties>
+              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish16_auto_align" />
+    </Properties>
 
-        <!-- <Icon>extension/icon.png</Icon> -->
+        <!-- <Icon>extension/images/icon.png</Icon> -->
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>

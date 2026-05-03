@@ -1,9 +1,10 @@
 {
 	"name": "gtfish02",
 	"displayName": "gtfish02_insert-numbers",
-	"description": "insert-numbers",
+	"description": "Insert sequential numbers at multiple cursor positions with simplified input. Enhanced fork supporting plain integer input for quick start value setting, in addition to full format string syntax.",
 	"version": "0.1.0",
 	"publisher": "gtfish1988",
+	"icon": "images/icon.png",
 	"galleryBanner": {
 		"color": "#0000FF",
 		"theme": "dark"
@@ -13,7 +14,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/02.%20insert-numbers"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish02_insert-numbers"
 	},
 	"categories": [
 		"Other"
@@ -26,7 +27,7 @@
 		"commands": [
 			{
 				"command": "extension.insertNumbers",
-				"title": "Insert Numbers"
+				"title": "GF02: Insert Numbers"
 			}
 		],
 		"keybindings": [

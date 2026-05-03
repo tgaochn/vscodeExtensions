@@ -1,19 +1,13 @@
 # gtfish29-formatted-paste
 
-A simple VSCode extension to paste clipboard content with leading and trailing whitespace removed.
+## Description
 
-## Features
+Paste clipboard content with leading and trailing whitespace automatically trimmed. Custom utility extension for clean paste operations.
 
-- **Formatted Paste (Trimmed)**: Reads clipboard content, removes all leading and trailing whitespace (spaces, tabs, newlines), and pastes the result.
+## Installation
 
-## Usage
+Install from the VS Code Marketplace or manually via .vsix file.
 
-1. Copy some text to clipboard
-2. Run command: `Formatted Paste (Trimmed)` from Command Palette (Ctrl+Shift+P)
+## Attribution
 
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `Formatted Paste (Trimmed)` | Paste clipboard content with whitespace trimmed |
-
+Original extension by gtfish1988. Independently developed and maintained.

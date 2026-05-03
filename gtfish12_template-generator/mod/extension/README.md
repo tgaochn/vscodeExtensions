@@ -1,9 +1,13 @@
-# README
+# gtfish12_template-generator
 
-personal modified version of DengSir.template-generator-vscode-0.4.1
+## Description
 
-## [0.1.1] - 2022-07-03
+Generate files and folders from customizable templates with keybinding support. Enhanced fork with additional keyboard shortcuts for template-based file scaffolding.
 
-### Added
+## Installation
 
-1. change date format to "week, MM/dd/yyyy, hh:mm"
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Template Generator by DengSir. Independently modified and maintained.

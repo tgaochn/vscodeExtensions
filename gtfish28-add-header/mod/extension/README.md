@@ -1,5 +1,13 @@
-A VSCode Extension To Add Headers forked from `ch3rag.addheader-1.1.0`
+# gtfish28-add-header
 
-[0.0.3] - 2025-08-17:
+## Description
 
-给 md 文件添加带 tags 的 header
+Add customizable headers to source code files with multi-language support and markdown frontmatter generation. Enhanced fork with additional language templates and keybindings.
+
+## Installation
+
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Add Header by ch3rag. Independently modified and maintained.

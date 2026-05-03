@@ -1,10 +1,13 @@
-# README
+# gtfish13_insert-numbers-alphacharts
 
-personal modified version of volkerdobler.insertnums-0.6.4
+## Description
 
-## [0.1.0] - 2022-07-03
+Insert sequential numbers, letters, and custom character sequences at multiple cursors. Enhanced fork with alphabetic character support and extended keybindings.
 
-### Added
+## Installation
 
-1. added more instruction in placeholder and showInputBox
-2. default starting number is changed to 0 instead of 1
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Insert Sequences by volkerdobler. Independently modified and maintained.

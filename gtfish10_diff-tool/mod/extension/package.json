@@ -1,7 +1,7 @@
 {
 	"name": "gtfish10",
 	"displayName": "gtfish10_diff-tool",
-	"description": "diff-tool",
+	"description": "Two-file diff comparison via context menu with full absolute path display. Enhanced fork showing complete file paths for clearer diff identification.",
 	"version": "0.1.0",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -56,5 +56,10 @@
 		"eslint": "^3.6.0",
 		"@types/node": "^6.0.40",
 		"@types/mocha": "^2.2.32"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish10_diff-tool"
+	},
+	"icon": "images/icon.png"
 }

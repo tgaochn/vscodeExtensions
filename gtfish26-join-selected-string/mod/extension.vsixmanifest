@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish26-join-selected-string" Version="0.0.1" Publisher="gtfish1988"/>
         <DisplayName>gtfish26-join-selected-string</DisplayName>
-        <Description xml:space="preserve">VSCode Extension to join selected text with custom separator</Description>
+        <Description xml:space="preserve">Join selected text lines with a custom separator character. Enhanced fork with modified join behavior and keybinding configuration.</Description>
         <Tags>join, paste, clipboard, text</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -15,7 +15,8 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-        </Properties>
+              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish26-join-selected-string" />
+    </Properties>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
@@ -24,5 +25,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

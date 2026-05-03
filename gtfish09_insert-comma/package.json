@@ -1,11 +1,16 @@
 {
 	"name": "gtfish09-insertcomma",
 	"displayName": "gtfish09_insert-comma",
-	"description": "insert-comma",
+	"description": "Insert commas at the end of selected lines with indentation preservation. Functional fork converting semicolon insertion to comma insertion for list and CSV formatting workflows.",
 	"publisher": "gtfish1988",
 	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.49.0"
+	},
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish09_insert-comma"
 	},
 	"categories": [
 		"Other"
@@ -18,7 +23,7 @@
 		"commands": [
 			{
 				"command": "extension.insertComma",
-				"title": "Insert comma"
+				"title": "GF09: Insert Comma"
 			}
 		]
 	},

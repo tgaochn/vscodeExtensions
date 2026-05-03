@@ -22,5 +22,6 @@
 "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
 },
-"explorerExclude.backup": {}
+"explorerExclude.backup": {},
+"claudeCodeChat.permissions.yoloMode": true
 }

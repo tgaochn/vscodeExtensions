@@ -1,7 +1,7 @@
 {
 	"name": "gtfish19-wrap-selection",
 	"displayName": "gtfish19-wrap-selection",
-	"description": "wrap selection with combination of symbols or your custom pattern",
+	"description": "Wrap selected text with configurable symbol combinations or custom patterns. Enhanced fork with additional wrapping pattern options and keybindings.",
 	"version": "0.0.2",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -152,5 +152,10 @@
 		"typescript": "^3.8.3",
 		"vscode": "^1.1.33"
 	},
-	"license": "MIT"
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection"
+	},
+	"icon": "images/icon.png"
 }

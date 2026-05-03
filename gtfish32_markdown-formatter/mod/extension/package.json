@@ -1,11 +1,16 @@
 {
 	"name": "gtfish32-markdown-formatter",
 	"displayName": "gtfish32_markdown-formatter",
-	"description": "markdown-formatter",
+	"description": "Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.",
 	"version": "0.8.25",
 	"publisher": "gtfish1988",
 	"engines": {
 		"vscode": "^1.21.0"
+	},
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter"
 	},
 	"categories": [
 		"Programming Languages",
@@ -20,23 +25,23 @@
 		"commands": [
 			{
 				"command": "extension.reFormat",
-				"title": "MarkdownFormat : 格式化MD"
+				"title": "GF32 MdFormat: 格式化MD"
 			},
 			{
 				"command": "extension.reFormat_html2md",
-				"title": "MarkdownFormat : 格式化MD_html2md"
+				"title": "GF32 MdFormat: 格式化MD_html2md"
 			},
 			{
 				"command": "extension.reFormat_md2html",
-				"title": "MarkdownFormat : 格式化MD_md2html"
+				"title": "GF32 MdFormat: 格式化MD_md2html"
 			},
 			{
 				"command": "extension.copyEncodedRelativePathOfCurrentFile",
-				"title": "MarkdownFormat : 复制当前文件的相对路径"
+				"title": "GF32 MdFormat: 复制当前文件的相对路径"
 			},
 			{
 				"command": "extension.copyEncodedRelativePathOfCurrentFileWithTitle",
-				"title": "MarkdownFormat : 复制当前文件的相对路径_带标题"
+				"title": "GF32 MdFormat: 复制当前文件的相对路径_带标题"
 			}
 		],
 		"menus": {

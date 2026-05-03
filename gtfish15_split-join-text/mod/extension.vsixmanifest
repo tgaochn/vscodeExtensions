@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish15-split-join-text" Version="0.0.1" Publisher="gtfish1988" />
         <DisplayName>gtfish15-split-join-text</DisplayName>
-        <Description xml:space="preserve">gtfish15-split-join-text</Description>
+        <Description xml:space="preserve">Split and join text lines with configurable separators and keybindings. Enhanced fork with custom keyboard shortcuts for text splitting and joining workflows.</Description>
 
 
 
@@ -20,10 +20,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/Matsuyanagi/vscode-split-join-text.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/Matsuyanagi/vscode-split-join-text.git" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/Matsuyanagi/vscode-split-join-text.git" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text" />
 
 
 
@@ -46,5 +46,6 @@
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

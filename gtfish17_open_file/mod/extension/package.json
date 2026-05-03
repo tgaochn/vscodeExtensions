@@ -1,7 +1,7 @@
 {
 	"name": "gtfish17-open-file",
 	"displayName": "gtfish17-open-file",
-	"description": "gtfish17-open-file",
+	"description": "Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.",
 	"license": "MIT",
 	"version": "0.0.1",
 	"publisher": "gtfish1988",
@@ -26,7 +26,7 @@
 		"commands": [
 			{
 				"command": "extension.openFileFromPath",
-				"title": "Open file from path"
+				"title": "GF17: Open file from path"
 			}
 		],
 		"keybindings": [
@@ -85,10 +85,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Jack89ita/vscode-open-file-from-path"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file"
 	},
 	"galleryBanner": {
 		"color": "#1c2237",
 		"theme": "dark"
-	}
+	},
+	"icon": "images/icon.png"
 }

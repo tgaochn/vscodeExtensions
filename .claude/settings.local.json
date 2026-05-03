@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Filesystem__list_directory",
+      "mcp__Filesystem__directory_tree",
+      "mcp__Filesystem__read_multiple_files",
+      "mcp__Filesystem__read_text_file",
+      "Bash(grep -v '^$')",
+      "Bash(cat)",
+      "Read(//tmp/**)",
+      "Bash(git -C \"D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions\" remote -v)",
+      "Bash(cp \"D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/gtfish32_markdown-formatter/images/icon.png\" \"D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/gtfish32_markdown-formatter/mod/extension/images/icon.png\")",
+      "Bash(mkdir -p \"D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/gtfish32_markdown-formatter/mod/extension/images\")",
+      "Bash(mkdir -p 'D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/__TRACKED_VAR__/mod/extension/images')",
+      "Bash(cp 'D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/__TRACKED_VAR__/images/icon.png' 'D:/Dropbox/project/0_non-work_stuff/vscode plugin/1. vscodeExtensions/__TRACKED_VAR__/mod/extension/images/icon.png')"
+    ]
+  }
+}

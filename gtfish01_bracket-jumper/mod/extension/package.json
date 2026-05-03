@@ -1,7 +1,7 @@
 {
 	"name": "gtfish01",
 	"displayName": "gtfish01_bracket-jumper",
-	"description": "bracket-jumper",
+	"description": "Jump between matching brackets with customized keybindings. Enhanced fork with modified shortcut configurations for efficient bracket navigation in code.",
 	"version": "0.2.0",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/01.%20bracket-jumper"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish01_bracket-jumper"
 	},
 	"categories": [
 		"Other"
@@ -116,7 +116,7 @@
 				"bracket-jumper.openingBrackets": {
 					"type": "array",
 					"default": [
-                        "<",
+						"<",
 						"{",
 						"[",
 						"("
@@ -126,21 +126,21 @@
 				"bracket-jumper.closingBrackets": {
 					"type": "array",
 					"default": [
-                        ">",
+						">",
 						"}",
 						"]",
 						")"
 					],
 					"description": "Characters to be recognized as closing brackets. MUST have a pair in openingBrackets."
-                },
-                "bracket-jumper.uniBrackets": {
-                    "type": "array",
-                    "default": [
-                        "`",
-                        "\"",
-                        "'"
-                    ],
-                    "description": "Characters that serve as both opening and closing brackets (e.g. quotes). Opening/closing is determined by context heuristics."
+				},
+				"bracket-jumper.uniBrackets": {
+					"type": "array",
+					"default": [
+						"`",
+						"\"",
+						"'"
+					],
+					"description": "Characters that serve as both opening and closing brackets (e.g. quotes). Opening/closing is determined by context heuristics."
 				}
 			}
 		}
@@ -157,5 +157,6 @@
 		"mocha": "^2.3.3",
 		"@types/node": "^6.0.40",
 		"@types/mocha": "^2.2.32"
-	}
+	},
+	"icon": "images/icon.png"
 }

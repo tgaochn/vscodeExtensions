@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Language="en-US" Id="gtfish13" Version="0.1.0" Publisher="gtfish1988"/>
     <DisplayName>gtfish13_insert-numbers-alphacharts</DisplayName>
-    <Description xml:space="preserve">insert-numbers-alphacharts</Description>
+    <Description xml:space="preserve">Insert sequential numbers, letters, and custom character sequences at multiple cursors. Enhanced fork with alphabetic character support and extended keybindings.</Description>
     <Tags>sequences,numbers,insert,alphachars,keybindings</Tags>
     <Categories>Other</Categories>
     <GalleryFlags>Public</GalleryFlags>
@@ -15,14 +15,14 @@
       <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
       <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
       
-        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/volkerdobler/insertnums.git" />
-        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/volkerdobler/insertnums.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts" />
         
-          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/volkerdobler/insertnums.git" />
+          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts" />
         
       
-      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/volkerdobler/insertnums/issues" />
-      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/volkerdobler/insertnums/blob/master/README.md" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts/issues" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts#readme" />
       <Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#5757ff" />
       <Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="dark" />
       <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
@@ -31,7 +31,7 @@
       
     </Properties>
     
-    <Icon>extension/insertnums.png</Icon>
+    <Icon>extension/images/icon.png</Icon>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Code"/>

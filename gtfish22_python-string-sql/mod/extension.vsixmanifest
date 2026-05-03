@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish22-python-string-sql" Version="0.0.2" Publisher="gtfish1988" />
         <DisplayName>gtfish22-python-string-sql</DisplayName>
-        <Description xml:space="preserve">highlight python strings as sql</Description>
+        <Description xml:space="preserve">Syntax highlight SQL code embedded in Python strings. Enhanced fork with additional keybindings for toggling SQL highlighting in Python files.</Description>
         <Tags>snippet,keybindings,python,sql,__web_extension</Tags>
         <Categories>Programming Languages</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -18,11 +18,11 @@
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/ptweir/python-string-sql.git" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/ptweir/python-string-sql/issues" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/ptweir/python-string-sql#readme" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql/issues" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql#readme" />
 
 
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
@@ -36,5 +36,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

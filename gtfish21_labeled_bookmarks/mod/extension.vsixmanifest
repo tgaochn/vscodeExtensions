@@ -3,7 +3,7 @@
 		<Metadata>
 			<Identity Language="en-US" Id="gtfish21-labeled-bookmarks" Version="0.0.3" Publisher="gtfish1988" />
 			<DisplayName>gtfish21-labeled-bookmarks</DisplayName>
-			<Description xml:space="preserve">Bookmarks, multiple groups, customizable visuals</Description>
+			<Description xml:space="preserve">Labeled bookmarks with multiple groups and customizable visual indicators. Enhanced fork with modified keybindings for efficient bookmark navigation across files.</Description>
 			<Tags>keybindings</Tags>
 			<Categories>Other</Categories>
 			<GalleryFlags>Public</GalleryFlags>
@@ -16,11 +16,11 @@
 				<Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 				
 				
-				<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/koalamer/vsc-labeled-bookmarks.git" />
-				<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/koalamer/vsc-labeled-bookmarks.git" />
-				<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/koalamer/vsc-labeled-bookmarks.git" />
-				<Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/koalamer/vsc-labeled-bookmarks/issues" />
-				<Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/koalamer/vsc-labeled-bookmarks#readme" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish21_labeled_bookmarks" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish21_labeled_bookmarks" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish21_labeled_bookmarks" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish21_labeled_bookmarks/issues" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish21_labeled_bookmarks#readme" />
 				
 				
 				<Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
@@ -35,5 +35,6 @@
 		<Assets>
 			<Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
 			<Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-		</Assets>
+		<Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 	</PackageManifest>

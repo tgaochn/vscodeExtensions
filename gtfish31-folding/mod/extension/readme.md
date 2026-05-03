@@ -1,9 +1,13 @@
 # gtfish31-folding
 
-This is a FORK of `atroxego.better-folding-plus-0.6.1`.
+## Description
 
-# changelog
+Custom code folding with configurable fold markers and keybindings. Enhanced fork with modified folding behavior and keyboard shortcuts.
 
-## [0.1.0] - 2026-03-22
+## Installation
 
-init
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on folding extension. Independently modified and maintained.

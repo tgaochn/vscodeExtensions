@@ -1,16 +1,13 @@
-# README
+# gtfish18_instant_md_table
 
-personal modified version of jayfidev.tablegenerator-1.0.4
+## Description
 
-## [0.0.3] - 2023-04-07
+Generate Markdown tables instantly from selected text or clipboard data. Enhanced fork with improved table formatting and keybinding support.
 
-1. updated instruction
-2. 
+## Installation
 
-## [0.0.2] - 2023-04-07
+Install from the VS Code Marketplace or manually via .vsix file.
 
-1. added a default table size (4 × 4)
+## Attribution
 
-## [0.0.1] - 2023-04-07
-
-1. init
+Based on Markdown Table Generator by JayFiDev. Independently modified and maintained.

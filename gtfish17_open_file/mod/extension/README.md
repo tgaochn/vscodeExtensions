@@ -1,8 +1,13 @@
-# README
+# gtfish17_open_file
 
-personal modified version of jack89ita.open-file-from-path-1.3.4
+## Description
 
-## [0.0.1] - 2023-04-06
+Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.
 
-1. replace space with %20 to align with vsc open-file type
-2. fix the regex pattern
+## Installation
+
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Open file From Path by Jack89ita. Independently modified and maintained.

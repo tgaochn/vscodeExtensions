@@ -1,9 +1,13 @@
-# README
+# gtfish10_diff-tool
 
-personal modified version of jinsihou.diff-tool-0.0.1
+## Description
 
-## [0.1.0] - 2022-07-03
+Two-file diff comparison via context menu with full absolute path display. Enhanced fork showing complete file paths for clearer diff identification.
 
-### Added
+## Installation
 
-1. added the full name of the compared two files
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on Diff Tool. Independently modified and maintained.

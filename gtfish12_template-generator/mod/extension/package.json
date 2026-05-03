@@ -1,15 +1,15 @@
 {
 	"name": "gtfish12",
 	"displayName": "gtfish12_template-generator",
-	"description": "template-generator",
+	"description": "Generate files and folders from customizable templates with keybinding support. Enhanced fork with additional keyboard shortcuts for template-based file scaffolding.",
 	"version": "0.1.1",
 	"publisher": "gtfish1988",
-	"icon": "images/icon.jpg",
+	"icon": "images/icon.png",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"main": "./out/src/extension",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/DengSir/template-generator-vscode.git"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator"
 	},
 	"engines": {
 		"vscode": "^1.12.0"

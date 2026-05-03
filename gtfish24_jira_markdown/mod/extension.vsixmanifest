@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Language="en-US" Id="gtfish24-jira-markdown" Version="0.0.6" Publisher="gtfish1988"/>
     <DisplayName>gtfish24-jira-markdown</DisplayName>
-    <Description xml:space="preserve">VSCode Extension for converting Markdown formatting to JIRA or vice-versa easily</Description>
+    <Description xml:space="preserve">Convert between Markdown and JIRA markup formats with keyboard shortcuts. Enhanced fork with customized keybindings for quick format conversion.</Description>
     <Tags></Tags>
     <Categories>Other</Categories>
     <GalleryFlags>Public</GalleryFlags>
@@ -13,14 +13,14 @@
       <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
       <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
       
-        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/chintans1/markdown-to-jira.git" />
-        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/chintans1/markdown-to-jira.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown" />
         
-          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/chintans1/markdown-to-jira.git" />
+          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown" />
         
       
-      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/chintans1/markdown-to-jira/issues" />
-      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/chintans1/markdown-to-jira/blob/master" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown/issues" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown#readme" />
       
       
       <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
@@ -37,5 +37,6 @@
   <Assets>
     <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
     <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+  <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
   </Assets>
 </PackageManifest>

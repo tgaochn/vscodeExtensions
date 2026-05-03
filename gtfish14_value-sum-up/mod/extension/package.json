@@ -1,7 +1,7 @@
 {
 	"name": "gtfish14",
 	"displayName": "gtfish14_value-sum-up",
-	"description": "value-sum-up",
+	"description": "Calculate and display the sum of selected numeric values in the editor. Enhanced fork with improved number detection and status bar display.",
 	"version": "0.2.0",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/arturcarvalho/code-sum-up"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish14_value-sum-up"
 	},
 	"categories": [
 		"Other"
@@ -31,5 +31,6 @@
 		"tslint": "^5.8.0",
 		"@types/node": "^7.0.43",
 		"@types/mocha": "^2.2.42"
-	}
+	},
+	"icon": "images/icon.png"
 }

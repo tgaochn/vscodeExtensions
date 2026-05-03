@@ -3,7 +3,7 @@
 		<Metadata>
 			<Identity Language="en-US" Id="gtfish08" Version="0.2.1" Publisher="gtfish1988" />
 			<DisplayName>gtfish08_markdown-viewer</DisplayName>
-			<Description xml:space="preserve">markdown-viewer</Description>
+			<Description xml:space="preserve">GitHub-styled markdown preview with high-contrast default themes for improved readability. Modified fork with customized theme defaults favoring light high-contrast mode for accessibility.</Description>
 			<Tags>__web_extension</Tags>
 			<Categories>Other</Categories>
 			<GalleryFlags>Public</GalleryFlags>
@@ -19,7 +19,8 @@
 				<Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
 				<Property Id="Microsoft.VisualStudio.Services.Content.Pricing" Value="Free"/>
 				
-			</Properties>
+			      <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish08_markdown-viewer" />
+    </Properties>
 			<License>extension/LICENSE.txt</License>
 			
 		</Metadata>
@@ -31,5 +32,6 @@
 			<Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
 			<Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
             <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
-		</Assets>
+		<Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 	</PackageManifest>

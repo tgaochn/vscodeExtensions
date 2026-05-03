@@ -1,9 +1,13 @@
-personally forked version from ptweir.python-string-sql-1.2.0
+# gtfish22_python-string-sql
 
-# [0.0.2] - 2023-12-15
+## Description
 
-1. update the flag for sql ending
+Syntax highlight SQL code embedded in Python strings. Enhanced fork with additional keybindings for toggling SQL highlighting in Python files.
 
-# [0.0.1] - 2023-11-19
+## Installation
 
-1. update keywords for SQL
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on python-string-sql by ptweir. Independently modified and maintained.

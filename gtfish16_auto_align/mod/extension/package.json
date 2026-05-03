@@ -1,11 +1,16 @@
 {
 	"name": "gtfish16-auto-align",
 	"displayName": "gtfish16-auto-align",
-	"description": "Automatically align by commas, vertical bars, etc.",
+	"description": "Auto-align columnar data with configurable pre-separator spacing. Enhanced fork adding space before separators for balanced column alignment in CSV and delimited files.",
 	"version": "0.0.1",
 	"publisher": "gtfish1988",
 	"engines": {
 		"vscode": "^1.5.0"
+	},
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish16_auto_align"
 	},
 	"categories": [
 		"Other"
@@ -18,39 +23,39 @@
 		"commands": [
 			{
 				"command": "auto-align.alignColumns",
-				"title": "Auto Align: Align Columns"
+				"title": "GF16 Align: Align Columns"
 			},
 			{
 				"command": "auto-align.collapseColumns",
-				"title": "Auto Align: Collapse Columns"
+				"title": "GF16 Align: Collapse Columns"
 			},
 			{
 				"command": "auto-align.enable",
-				"title": "Auto Align: Enable auto align mode"
+				"title": "GF16 Align: Enable auto align mode"
 			},
 			{
 				"command": "auto-align.disable",
-				"title": "Auto Align: Disable auto align mode"
+				"title": "GF16 Align: Disable auto align mode"
 			},
 			{
 				"command": "auto-align.changeSeparator",
-				"title": "Auto Align: Change Separator"
+				"title": "GF16 Align: Change Separator"
 			},
 			{
 				"command": "auto-align.moveCursorToNextField",
-				"title": "Auto Align: Move Cursor to Next Field"
+				"title": "GF16 Align: Move Cursor to Next Field"
 			},
 			{
 				"command": "auto-align.moveCursorToPreviousField",
-				"title": "Auto Align: Move Cursor to Previous Field"
+				"title": "GF16 Align: Move Cursor to Previous Field"
 			},
 			{
 				"command": "auto-align.alignSelection",
-				"title": "Auto Align: Align Selection"
+				"title": "GF16 Align: Align Selection"
 			},
 			{
 				"command": "auto-align.alignSelectionWithSeparator",
-				"title": "Auto Align: Align Selection With Separator"
+				"title": "GF16 Align: Align Selection With Separator"
 			}
 		],
 		"keybindings": [

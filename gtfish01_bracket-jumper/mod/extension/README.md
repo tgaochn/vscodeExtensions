@@ -1,16 +1,13 @@
-# bracket-jumper README
+# gtfish01_bracket-jumper
 
-personal modified version of sashaweiss.bracket-jumper-1.1.8
+## Description
 
-# Change Log
+Jump between matching brackets with customized keybindings. Enhanced fork with modified shortcut configurations for efficient bracket navigation in code.
 
-## [0.2.0] - 2026-03-21
+## Installation
 
-1. 添加了通用符号的跳转规则 (`, ", ')
-2. 代码注释改为中文
+Install from the VS Code Marketplace or manually via .vsix file.
 
-## [0.1.0] - 2022-07-03
+## Attribution
 
-### Added
-
-1. change the position after jumping
+Based on Bracket Jumper. Independently modified and maintained.

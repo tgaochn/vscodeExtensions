@@ -1,18 +1,13 @@
 # gtfish30-render-pattern
 
-A VS Code extension that recognizes file system paths as clickable links.
+## Description
 
-## Features
+Recognize custom patterns in text as clickable links and open them with configurable commands, including Windows Explorer file path support. Custom extension for pattern-based link rendering.
 
-- Recognizes Windows absolute paths (e.g., `D:\Dropbox`, `C:\Users\Documents`)
-- Recognizes UNC paths (e.g., `\\server\share\folder`)
-- Recognizes file:// URLs (e.g., `file:///D:/Dropbox`)
-- Ctrl+Click (or Cmd+Click on Mac) on a path to open it in Windows Explorer
-- If the path is a folder, opens the folder directly
-- If the path is a file, opens the parent folder and selects the file
+## Installation
 
-## Usage
+Install from the VS Code Marketplace or manually via .vsix file.
 
-1. Open any file containing file paths
-2. Hover over a recognized path to see the tooltip
-3. Ctrl+Click to open the path in Windows Explorer
+## Attribution
+
+Original extension by gtfish1988. Independently developed and maintained.

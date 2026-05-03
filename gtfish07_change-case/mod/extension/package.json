@@ -1,0 +1,143 @@
+{
+	"name": "gtfish07-change-case",
+	"displayName": "gtfish07-change-case",
+	"description": "Change text case with reordered command list for frequently used transformations. Enhanced fork with reorganized case conversion commands prioritizing common operations like camelCase, snake_case, and PascalCase.",
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case"
+	},
+	"galleryBanner": {
+		"color": "#1e1e1e",
+		"theme": "dark"
+	},
+	"license": "MIT",
+	"version": "0.1.0",
+	"publisher": "gtfish1988",
+	"engines": {
+		"vscode": "^1.6.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.changeCase.commands",
+		"onCommand:extension.changeCase.camel",
+		"onCommand:extension.changeCase.constant",
+		"onCommand:extension.changeCase.dot",
+		"onCommand:extension.changeCase.kebab",
+		"onCommand:extension.changeCase.lower",
+		"onCommand:extension.changeCase.lowerFirst",
+		"onCommand:extension.changeCase.no",
+		"onCommand:extension.changeCase.param",
+		"onCommand:extension.changeCase.pascal",
+		"onCommand:extension.changeCase.path",
+		"onCommand:extension.changeCase.sentence",
+		"onCommand:extension.changeCase.snake",
+		"onCommand:extension.changeCase.swap",
+		"onCommand:extension.changeCase.title",
+		"onCommand:extension.changeCase.upper",
+		"onCommand:extension.changeCase.upperFirst"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.changeCase.commands",
+				"title": "GF07 Case Commands"
+			},
+			{
+				"command": "extension.changeCase.camel",
+				"title": "GF07 Case camel"
+			},
+			{
+				"command": "extension.changeCase.constant",
+				"title": "GF07 Case constant"
+			},
+			{
+				"command": "extension.changeCase.dot",
+				"title": "GF07 Case dot"
+			},
+			{
+				"command": "extension.changeCase.kebab",
+				"title": "GF07 Case kebab"
+			},
+			{
+				"command": "extension.changeCase.lower",
+				"title": "GF07 Case lower"
+			},
+			{
+				"command": "extension.changeCase.lowerFirst",
+				"title": "GF07 Case lowerFirst"
+			},
+			{
+				"command": "extension.changeCase.no",
+				"title": "GF07 Case no"
+			},
+			{
+				"command": "extension.changeCase.param",
+				"title": "GF07 Case param"
+			},
+			{
+				"command": "extension.changeCase.pascal",
+				"title": "GF07 Case pascal"
+			},
+			{
+				"command": "extension.changeCase.path",
+				"title": "GF07 Case path"
+			},
+			{
+				"command": "extension.changeCase.sentence",
+				"title": "GF07 Case sentence"
+			},
+			{
+				"command": "extension.changeCase.snake",
+				"title": "GF07 Case snake"
+			},
+			{
+				"command": "extension.changeCase.swap",
+				"title": "GF07 Case swap"
+			},
+			{
+				"command": "extension.changeCase.title",
+				"title": "GF07 Case title"
+			},
+			{
+				"command": "extension.changeCase.upper",
+				"title": "GF07 Case upper"
+			},
+			{
+				"command": "extension.changeCase.upperFirst",
+				"title": "GF07 Case upperFirst"
+			}
+		]
+	},
+	"configuration": {
+		"type": "object",
+		"title": "changeCase configuration",
+		"properties": {
+			"changeCase.includeDotInCurrentWord": {
+				"type": "boolean",
+				"default": "false",
+				"description": "When selecting current word, allow dots in current word (false by default)"
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.32",
+		"@types/node": "^6.0.46",
+		"mocha": "^7.1.2",
+		"typescript": "^2.0.6",
+		"vscode": "^1.0.3"
+	},
+	"dependencies": {
+		"change-case": "^3.0.0",
+		"lodash.range": "^3.1.1",
+		"lodash.uniq": "^4.1.0"
+	}
+}

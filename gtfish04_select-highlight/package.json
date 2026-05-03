@@ -1,15 +1,16 @@
 {
 	"name": "gtfish04",
 	"displayName": "gtfish04_select-highlight",
-	"description": "select-highlight",
+	"description": "Highlight all occurrences of selected text with customized color scheme. Enhanced fork with swapped light/dark theme colors for improved visibility using cochineal-based palette.",
 	"publisher": "gtfish1988",
 	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.30.0"
 	},
+	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/04.%20select-highlight"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish04_select-highlight"
 	},
 	"categories": [
 		"Other"

@@ -1,7 +1,7 @@
 {
 	"name": "gtfish20-notes",
 	"displayName": "gtfish20-notes",
-	"description": "Notes is a Markdown focused notes extension for Visual Studio Code that takes inspiration from Notational Velocity and nvAlt.",
+	"description": "Markdown-focused note-taking extension with Notational Velocity-inspired workflow. Enhanced fork with customized keybindings and note management shortcuts.",
 	"version": "0.1.0",
 	"publisher": "gtfish1988",
 	"license": "CC-BY-NC-4.0",
@@ -19,7 +19,7 @@
 		"onCommand:Notes.deleteNote",
 		"onCommand:Notes.listNotes",
 		"onCommand:Notes.newNote",
-        "onCommand:Notes.newNoteWithDate",
+		"onCommand:Notes.newNoteWithDate",
 		"onCommand:Notes.refreshNotes",
 		"onCommand:Notes.renameNote",
 		"onCommand:Notes.setupNotes"
@@ -27,92 +27,92 @@
 	"main": "./extension",
 	"contributes": {
 		"configuration": {
-            "title": "Notes",
+			"title": "Notes",
 			"properties": {
-                "notes.notesLocation": {
+				"notes.notesLocation": {
 					"type": "string",
 					"default": "",
 					"description": "Storage location for notes."
-                },
-                "notes.notesDefaultNoteExtension": {
-                    "type": "string",
-                    "default": "md",
-                    "description": "The default extension to use for new notes. (do not include the dot)"
-                },
-                "notes.notesExtensions": {
-                    "type": "string",
-                    "default": "*",
-                    "description": "A comma separated list of allowed extensions for notes. Use '*' (asterisk) to allow all file types. (do not include the dot or spaces)"
+				},
+				"notes.notesDefaultNoteExtension": {
+					"type": "string",
+					"default": "md",
+					"description": "The default extension to use for new notes. (do not include the dot)"
+				},
+				"notes.notesExtensions": {
+					"type": "string",
+					"default": "*",
+					"description": "A comma separated list of allowed extensions for notes. Use '*' (asterisk) to allow all file types. (do not include the dot or spaces)"
 				}
 			}
 		},
 		"commands": [
 			{
 				"command": "Notes.deleteNote",
-				"title": "Delete Note",
+				"title": "GF20: Delete Note",
 				"icon": {
-                    "light": "resources/light/delete.svg",
-                    "dark": "resources/dark/delete.svg"
-                }
-            },
-            {
-                "command": "Notes.deleteFolder",
-                "title": "Delete Folder",
-                "icon": {
-                    "light": "resources/light/delete.svg",
-                    "dark": "resources/dark/delete.svg"
+					"light": "resources/light/delete.svg",
+					"dark": "resources/dark/delete.svg"
+				}
+			},
+			{
+				"command": "Notes.deleteFolder",
+				"title": "GF20: Delete Folder",
+				"icon": {
+					"light": "resources/light/delete.svg",
+					"dark": "resources/dark/delete.svg"
 				}
 			},
 			{
 				"command": "Notes.listNotes",
-				"title": "List Notes",
+				"title": "GF20: List Notes",
 				"category": "Notes"
 			},
 			{
 				"command": "Notes.newNote",
-				"title": "New Note",
+				"title": "GF20: New Note",
 				"category": "Notes",
-                "icon": "$(new-file)"
+				"icon": "$(new-file)"
 			},
 			{
-                "command": "Notes.newNoteWithDate",
-                "title": "New Note with Date",
+				"command": "Notes.newNoteWithDate",
+				"title": "GF20: New Note with Date",
 				"category": "Notes",
-                "icon": "$(new-file)"
-            },
-            {
-                "command": "Notes.newFolder",
-                "title": "New Folder",
-                "category": "Notes",
-                "icon": "$(new-folder)"
-			},            
+				"icon": "$(new-file)"
+			},
+			{
+				"command": "Notes.newFolder",
+				"title": "GF20: New Folder",
+				"category": "Notes",
+				"icon": "$(new-folder)"
+			},
 			{
 				"command": "Notes.refreshNotes",
-				"title": "Refresh Notes",
+				"title": "GF20: Refresh Notes",
 				"category": "Notes",
-                "icon": "$(refresh)"
+				"icon": "$(refresh)"
 			},
 			{
 				"command": "Notes.renameNote",
-				"title": "Rename Note",
+				"title": "GF20: Rename Note",
 				"icon": {
-                    "light": "resources/light/rename.svg",
-                    "dark": "resources/dark/rename.svg"
-                }
-            },
-            {
-                "command": "Notes.renameFolder",
-                "title": "Rename Folder",
-                "icon": {
-                    "light": "resources/light/rename.svg",
-                    "dark": "resources/dark/rename.svg"
+					"light": "resources/light/rename.svg",
+					"dark": "resources/dark/rename.svg"
+				}
+			},
+			{
+				"command": "Notes.renameFolder",
+				"title": "GF20: Rename Folder",
+				"icon": {
+					"light": "resources/light/rename.svg",
+					"dark": "resources/dark/rename.svg"
 				}
 			},
 			{
 				"command": "Notes.setupNotes",
-                "title": "Settings",
-                "category": "Notes",
-                "icon": "$(gear)"
+				"title": "GF20: Notes Settings",
+				"category": "Notes",
+				"icon": "$(gear)"
 			}
 		],
 		"keybindings": [
@@ -130,86 +130,86 @@
 		"menus": {
 			"view/title": [
 				{
-                    "command": "Notes.newNote",
+					"command": "Notes.newNote",
 					"when": "view == notes",
 					"group": "navigation@1"
 				},
 				{
-                    "command": "Notes.newNoteWithDate",
-                    "when": "view == notes",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "Notes.newFolder",
+					"command": "Notes.newNoteWithDate",
+					"when": "view == notes",
+					"group": "navigation@1"
+				},
+				{
+					"command": "Notes.newFolder",
 					"when": "view == notes",
 					"group": "navigation@2"
 				},
 				{
-                    "command": "Notes.refreshNotes",
+					"command": "Notes.refreshNotes",
 					"when": "view == notes",
 					"group": "navigation@3"
-                },
-                {
-                    "command": "Notes.setupNotes",
-                    "when": "view == notes",
-                    "group": "navigation@4"
+				},
+				{
+					"command": "Notes.setupNotes",
+					"when": "view == notes",
+					"group": "navigation@4"
 				}
 			],
 			"view/item/context": [
 				{
 					"command": "Notes.renameNote",
 					"when": "view == notes && viewItem == note",
-                    "group": "1_modification@1"
+					"group": "1_modification@1"
 				},
 				{
 					"command": "Notes.deleteNote",
 					"when": "view == notes && viewItem == note",
-                    "group": "1_modification@2"
-                },
-                {
-                    "command": "Notes.renameFolder",
-                    "when": "view == notes && viewItem == folder",
-                    "group": "1_modification@1"
-                },
-                {
-                    "command": "Notes.deleteFolder",
-                    "when": "view == notes && viewItem == folder",
-                    "group": "1_modification@2"
-                },
-                {
-                    "command": "Notes.newNote",
-                    "when": "view == notes && viewItem == folder",
-                    "group": "2_workspace@1"
-                },
-                {
-                    "command": "Notes.newNoteWithDate",
-                    "when": "view == notes && viewItem == folder",
-                    "group": "2_workspace@1"
-                },
-                {
-                    "command": "Notes.newFolder",
-                    "when": "view == notes && viewItem == folder",
-                    "group": "2_workspace@2"
-                },
-                {
-                    "command": "Notes.newNote",
-                    "when": "view == notes && !viewItem",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "Notes.newNoteWithDate",
-                    "when": "view == notes && !viewItem",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "Notes.newFolder",
-                    "when": "view == notes && !viewItem",
-                    "group": "navigation@2"
-                },
-                {
-                    "command": "Notes.refreshNotes",
-                    "when": "view == notes && !viewItem",
-                    "group": "navigation@3"
+					"group": "1_modification@2"
+				},
+				{
+					"command": "Notes.renameFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "1_modification@1"
+				},
+				{
+					"command": "Notes.deleteFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "1_modification@2"
+				},
+				{
+					"command": "Notes.newNote",
+					"when": "view == notes && viewItem == folder",
+					"group": "2_workspace@1"
+				},
+				{
+					"command": "Notes.newNoteWithDate",
+					"when": "view == notes && viewItem == folder",
+					"group": "2_workspace@1"
+				},
+				{
+					"command": "Notes.newFolder",
+					"when": "view == notes && viewItem == folder",
+					"group": "2_workspace@2"
+				},
+				{
+					"command": "Notes.newNote",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@1"
+				},
+				{
+					"command": "Notes.newNoteWithDate",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@1"
+				},
+				{
+					"command": "Notes.newFolder",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@2"
+				},
+				{
+					"command": "Notes.refreshNotes",
+					"when": "view == notes && !viewItem",
+					"group": "navigation@3"
 				}
 			]
 		},
@@ -218,7 +218,7 @@
 				{
 					"id": "vscode-notes",
 					"title": "Notes",
-                    "icon": "resources/notes-light.svg"
+					"icon": "resources/notes-light.svg"
 				}
 			]
 		},
@@ -229,13 +229,13 @@
 					"name": "Notes"
 				}
 			]
-        },
-        "viewsWelcome": [
-            {
-                "view": "notes",
-                "contents": "To get started, you need to select a location to store your notes.\n[Select Location](command:Notes.setupNotes)"
-		}
-        ]
+		},
+		"viewsWelcome": [
+			{
+				"view": "notes",
+				"contents": "To get started, you need to select a location to store your notes.\n[Select Location](command:Notes.setupNotes)"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "webpack --mode production",
@@ -249,29 +249,29 @@
 		"test-compile": "tsc -p ./"
 	},
 	"devDependencies": {
-        "@types/glob": "^8.1.0",
-        "@types/mkdirp": "^2.0.0",
-        "@types/mocha": "^10.0.6",
-        "@types/node": "^20.11.0",
-        "@types/rimraf": "^4.0.5",
-        "@types/vscode": "^1.87.0",
-        "@typescript-eslint/eslint-plugin": "^7.0.0",
-        "@typescript-eslint/parser": "^7.0.0",
-        "eslint": "^8.56.0",
-        "glob": "^10.3.10",
-        "mocha": "^10.2.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.3.3",
-        "vscode-test": "^1.6.1",
-        "webpack": "^5.89.0",
-        "webpack-cli": "^5.1.4"
-    },
-    "dependencies": {
-        "vscode-uri": "^3.0.8"
-    },
-    "__metadata": {
-        "installedTimestamp": 1757105190837,
-        "targetPlatform": "undefined",
-        "size": 87303
-	}
+		"@types/glob": "^8.1.0",
+		"@types/mkdirp": "^2.0.0",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "^20.11.0",
+		"@types/rimraf": "^4.0.5",
+		"@types/vscode": "^1.87.0",
+		"@typescript-eslint/eslint-plugin": "^7.0.0",
+		"@typescript-eslint/parser": "^7.0.0",
+		"eslint": "^8.56.0",
+		"glob": "^10.3.10",
+		"mocha": "^10.2.0",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.3.3",
+		"vscode-test": "^1.6.1",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"dependencies": {
+		"vscode-uri": "^3.0.8"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish20_notes"
+	},
+	"icon": "images/icon.png"
 }

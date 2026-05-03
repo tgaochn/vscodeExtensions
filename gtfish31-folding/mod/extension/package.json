@@ -1,133 +1,138 @@
 {
-  "name": "gtfish31-folding",
-  "displayName": "gtfish31-folding",
-  "description": "gtfish31-folding",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.74.0"
-  },
-  "publisher": "gtfish1988",
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "keywords": [
-    "folding",
-    "fold",
-    "collapsing",
-    "collapse",
-    "hide",
-    "blocks",
-    "markers",
-    "bracket",
-    "brackets",
-    "vscode"
-  ],
-  "main": "./out/main.js",
-  "contributes": {
-    "configuration": {
-      "title": "Better Folding",
-      "properties": {
-        "betterFolding.foldClosingBrackets": {
-          "order": 1,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Include closing brackets like `}` and `]` in the folding range."
-        },
-        "betterFolding.foldClosingTags": {
-          "order": 1,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Include closing tags like `</div>` and `</p>` in the folding range."
-        },
-        "betterFolding.showFoldedBodyLinesCount": {
-          "order": 2,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Shows the number of lines folded, excluding the closing bracket line. \n\nExample: `function example() { ⋯ 3 lines ⋯ `"
-        },
-        "betterFolding.showFoldedBrackets": {
-          "order": 3,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Shows brackets like `{` and `}` in the collapsed text. Only applies if `#betterFolding.foldClosingBrackets#` is `enabled`. \n\nExample: `function example() {…}`."
-        },
-        "betterFolding.showFunctionParameters": {
-          "order": 4,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Shows the function parameters in the collapsed text for functions with params in multiple lines. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nExample: `function example(firstParam, secondParam) {…}`."
-        },
-        "betterFolding.chainFoldingRanges": {
-          "order": 5,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "On folding a range, fold all the ranges that start on the same line where the original range ends. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nEnabled: `function example(…) {…}`. \n\nDisabled: `function example(…) {`."
-        },
-        "betterFolding.showOnlyRegionsDescriptions": {
-          "order": 6,
-          "type": "boolean",
-          "default": false,
-          "markdownDescription": "Only shows the region description in the collapsed text. \n\nExample: `// #region some text`.\n\nBecomes: `some text`."
-        },
-        "betterFolding.showObjectPreviews": {
-          "order": 6,
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Show the first property in the collapsed text of an object literal. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nExample: `{ id:'123',… }`."
-        },
-        "betterFolding.excludedLanguages": {
-          "order": 7,
-          "type": "array",
-          "default": [],
-          "markdownDescription": "List of languages to exclude from folding. \n\nExample: `['javascript', 'typescript']`."
-        }
-      }
-    },
-    "commands": [
-      {
-        "command": "betterFolding.createZenFoldsAroundSelection",
-        "title": "Better Folding: Create Zen Folds Around Selection"
-      },
-      {
-        "command": "betterFolding.clearZenFolds",
-        "title": "Better Folding: Clear Zen Folds"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "deploy": "vsce publish --yarn"
-  },
-  "devDependencies": {
-    "@types/glob": "^8.0.0",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@types/vscode": "^1.74.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.1",
-    "@vscode/test-electron": "^2.2.0",
-    "@vscode/vsce": "^3.2.1",
-    "esbuild": "^0.17.4",
-    "eslint": "^8.32.0",
-    "glob": "^8.0.3",
-    "mocha": "^10.1.0",
-    "prettier": "2.8.2",
-    "typescript": "^4.9.4"
-  },
-  "dependencies": {
-    "@typescript-eslint/typescript-estree": "^5.49.0",
-    "json5": "^2.2.3",
-    "vscode-languageserver-protocol": "^3.17.2"
-  }
+	"name": "gtfish31-folding",
+	"displayName": "gtfish31-folding",
+	"description": "Custom code folding with configurable fold markers and keybindings. Enhanced fork with modified folding behavior and keyboard shortcuts.",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"publisher": "gtfish1988",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"keywords": [
+		"folding",
+		"fold",
+		"collapsing",
+		"collapse",
+		"hide",
+		"blocks",
+		"markers",
+		"bracket",
+		"brackets",
+		"vscode"
+	],
+	"main": "./out/main.js",
+	"contributes": {
+		"configuration": {
+			"title": "Better Folding",
+			"properties": {
+				"betterFolding.foldClosingBrackets": {
+					"order": 1,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Include closing brackets like `}` and `]` in the folding range."
+				},
+				"betterFolding.foldClosingTags": {
+					"order": 1,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Include closing tags like `</div>` and `</p>` in the folding range."
+				},
+				"betterFolding.showFoldedBodyLinesCount": {
+					"order": 2,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Shows the number of lines folded, excluding the closing bracket line. \n\nExample: `function example() { ⋯ 3 lines ⋯ `"
+				},
+				"betterFolding.showFoldedBrackets": {
+					"order": 3,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Shows brackets like `{` and `}` in the collapsed text. Only applies if `#betterFolding.foldClosingBrackets#` is `enabled`. \n\nExample: `function example() {…}`."
+				},
+				"betterFolding.showFunctionParameters": {
+					"order": 4,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Shows the function parameters in the collapsed text for functions with params in multiple lines. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nExample: `function example(firstParam, secondParam) {…}`."
+				},
+				"betterFolding.chainFoldingRanges": {
+					"order": 5,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "On folding a range, fold all the ranges that start on the same line where the original range ends. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nEnabled: `function example(…) {…}`. \n\nDisabled: `function example(…) {`."
+				},
+				"betterFolding.showOnlyRegionsDescriptions": {
+					"order": 6,
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "Only shows the region description in the collapsed text. \n\nExample: `// #region some text`.\n\nBecomes: `some text`."
+				},
+				"betterFolding.showObjectPreviews": {
+					"order": 6,
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Show the first property in the collapsed text of an object literal. Only applies if `#betterFolding.showFoldedBrackets#` is `enabled`. \n\nExample: `{ id:'123',… }`."
+				},
+				"betterFolding.excludedLanguages": {
+					"order": 7,
+					"type": "array",
+					"default": [],
+					"markdownDescription": "List of languages to exclude from folding. \n\nExample: `['javascript', 'typescript']`."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "betterFolding.createZenFoldsAroundSelection",
+				"title": "Better Folding: Create Zen Folds Around Selection"
+			},
+			{
+				"command": "betterFolding.clearZenFolds",
+				"title": "Better Folding: Clear Zen Folds"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run esbuild-base -- --minify",
+		"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+		"esbuild": "npm run esbuild-base -- --sourcemap",
+		"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+		"test-compile": "tsc -p ./",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"deploy": "vsce publish --yarn"
+	},
+	"devDependencies": {
+		"@types/glob": "^8.0.0",
+		"@types/mocha": "^10.0.1",
+		"@types/node": "16.x",
+		"@types/vscode": "^1.74.0",
+		"@typescript-eslint/eslint-plugin": "^5.48.1",
+		"@vscode/test-electron": "^2.2.0",
+		"@vscode/vsce": "^3.2.1",
+		"esbuild": "^0.17.4",
+		"eslint": "^8.32.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.1.0",
+		"prettier": "2.8.2",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@typescript-eslint/typescript-estree": "^5.49.0",
+		"json5": "^2.2.3",
+		"vscode-languageserver-protocol": "^3.17.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding"
+	},
+	"icon": "images/icon.png"
 }

@@ -1,21 +1,22 @@
 {
     "name": "gtfish08",
     "displayName": "gtfish08_markdown-viewer",
-    "description": "markdown-viewer",
+    "description": "GitHub-styled markdown preview with high-contrast default themes for improved readability. Modified fork with customized theme defaults favoring light high-contrast mode for accessibility.",
     "publisher": "gtfish1988",
     "version": "0.2.1",
     "engines": {
 		"vscode": "^1.41.0"
     },
+    "icon": "images/icon.png",
     "categories": [
         "Other"
     ],
 	"main": "dist/extension.js",
 	"browser": "dist/extension.js",
-	"activationEvents": [],    
+	"activationEvents": [],
     "repository": {
         "type": "git",
-        "url": "https://github.com/tgaochn/vscodeExtensions/tree/master/08.%20markdown%20view"
+        "url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish08_markdown-viewer"
     },
     "contributes": {
         "markdown.markdownItPlugins": true,

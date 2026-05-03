@@ -1,7 +1,7 @@
 {
 	"name": "gtfish18-instant-md-table",
 	"displayName": "gtfish18-instant-md-table",
-	"description": "gtfish18-instant-md-table",
+	"description": "Generate Markdown tables instantly from selected text or clipboard data. Enhanced fork with improved table formatting and keybinding support.",
 	"version": "0.0.3",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -48,6 +48,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/JayFiDev/MarkdownTablegenerator"
-	}
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish18_instant_md_table"
+	},
+	"icon": "images/icon.png"
 }

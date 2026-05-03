@@ -1,4 +1,13 @@
-# [0.0.1] - 2024-01-08
+# gtfish23_language-injection
 
-1. inject julia/avro/ahk/tree into markdown
-2. inject sql into python
+## Description
+
+Inject language syntax highlighting into code blocks across different languages, including markdown codeblocks and Python strings. Custom extension for general-purpose language injection.
+
+## Installation
+
+Install from the VS Code Marketplace or manually via .vsix file.
+
+## Attribution
+
+Based on es6-string-html. Independently modified and maintained.

@@ -5,7 +5,7 @@
     <Metadata>
         <Identity Language="en-US" Id="gtfish32-markdown-formatter" Version="0.8.25" Publisher="gtfish1988"/>
         <DisplayName>gtfish32_markdown-formatter</DisplayName>
-        <Description xml:space="preserve">markdown-formatter</Description>
+        <Description xml:space="preserve">Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.</Description>
         <Tags>markdown</Tags>
         <Categories>Programming Languages,Formatters,Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
@@ -16,10 +16,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/liushilive/MarkdownFormat" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/liushilive/MarkdownFormat" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/liushilive/MarkdownFormat" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
 
 
 
@@ -40,5 +40,6 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true"/>
-    </Assets>
+    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+  </Assets>
 </PackageManifest>

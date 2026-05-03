@@ -1,7 +1,7 @@
 {
 	"name": "gtfish28-add-header",
 	"displayName": "gtfish28-add-header",
-	"description": "gtfish28-add-header",
+	"description": "Add customizable headers to source code files with multi-language support and markdown frontmatter generation. Enhanced fork with additional language templates and keybindings.",
 	"version": "0.0.3",
 	"galleryBanner": {
 		"theme": "dark"
@@ -21,7 +21,7 @@
 		"commands": [
 			{
 				"command": "addHeader.addHeader",
-				"title": "Add Header"
+				"title": "GF28: Add Header"
 			}
 		],
 		"configuration": {
@@ -83,5 +83,10 @@
 	},
 	"extensionDependencies": [
 		"vscode.git"
-	]
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header"
+	},
+	"icon": "images/icon.png"
 }

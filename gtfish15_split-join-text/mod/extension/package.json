@@ -1,7 +1,7 @@
 {
 	"name": "gtfish15-split-join-text",
 	"displayName": "gtfish15-split-join-text",
-	"description": "gtfish15-split-join-text",
+	"description": "Split and join text lines with configurable separators and keybindings. Enhanced fork with custom keyboard shortcuts for text splitting and joining workflows.",
 	"version": "0.0.1",
 	"publisher": "gtfish1988",
 	"engines": {
@@ -90,5 +90,10 @@
 		"mocha": "^9.0.3",
 		"typescript": "^4.3.5",
 		"vscode-test": "^1.6.1"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text"
+	},
+	"icon": "images/icon.png"
 }

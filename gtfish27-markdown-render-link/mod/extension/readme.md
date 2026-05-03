@@ -1,13 +1,13 @@
 # gtfish27-markdown-render-link
 
-A VSCode extension that enhances markdown rendering with two key features:
+## Description
 
-## changelog
+Render markdown links with backtick-enclosed URLs as clickable links and support pattern-based auto-linking. Custom extension for enhanced markdown link rendering.
 
-### 0.1.0
+## Installation
 
-1. 添加 jira/Butterfly model text2link 的渲染
+Install from the VS Code Marketplace or manually via .vsix file.
 
-### 0.0.1
+## Attribution
 
-init
+Original extension by gtfish1988. Independently developed and maintained.

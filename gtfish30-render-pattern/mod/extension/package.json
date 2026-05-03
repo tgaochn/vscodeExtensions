@@ -1,7 +1,7 @@
 {
 	"name": "gtfish30-render-pattern",
 	"displayName": "gtfish30-render-pattern",
-	"description": "Recognize custom patterns as clickable links and open them with configurable commands",
+	"description": "Recognize custom patterns in text as clickable links and open them with configurable commands, including Windows Explorer file path support. Custom extension for pattern-based link rendering.",
 	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.97.0"
@@ -72,7 +72,9 @@
 							},
 							"commands": {
 								"type": "array",
-								"items": { "type": "string" },
+								"items": {
+									"type": "string"
+								},
 								"description": "Array of commands to try in order. First command with existing executable will be used. Use ${path} as placeholder"
 							},
 							"tooltip": {
@@ -81,20 +83,28 @@
 							},
 							"pathTransform": {
 								"type": "string",
-								"enum": ["none", "forwardSlash", "fileUrl"],
+								"enum": [
+									"none",
+									"forwardSlash",
+									"fileUrl"
+								],
 								"default": "none",
 								"description": "Transform to apply: 'forwardSlash' converts / to \\, 'fileUrl' converts file:///D:/path to D:\\path"
 							}
 						},
-						"required": ["name", "regex", "commands"]
+						"required": [
+							"name",
+							"regex",
+							"commands"
+						]
 					}
 				}
 			}
 		}
 	},
-	"__metadata": {
-		"installedTimestamp": 1768712687223,
-		"targetPlatform": "undefined",
-		"size": 6205
-	}
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern"
+	},
+	"icon": "images/icon.png"
 }

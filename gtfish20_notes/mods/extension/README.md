@@ -1,19 +1,13 @@
-personally forked version from dionmunk.vscode-notes-2.0.0
+# gtfish20_notes
 
-# [0.1.0] - 2025-09-05
+## Description
 
-update the forked version
+Markdown-focused note-taking extension with Notational Velocity-inspired workflow. Enhanced fork with customized keybindings and note management shortcuts.
 
-# [0.0.3] - 2023-12-08
+## Installation
 
-1. added padding zeros to months and days
+Install from the VS Code Marketplace or manually via .vsix file.
 
-# [0.0.2] - 2023-11-10
+## Attribution
 
-1. removed the confirmation when deleting a note
-2. added a icon to directly generate a note with today's date without input box
-
-# [0.0.1] - 2023-10-11
-
-1. use current date as the default filename
-2. keep the content of file empty
+Based on Notes by dionmunk. Independently modified and maintained.
