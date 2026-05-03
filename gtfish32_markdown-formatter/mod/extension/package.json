@@ -8,9 +8,13 @@
 		"vscode": "^1.21.0"
 	},
 	"icon": "images/icon.png",
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension"
 	},
 	"categories": [
 		"Programming Languages",

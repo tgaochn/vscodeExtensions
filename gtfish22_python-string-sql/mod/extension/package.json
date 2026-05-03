@@ -6,7 +6,7 @@
 	"publisher": "gtfish1988",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql/mod/extension"
 	},
 	"engines": {
 		"vscode": "^1.32.0"
@@ -44,5 +44,9 @@
 			}
 		]
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql/mod/extension",
 	"icon": "images/icon.png"
 }

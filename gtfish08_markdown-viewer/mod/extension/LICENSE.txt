@@ -1,6 +1,5 @@
-Copyright (c) Microsoft Corporation
-
-All rights reserved.
+Copyright (c) 2022-2026 tgaochn (gtfish1988)
+Portions Copyright (c) bierner (original markdown-preview-github-styles extension)
 
 MIT License
 

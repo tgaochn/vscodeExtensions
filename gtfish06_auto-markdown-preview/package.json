@@ -23,5 +23,9 @@
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
 		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish06_auto-markdown-preview"
 }

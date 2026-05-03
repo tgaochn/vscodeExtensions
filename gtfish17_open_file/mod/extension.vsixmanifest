@@ -6,7 +6,7 @@
         <Identity Language="en-US" Id="gtfish17-open-file" Version="0.0.1" Publisher="gtfish1988"/>
         <DisplayName>gtfish17-open-file</DisplayName>
         <Description xml:space="preserve">Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.</Description>
-        <Tags>shortcuts,open-files,path,vscode,vscode-extension,keybindings</Tags>
+        <Tags>shortcuts,open-files,path,vscode,vscode-extension</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
@@ -15,20 +15,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
-
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
-
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file" />
-
-
-
-
-            <Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#1c2237" />
-            <Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="dark" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-
-
         </Properties>
     </Metadata>
     <Installation>
@@ -38,6 +28,8 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>

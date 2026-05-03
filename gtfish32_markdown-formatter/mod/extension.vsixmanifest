@@ -16,10 +16,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
 
 
 

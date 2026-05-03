@@ -85,11 +85,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file/mod/extension"
 	},
 	"galleryBanner": {
 		"color": "#1c2237",
 		"theme": "dark"
 	},
-	"icon": "images/icon.png"
+	"icon": "images/icon.png",
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish17_open_file/mod/extension"
 }

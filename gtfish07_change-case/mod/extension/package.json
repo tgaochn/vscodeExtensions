@@ -5,7 +5,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case/mod/extension"
 	},
 	"galleryBanner": {
 		"color": "#1e1e1e",
@@ -139,5 +139,9 @@
 		"change-case": "^3.0.0",
 		"lodash.range": "^3.1.1",
 		"lodash.uniq": "^4.1.0"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case/mod/extension"
 }

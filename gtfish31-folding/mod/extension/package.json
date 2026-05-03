@@ -132,7 +132,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension"
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension",
 	"icon": "images/icon.png"
 }

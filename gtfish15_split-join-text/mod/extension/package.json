@@ -93,7 +93,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text/mod/extension"
 	},
-	"icon": "images/icon.png"
+	"icon": "images/icon.png",
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish15_split-join-text/mod/extension"
 }

@@ -10,7 +10,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish16_auto_align"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish16_auto_align/mod/extension"
 	},
 	"categories": [
 		"Other"
@@ -134,5 +134,9 @@
 	},
 	"devDependencies": {
 		"vscode": "^1.0.0"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish16_auto_align/mod/extension"
 }

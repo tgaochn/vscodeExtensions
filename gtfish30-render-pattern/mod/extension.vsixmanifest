@@ -6,17 +6,20 @@
         <Identity Language="en-US" Id="gtfish30-render-pattern" Version="0.0.2" Publisher="gtfish1988"/>
         <DisplayName>gtfish30-render-pattern</DisplayName>
         <Description xml:space="preserve">Recognize custom patterns in text as clickable links and open them with configurable commands, including Windows Explorer file path support. Custom extension for pattern-based link rendering.</Description>
-        <Tags>pattern, path, explorer, link, windows</Tags>
+        <Tags>pattern,path,explorer,link,windows</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
         <Properties>
-            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.25.0" />
+            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.97.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+            <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern" />
-    </Properties>
+        </Properties>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
@@ -24,7 +27,9 @@
     <Dependencies/>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
-        <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/readme.md" Addressable="true" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>

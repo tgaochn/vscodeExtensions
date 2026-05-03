@@ -22,7 +22,6 @@
 		"onLanguage:matlab"
 	],
 	"main": "./extension",
-	"icon": "images/icon.png",
 	"contributes": {
 		"configuration": {
 			"title": "Matlab-formatter configuration",
@@ -58,5 +57,9 @@
 		"eslint": "^4.11.0",
 		"@types/node": "^7.0.43",
 		"@types/mocha": "^2.2.42"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish03_matlab-formatter"
 }

@@ -6,21 +6,20 @@
         <Identity Language="en-US" Id="gtfish28-add-header" Version="0.0.3" Publisher="gtfish1988"/>
         <DisplayName>gtfish28-add-header</DisplayName>
         <Description xml:space="preserve">Add customizable headers to source code files with multi-language support and markdown frontmatter generation. Enhanced fork with additional language templates and keybindings.</Description>
-        <Tags></Tags>
+        <Tags>header,comment,author,boilerplate,frontmatter</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
         <Properties>
             <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.48.0" />
-            <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="vscode.git" />
+            <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
-            <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
-            <Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="dark" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-
-              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header" />
-    </Properties>
+        </Properties>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
@@ -29,6 +28,8 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>

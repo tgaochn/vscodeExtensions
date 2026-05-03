@@ -6,17 +6,20 @@
         <Identity Language="en-US" Id="gtfish29-formatted-paste" Version="0.0.1" Publisher="gtfish1988"/>
         <DisplayName>gtfish29-formatted-paste</DisplayName>
         <Description xml:space="preserve">Paste clipboard content with leading and trailing whitespace automatically trimmed. Custom utility extension for clean paste operations.</Description>
-        <Tags>paste, clipboard, trim, format</Tags>
+        <Tags>paste,clipboard,trim,format</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
         <Properties>
-            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.25.0" />
+            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.97.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+            <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish29-formatted-paste/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish29-formatted-paste/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish29-formatted-paste/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish29-formatted-paste" />
-    </Properties>
+        </Properties>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
@@ -24,8 +27,9 @@
     <Dependencies/>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
-        <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/readme.md" Addressable="true" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>
-

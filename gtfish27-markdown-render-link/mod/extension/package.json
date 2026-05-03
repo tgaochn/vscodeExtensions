@@ -33,7 +33,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link/mod/extension"
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link/mod/extension",
 	"icon": "images/icon.png"
 }

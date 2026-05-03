@@ -6,17 +6,20 @@
         <Identity Language="en-US" Id="gtfish27-markdown-render-link" Version="0.1.0" Publisher="gtfish1988"/>
         <DisplayName>gtfish27-markdown-render-link</DisplayName>
         <Description xml:space="preserve">Render markdown links with backtick-enclosed URLs as clickable links and support pattern-based auto-linking. Custom extension for enhanced markdown link rendering.</Description>
-        <Tags>markdown, link, render</Tags>
+        <Tags>markdown,link,render,backtick</Tags>
         <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
         <Properties>
-            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.25.0" />
+            <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.60.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+            <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-              <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish27-markdown-render-link" />
-    </Properties>
+        </Properties>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
@@ -25,6 +28,8 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>

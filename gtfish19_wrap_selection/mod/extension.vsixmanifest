@@ -6,25 +6,19 @@
         <Identity Language="en-US" Id="gtfish19-wrap-selection" Version="0.0.2" Publisher="gtfish1988"/>
         <DisplayName>gtfish19-wrap-selection</DisplayName>
         <Description xml:space="preserve">Wrap selected text with configurable symbol combinations or custom patterns. Enhanced fork with additional wrapping pattern options and keybindings.</Description>
-        <Tags></Tags>
-        <Categories>Formatters,Keymaps,Other</Categories>
+        <Tags>wrap,selection,quote,bracket,formatting</Tags>
+        <Categories>Other</Categories>
         <GalleryFlags>Public</GalleryFlags>
         <Badges></Badges>
         <Properties>
             <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.18.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
-
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection" />
-
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection" />
-
-
-            <Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#FFFFFF" />
-            <Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="light" />
+            <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+            <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish19_wrap_selection/mod/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
-
-
         </Properties>
     </Metadata>
     <Installation>
@@ -34,7 +28,8 @@
     <Assets>
         <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
         <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
-
-    <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/icon.png" Addressable="true" />
+    </Assets>
 </PackageManifest>

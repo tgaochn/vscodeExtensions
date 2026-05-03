@@ -1,8 +1,10 @@
-# Change Log
+# Changelog
 
-All notable changes to the "gtfish09" extension will be documented in this file.
+## [0.1.1] - 2026-05-03
+
+- Marketplace compliance update: updated metadata, README, and licensing
 
 ## [0.1.0] - 2022-07-03
 
-### Added
-1. add comma at the end of current line (in stead of semicolon as in chrisvltn.vs-code-semicolon-insertion-0.0.6)
+- Initial fork: converted semicolon insertion to comma insertion
+- Added smart duplicate detection to avoid inserting duplicate commas

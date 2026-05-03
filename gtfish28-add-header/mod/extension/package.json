@@ -86,7 +86,11 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header/mod/extension"
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish28-add-header/mod/extension",
 	"icon": "images/icon.png"
 }

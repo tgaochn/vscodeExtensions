@@ -65,5 +65,9 @@
 		"@types/node": "^10.5.2",
 		"@types/mocha": "^5.2.5"
 	},
-	"icon": "images/icon.png"
+	"icon": "images/icon.png",
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish05_time-range"
 }

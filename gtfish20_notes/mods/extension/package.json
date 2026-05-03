@@ -271,7 +271,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish20_notes"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish20_notes/mods/extension"
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish20_notes/mods/extension",
 	"icon": "images/icon.png"
 }

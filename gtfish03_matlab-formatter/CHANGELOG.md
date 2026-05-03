@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to the "t1" extension will be documented in this file.
+All notable changes to the "gtfish03_matlab-formatter" extension will be documented in this file.
 
 ## [0.1.0] - 2022-07-03
 

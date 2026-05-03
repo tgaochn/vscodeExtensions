@@ -9,7 +9,7 @@
 	"main": "./out/src/extension",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator/mod/extension"
 	},
 	"engines": {
 		"vscode": "^1.12.0"
@@ -107,5 +107,9 @@
 		"lodash": "^4.17.4",
 		"mkdirp": "^0.5.1",
 		"mz": "^2.7.0"
-	}
+	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish12_template-generator/mod/extension"
 }

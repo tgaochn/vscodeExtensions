@@ -9,8 +9,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown/mod/extension"
 	},
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish24_jira_markdown/mod/extension",
 	"categories": [
 		"Other"
 	],

@@ -59,7 +59,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish10_diff-tool"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish10_diff-tool/mod/extension"
 	},
-	"icon": "images/icon.png"
+	"icon": "images/icon.png",
+	"bugs": {
+		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
+	},
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish10_diff-tool/mod/extension"
 }
