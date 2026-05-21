@@ -16,7 +16,10 @@
     "__error": "Not found",
     ".gitignore": true,
     ".favorites.json": true,
-    "**/*.vsix": true
+    "**/*.vsix": true,
+    ".vscode": true,
+    ".claude": true,
+    "tempfile": true
 },
 "git.ignoreLimitWarning": true,
 "[markdown]": {
