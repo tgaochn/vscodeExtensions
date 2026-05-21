@@ -13,7 +13,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish03_matlab-formatter"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-03_matlab-formatter"
 	},
 	"keywords": [
 		"matlab"
@@ -61,5 +61,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish03_matlab-formatter"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-03_matlab-formatter"
 }

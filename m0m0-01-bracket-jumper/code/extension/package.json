@@ -1,6 +1,6 @@
 {
 	"name": "m0m0-01",
-	"displayName": "m0m0-01_bracket-jumper",
+	"displayName": "m0m0-01-bracket-jumper",
 	"description": "Jump between matching brackets with customized keybindings. Enhanced fork with modified shortcut configurations for efficient bracket navigation in code.",
 	"version": "0.2.0",
 	"publisher": "m0m0",
@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish01_bracket-jumper/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-01-bracket-jumper/code/extension"
 	},
 	"categories": [
 		"Other"
@@ -162,5 +162,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish01_bracket-jumper/mod/extension"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-01-bracket-jumper/code/extension"
 }

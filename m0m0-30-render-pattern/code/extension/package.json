@@ -104,11 +104,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-30-render-pattern/code/extension"
 	},
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish30-render-pattern/mod/extension",
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-30-render-pattern/code/extension",
 	"icon": "images/icon.png"
 }

@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish32-markdown-formatter" Version="0.8.26" Publisher="m0m0"/>
-        <DisplayName>gtfish32_markdown-formatter</DisplayName>
+        <Identity Language="en-US" Id="m0m0-32-markdown-formatter" Version="0.8.26" Publisher="m0m0"/>
+        <DisplayName>m0m0-32-markdown-formatter</DisplayName>
         <Description xml:space="preserve">Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.</Description>
         <Tags>markdown,formatter,cjk,chinese,latex,html-to-markdown,markdown-to-html,unicode,format-on-save</Tags>
         <Categories>Programming Languages,Formatters,Other</Categories>
@@ -16,10 +16,10 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-32-markdown-formatter/code/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-32-markdown-formatter/code/extension" />
 
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-32-markdown-formatter/code/extension" />
 
 
 

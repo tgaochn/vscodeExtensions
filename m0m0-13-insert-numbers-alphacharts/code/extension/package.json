@@ -13,7 +13,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-13_insert-numbers-alphacharts/code/extension"
 	},
 	"engines": {
 		"vscode": "^1.49.0"
@@ -100,5 +100,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish13_insert-numbers-alphacharts/mod/extension"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-13_insert-numbers-alphacharts/code/extension"
 }

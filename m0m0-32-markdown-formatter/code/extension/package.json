@@ -1,6 +1,6 @@
 {
 	"name": "m0m0-32-markdown-formatter",
-	"displayName": "m0m0-32_markdown-formatter",
+	"displayName": "m0m0-32-markdown-formatter",
 	"description": "Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.",
 	"version": "0.8.26",
 	"publisher": "m0m0",
@@ -11,10 +11,10 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension",
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-32-markdown-formatter/code/extension",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish32_markdown-formatter/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-32-markdown-formatter/code/extension"
 	},
 	"categories": [
 		"Programming Languages",

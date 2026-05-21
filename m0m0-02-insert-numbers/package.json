@@ -1,6 +1,6 @@
 {
 	"name": "m0m0-02",
-	"displayName": "m0m0-02_insert-numbers",
+	"displayName": "m0m0-02-insert-numbers",
 	"description": "Insert sequential numbers at multiple cursor positions with simplified input. Enhanced fork supporting plain integer input for quick start value setting, in addition to full format string syntax.",
 	"version": "0.1.0",
 	"publisher": "m0m0",
@@ -14,7 +14,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish02_insert-numbers"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-02-insert-numbers"
 	},
 	"categories": [
 		"Other"
@@ -51,5 +51,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish02_insert-numbers"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-02-insert-numbers"
 }

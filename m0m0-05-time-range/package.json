@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish05_time-range"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-05_time-range"
 	},
 	"categories": [
 		"Other"
@@ -69,5 +69,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish05_time-range"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-05_time-range"
 }

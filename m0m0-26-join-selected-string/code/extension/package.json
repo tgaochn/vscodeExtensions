@@ -53,10 +53,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish26-join-selected-string/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-26-join-selected-string/code/extension"
 	},
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish26-join-selected-string/mod/extension"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-26-join-selected-string/code/extension"
 }

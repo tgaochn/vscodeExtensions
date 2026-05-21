@@ -10,7 +10,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish04_select-highlight"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-04_select-highlight"
 	},
 	"categories": [
 		"Other"
@@ -36,5 +36,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish04_select-highlight"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-04_select-highlight"
 }

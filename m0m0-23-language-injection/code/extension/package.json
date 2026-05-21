@@ -67,11 +67,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-23_language-injection/code/extension"
 	},
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish23_language-injection/mod/extension",
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-23_language-injection/code/extension",
 	"icon": "images/icon.png"
 }

@@ -10,7 +10,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish09_insert-comma"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-09_insert-comma"
 	},
 	"categories": [
 		"Other"
@@ -48,5 +48,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish09_insert-comma"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-09_insert-comma"
 }

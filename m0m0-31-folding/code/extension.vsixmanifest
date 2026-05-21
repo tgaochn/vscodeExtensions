@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish31-folding" Version="0.1.0" Publisher="m0m0"/>
-        <DisplayName>gtfish31-folding</DisplayName>
+        <Identity Language="en-US" Id="m0m0-31-folding" Version="0.1.0" Publisher="m0m0"/>
+        <DisplayName>m0m0-31-folding</DisplayName>
         <Description xml:space="preserve">Custom code folding with configurable fold markers and keybindings. Enhanced fork with modified folding behavior and keyboard shortcuts.</Description>
         <Tags>folding,fold,collapse,brackets,regions</Tags>
         <Categories>Other</Categories>
@@ -15,9 +15,9 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-31-folding/code/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-31-folding/code/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-31-folding/code/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
         </Properties>
     </Metadata>

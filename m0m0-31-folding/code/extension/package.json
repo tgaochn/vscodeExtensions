@@ -132,11 +132,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-31-folding/code/extension"
 	},
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish31-folding/mod/extension",
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-31-folding/code/extension",
 	"icon": "images/icon.png"
 }

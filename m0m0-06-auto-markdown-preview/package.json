@@ -13,7 +13,7 @@
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish06_auto-markdown-preview"
+		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-06_auto-markdown-preview"
 	},
 	"activationEvents": [
 		"onLanguage:markdown"
@@ -27,5 +27,5 @@
 	"bugs": {
 		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
 	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish06_auto-markdown-preview"
+	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-06_auto-markdown-preview"
 }

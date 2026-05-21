@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish07-change-case" Version="0.1.0" Publisher="m0m0"/>
-        <DisplayName>gtfish07-change-case</DisplayName>
+        <Identity Language="en-US" Id="m0m0-07-change-case" Version="0.1.0" Publisher="m0m0"/>
+        <DisplayName>m0m0-07-change-case</DisplayName>
         <Description xml:space="preserve">Change text case with reordered command list for frequently used transformations. Enhanced fork with reorganized case conversion commands prioritizing common operations like camelCase, snake_case, and PascalCase.</Description>
         <Tags>case,convert,camelCase,snake_case,PascalCase</Tags>
         <Categories>Other</Categories>
@@ -15,9 +15,9 @@
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
             <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case/mod/extension" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case/mod/extension" />
-            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish07_change-case/mod/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-07_change-case/code/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-07_change-case/code/extension" />
+            <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-07_change-case/code/extension" />
             <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
         </Properties>
     </Metadata>
