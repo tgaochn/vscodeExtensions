@@ -1,9 +1,9 @@
 {
-	"name": "gtfish03",
-	"displayName": "gtfish03_matlab-formatter",
+	"name": "m0m0-03",
+	"displayName": "m0m0-03_matlab-formatter",
 	"description": "MATLAB code formatter with Windows Python compatibility. Enhanced fork adding cross-platform Python command detection for reliable formatting on Windows systems.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.30.0"
 	},

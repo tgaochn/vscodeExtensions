@@ -1,4 +1,4 @@
-# gtfish03_matlab-formatter
+# m0m0-03_matlab-formatter
 
 MATLAB code formatter for VS Code with Windows Python compatibility.
 

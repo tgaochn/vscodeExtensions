@@ -1,9 +1,9 @@
 {
-	"name": "gtfish02",
-	"displayName": "gtfish02_insert-numbers",
+	"name": "m0m0-02",
+	"displayName": "m0m0-02_insert-numbers",
 	"description": "Insert sequential numbers at multiple cursor positions with simplified input. Enhanced fork supporting plain integer input for quick start value setting, in addition to full format string syntax.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"icon": "images/icon.png",
 	"galleryBanner": {
 		"color": "#0000FF",

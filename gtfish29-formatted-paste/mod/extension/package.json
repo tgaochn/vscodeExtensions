@@ -1,12 +1,12 @@
 {
-	"name": "gtfish29-formatted-paste",
-	"displayName": "gtfish29-formatted-paste",
+	"name": "m0m0-29-formatted-paste",
+	"displayName": "m0m0-29-formatted-paste",
 	"description": "Paste clipboard content with leading and trailing whitespace automatically trimmed. Custom utility extension for clean paste operations.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.97.0"
 	},
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"categories": [
 		"Other"
 	],

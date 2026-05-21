@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish19-wrap-selection" Version="0.0.2" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish19-wrap-selection" Version="0.0.2" Publisher="m0m0"/>
         <DisplayName>gtfish19-wrap-selection</DisplayName>
         <Description xml:space="preserve">Wrap selected text with configurable symbol combinations or custom patterns. Enhanced fork with additional wrapping pattern options and keybindings.</Description>
         <Tags>wrap,selection,quote,bracket,formatting</Tags>

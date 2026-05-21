@@ -1,9 +1,9 @@
 {
-	"name": "gtfish20-notes",
-	"displayName": "gtfish20-notes",
+	"name": "m0m0-20-notes",
+	"displayName": "m0m0-20-notes",
 	"description": "Markdown-focused note-taking extension with Notational Velocity-inspired workflow. Enhanced fork with customized keybindings and note management shortcuts.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"license": "CC-BY-NC-4.0",
 	"keywords": [
 		"notes"

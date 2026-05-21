@@ -1,4 +1,4 @@
-# gtfish30-render-pattern
+# m0m0-30-render-pattern
 
 Recognize custom regex patterns in text files as clickable document links and open matched paths with configurable external commands. Supports Windows drive paths, UNC paths, and `file://` URLs with automatic path transforms and command fallback chains.
 
@@ -33,4 +33,4 @@ Patterns are configured via `render-pattern.patterns` in VS Code settings. Each 
 
 ## Attribution
 
-Original extension by gtfish1988. Independently developed and maintained.
+Original extension by m0m0. Independently developed and maintained.

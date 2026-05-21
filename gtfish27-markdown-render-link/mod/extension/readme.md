@@ -1,4 +1,4 @@
-# gtfish27-markdown-render-link
+# m0m0-27-markdown-render-link
 
 A VS Code markdown preview extension that adds support for backtick-enclosed URLs in links and pattern-based auto-linking. Extends the built-in markdown renderer via the `markdown.markdownItPlugins` API.
 
@@ -26,4 +26,4 @@ The extension registers a `markdown-it` plugin that:
 
 ## Attribution
 
-Original extension by gtfish1988. Independently developed and maintained.
+Original extension by m0m0. Independently developed and maintained.

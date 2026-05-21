@@ -1,4 +1,4 @@
-# gtfish22-python-string-sql
+# m0m0-22-python-string-sql
 
 Syntax highlighting for SQL code embedded inside Python multi-line strings and f-strings. Automatically detects SQL keywords and applies full SQL syntax coloring within Python source files.
 

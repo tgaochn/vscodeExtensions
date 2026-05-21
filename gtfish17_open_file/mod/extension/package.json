@@ -1,10 +1,10 @@
 {
-	"name": "gtfish17-open-file",
-	"displayName": "gtfish17-open-file",
+	"name": "m0m0-17-open-file",
+	"displayName": "m0m0-17-open-file",
 	"description": "Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.",
 	"license": "MIT",
 	"version": "0.0.1",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.19.0"
 	},

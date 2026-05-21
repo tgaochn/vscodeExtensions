@@ -1,4 +1,4 @@
-# gtfish13_insert-numbers-alphacharts
+# m0m0-13_insert-numbers-alphacharts
 
 Insert sequential numbers, alphabetic characters, hex values, and custom-formatted sequences at multiple cursor positions with powerful expression-based patterns.
 

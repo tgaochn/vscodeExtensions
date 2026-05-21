@@ -1,4 +1,4 @@
-# gtfish25-sql-formatter
+# m0m0-25-sql-formatter
 
 Format SQL files with support for 16 SQL dialects including BigQuery, PostgreSQL, MySQL, Snowflake, and more. Provides extensive formatting configuration options for keyword casing, indent style, comma placement, and expression width.
 

@@ -1,9 +1,9 @@
 {
-	"name": "gtfish06",
-	"displayName": "gtfish06_markdown-auto-preview",
+	"name": "m0m0-06",
+	"displayName": "m0m0-06_markdown-auto-preview",
 	"description": "Auto-open Markdown Preview Enhanced pane when editing markdown files. Modified fork that uses the Markdown Preview Enhanced extension instead of the built-in VS Code previewer for richer rendering.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.30.0"
 	},

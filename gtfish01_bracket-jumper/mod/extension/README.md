@@ -1,4 +1,4 @@
-# gtfish01_bracket-jumper
+# m0m0-01_bracket-jumper
 
 Jump between matching brackets with customized keybindings. This extension provides eight directional bracket navigation commands that let you move or select to the nearest bracket in any direction, including scope-aware "ascend" commands that find the enclosing bracket pair at the same or higher nesting level.
 

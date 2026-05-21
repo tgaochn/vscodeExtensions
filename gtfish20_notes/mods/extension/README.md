@@ -1,4 +1,4 @@
-# gtfish20-notes
+# m0m0-20-notes
 
 Markdown-focused note-taking extension inspired by Notational Velocity / nvALT. Provides a dedicated sidebar panel for managing notes with configurable storage locations and file extensions.
 

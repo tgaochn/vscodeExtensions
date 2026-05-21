@@ -1,4 +1,4 @@
-# gtfish05_time-range
+# m0m0-05_time-range
 
 Insert formatted time range strings into the editor based on a user-specified duration. This extension calculates a start time (current time + 5 minutes, rounded) and an end time (start + duration), then inserts the range in `HH:MM - HH:MM` format at the cursor position.
 

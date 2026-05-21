@@ -1,4 +1,4 @@
-# gtfish21-labeled-bookmarks
+# m0m0-21-labeled-bookmarks
 
 Labeled bookmarks with multiple groups and customizable visual indicators. Organize bookmarks by named groups with configurable icon shapes, colors, and unicode markers. Navigate efficiently across files with dedicated keybindings.
 

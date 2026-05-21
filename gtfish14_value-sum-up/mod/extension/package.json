@@ -1,9 +1,9 @@
 {
-	"name": "gtfish14",
-	"displayName": "gtfish14_value-sum-up",
+	"name": "m0m0-14",
+	"displayName": "m0m0-14_value-sum-up",
 	"description": "Calculate and display the sum of selected numeric values in the editor. Enhanced fork with improved number detection and status bar display.",
 	"version": "0.2.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.23.0"
 	},

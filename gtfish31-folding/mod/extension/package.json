@@ -1,12 +1,12 @@
 {
-	"name": "gtfish31-folding",
-	"displayName": "gtfish31-folding",
+	"name": "m0m0-31-folding",
+	"displayName": "m0m0-31-folding",
 	"description": "Custom code folding with configurable fold markers and keybindings. Enhanced fork with modified folding behavior and keyboard shortcuts.",
 	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.74.0"
 	},
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"categories": [
 		"Other"
 	],

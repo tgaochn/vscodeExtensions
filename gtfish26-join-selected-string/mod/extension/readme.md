@@ -1,4 +1,4 @@
-# gtfish26-join-selected-string
+# m0m0-26-join-selected-string
 
 Join selected text lines or clipboard content with a custom separator character. Provides three distinct join modes: paste-and-join from clipboard, join selections to clipboard, and quick comma-join to clipboard.
 

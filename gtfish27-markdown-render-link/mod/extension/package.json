@@ -1,9 +1,9 @@
 {
-	"name": "gtfish27-markdown-render-link",
-	"displayName": "gtfish27-markdown-render-link",
+	"name": "m0m0-27-markdown-render-link",
+	"displayName": "m0m0-27-markdown-render-link",
 	"description": "Render markdown links with backtick-enclosed URLs as clickable links and support pattern-based auto-linking. Custom extension for enhanced markdown link rendering.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"keywords": [
 		"markdown",
 		"footnotes",

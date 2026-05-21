@@ -1,9 +1,9 @@
 {
-	"name": "gtfish12",
-	"displayName": "gtfish12_template-generator",
+	"name": "m0m0-12",
+	"displayName": "m0m0-12_template-generator",
 	"description": "Generate files and folders from customizable templates with keybinding support. Enhanced fork with additional keyboard shortcuts for template-based file scaffolding.",
 	"version": "0.1.1",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"icon": "images/icon.png",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"main": "./out/src/extension",

@@ -1,4 +1,4 @@
-# gtfish23-language-injection
+# m0m0-23-language-injection
 
 General-purpose language injection extension that adds syntax highlighting for additional languages inside Markdown fenced code blocks and Python multi-line strings. Supports AHK, Tree, Avro (AVDL), Julia, and SQL injection.
 

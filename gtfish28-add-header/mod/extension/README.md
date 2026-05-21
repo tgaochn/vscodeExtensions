@@ -1,4 +1,4 @@
-# gtfish28-add-header
+# m0m0-28-add-header
 
 Add customizable comment headers to source code files with multi-language support. For markdown files, inserts a YAML frontmatter template with tag placeholders. For code files, generates a formatted comment box with author, filename, timestamps, language, repository URL, and description.
 

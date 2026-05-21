@@ -1,8 +1,8 @@
 {
-	"name": "gtfish13",
+	"name": "m0m0-13",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
-	"displayName": "gtfish13_insert-numbers-alphacharts",
+	"publisher": "m0m0",
+	"displayName": "m0m0-13_insert-numbers-alphacharts",
 	"description": "Insert sequential numbers, letters, and custom character sequences at multiple cursors. Enhanced fork with alphabetic character support and extended keybindings.",
 	"keywords": [
 		"sequences",

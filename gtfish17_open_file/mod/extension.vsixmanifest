@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish17-open-file" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish17-open-file" Version="0.0.1" Publisher="m0m0"/>
         <DisplayName>gtfish17-open-file</DisplayName>
         <Description xml:space="preserve">Open files from path strings in the editor with keyboard shortcuts. Enhanced fork with customized keybindings for quick file navigation from path references.</Description>
         <Tags>shortcuts,open-files,path,vscode,vscode-extension</Tags>

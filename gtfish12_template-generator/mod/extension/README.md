@@ -1,4 +1,4 @@
-# gtfish12_template-generator
+# m0m0-12_template-generator
 
 Generate new files and folders from customizable templates with keyboard shortcut support and explorer context menu integration.
 

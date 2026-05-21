@@ -1,12 +1,12 @@
 {
-	"name": "gtfish30-render-pattern",
-	"displayName": "gtfish30-render-pattern",
+	"name": "m0m0-30-render-pattern",
+	"displayName": "m0m0-30-render-pattern",
 	"description": "Recognize custom patterns in text as clickable links and open them with configurable commands, including Windows Explorer file path support. Custom extension for pattern-based link rendering.",
 	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.97.0"
 	},
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"categories": [
 		"Other"
 	],

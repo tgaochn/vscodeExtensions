@@ -1,4 +1,4 @@
-# gtfish31-folding
+# m0m0-31-folding
 
 Enhanced code folding for VS Code with smarter bracket handling, folded text previews, Zen Folds, and region support. Provides a custom FoldingRangeProvider that includes closing brackets in folds, shows line counts, displays function parameters, and previews object properties in collapsed text.
 

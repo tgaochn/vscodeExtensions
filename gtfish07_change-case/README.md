@@ -1,4 +1,4 @@
-# gtfish07_change-case
+# m0m0-07_change-case
 
 Change text case with reordered command list for frequently used transformations. Enhanced fork of wmaurer.change-case with reorganized command priorities.
 

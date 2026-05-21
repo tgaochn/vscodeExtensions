@@ -1,9 +1,9 @@
 {
-	"name": "gtfish05",
-	"displayName": "gtfish05_time-range",
+	"name": "m0m0-05",
+	"displayName": "m0m0-05_time-range",
 	"description": "Output time range strings in various formats. Custom utility extension for inserting formatted time range text into the editor.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.21.0"
 	},

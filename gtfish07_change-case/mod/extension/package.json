@@ -1,6 +1,6 @@
 {
-	"name": "gtfish07-change-case",
-	"displayName": "gtfish07-change-case",
+	"name": "m0m0-07-change-case",
+	"displayName": "m0m0-07-change-case",
 	"description": "Change text case with reordered command list for frequently used transformations. Enhanced fork with reorganized case conversion commands prioritizing common operations like camelCase, snake_case, and PascalCase.",
 	"icon": "images/icon.png",
 	"repository": {
@@ -13,7 +13,7 @@
 	},
 	"license": "MIT",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.6.0"
 	},

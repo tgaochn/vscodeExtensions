@@ -1,4 +1,4 @@
-# gtfish14_value-sum-up
+# m0m0-14_value-sum-up
 
 Calculate and display statistics (sum, average, min, max) for selected numeric values directly in the VS Code status bar.
 

@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish21-labeled-bookmarks" Version="0.0.3" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish21-labeled-bookmarks" Version="0.0.3" Publisher="m0m0"/>
         <DisplayName>gtfish21-labeled-bookmarks</DisplayName>
         <Description xml:space="preserve">Labeled bookmarks with multiple groups and customizable visual indicators. Enhanced fork with modified keybindings for efficient bookmark navigation across files.</Description>
         <Tags>bookmarks,labels,groups,navigation,keybindings</Tags>

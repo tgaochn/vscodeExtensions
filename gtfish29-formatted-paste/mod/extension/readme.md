@@ -1,4 +1,4 @@
-# gtfish29-formatted-paste
+# m0m0-29-formatted-paste
 
 A simple VS Code utility that pastes clipboard content with leading and trailing whitespace automatically stripped. Useful when copying text from terminals, web pages, or documentation where extra whitespace and newlines get included unintentionally.
 
@@ -23,4 +23,4 @@ A simple VS Code utility that pastes clipboard content with leading and trailing
 
 ## Attribution
 
-Original extension by gtfish1988. Independently developed and maintained.
+Original extension by m0m0. Independently developed and maintained.

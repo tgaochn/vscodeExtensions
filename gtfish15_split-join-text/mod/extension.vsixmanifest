@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish15-split-join-text" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish15-split-join-text" Version="0.0.1" Publisher="m0m0"/>
         <DisplayName>gtfish15-split-join-text</DisplayName>
         <Description xml:space="preserve">Split and join text lines with configurable separators and keybindings. Enhanced fork with custom keyboard shortcuts for text splitting and joining workflows.</Description>
         <Tags>join,split,edit,keybindings</Tags>

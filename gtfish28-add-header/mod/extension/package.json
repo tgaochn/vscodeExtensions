@@ -1,6 +1,6 @@
 {
-	"name": "gtfish28-add-header",
-	"displayName": "gtfish28-add-header",
+	"name": "m0m0-28-add-header",
+	"displayName": "m0m0-28-add-header",
 	"description": "Add customizable headers to source code files with multi-language support and markdown frontmatter generation. Enhanced fork with additional language templates and keybindings.",
 	"version": "0.0.3",
 	"galleryBanner": {
@@ -9,7 +9,7 @@
 	"engines": {
 		"vscode": "^1.48.0"
 	},
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"categories": [
 		"Other"
 	],

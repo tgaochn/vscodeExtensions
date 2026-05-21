@@ -1,4 +1,4 @@
-# gtfish18-instant-md-table
+# m0m0-18-instant-md-table
 
 Generate Markdown tables instantly by specifying dimensions. Supports column alignment options and inserts the table directly at the cursor position.
 

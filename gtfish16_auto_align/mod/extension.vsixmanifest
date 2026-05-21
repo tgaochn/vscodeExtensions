@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish16-auto-align" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish16-auto-align" Version="0.0.1" Publisher="m0m0"/>
         <DisplayName>gtfish16-auto-align</DisplayName>
         <Description xml:space="preserve">Auto-align columnar data with configurable pre-separator spacing. Enhanced fork adding space before separators for balanced column alignment in CSV and delimited files.</Description>
         <Tags>align,csv,columns,formatting,separator</Tags>

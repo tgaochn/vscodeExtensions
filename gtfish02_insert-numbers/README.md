@@ -1,4 +1,4 @@
-# gtfish02_insert-numbers
+# m0m0-02_insert-numbers
 
 Insert sequential numbers at multiple cursor positions with an enhanced input experience.
 

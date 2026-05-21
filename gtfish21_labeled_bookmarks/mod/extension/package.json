@@ -1,9 +1,9 @@
 {
-	"name": "gtfish21-labeled-bookmarks",
-	"displayName": "gtfish21-labeled-bookmarks",
+	"name": "m0m0-21-labeled-bookmarks",
+	"displayName": "m0m0-21-labeled-bookmarks",
 	"description": "Labeled bookmarks with multiple groups and customizable visual indicators. Enhanced fork with modified keybindings for efficient bookmark navigation across files.",
 	"version": "0.0.3",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",

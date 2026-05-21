@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish24-jira-markdown" Version="0.0.6" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish24-jira-markdown" Version="0.0.6" Publisher="m0m0"/>
         <DisplayName>gtfish24-jira-markdown</DisplayName>
         <Description xml:space="preserve">Convert between Markdown and JIRA markup formats with keyboard shortcuts. Enhanced fork with customized keybindings for quick format conversion.</Description>
         <Tags>markdown,jira,converter,markup,formatting</Tags>

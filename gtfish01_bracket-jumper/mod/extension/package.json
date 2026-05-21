@@ -1,9 +1,9 @@
 {
-	"name": "gtfish01",
-	"displayName": "gtfish01_bracket-jumper",
+	"name": "m0m0-01",
+	"displayName": "m0m0-01_bracket-jumper",
 	"description": "Jump between matching brackets with customized keybindings. Enhanced fork with modified shortcut configurations for efficient bracket navigation in code.",
 	"version": "0.2.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.30.0"
 	},

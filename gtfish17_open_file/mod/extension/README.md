@@ -1,4 +1,4 @@
-# gtfish17-open-file
+# m0m0-17-open-file
 
 Open files directly from path strings in the editor. Place your cursor on a quoted or bracketed file path and trigger the command to navigate to that file.
 

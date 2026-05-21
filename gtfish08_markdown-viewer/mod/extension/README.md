@@ -1,4 +1,4 @@
-# gtfish08_markdown-viewer
+# m0m0-08_markdown-viewer
 
 GitHub-styled markdown preview with high-contrast default theme settings.
 

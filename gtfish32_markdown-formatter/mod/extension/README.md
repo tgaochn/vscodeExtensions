@@ -1,4 +1,4 @@
-# gtfish32_markdown-formatter
+# m0m0-32_markdown-formatter
 
 An advanced Markdown formatter for VS Code with strong CJK (Chinese/Japanese/Korean) text support. This extension normalizes Markdown documents by handling mixed CJK-English spacing, full-width to half-width character conversion, LaTeX symbol conversion, code block formatting, and more.
 

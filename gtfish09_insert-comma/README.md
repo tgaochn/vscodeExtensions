@@ -1,4 +1,4 @@
-# gtfish09_insert-comma
+# m0m0-09_insert-comma
 
 Insert commas at the end of selected lines with indentation preservation.
 

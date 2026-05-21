@@ -1,4 +1,4 @@
-# gtfish16-auto-align
+# m0m0-16-auto-align
 
 Auto-align columnar data with configurable pre-separator spacing for balanced column alignment in CSV and delimited files.
 

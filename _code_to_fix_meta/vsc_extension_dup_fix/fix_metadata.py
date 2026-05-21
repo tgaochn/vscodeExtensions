@@ -175,7 +175,7 @@ def write_readme(ext_name, config):
     if original:
         attribution = f"\n## Attribution\n\nBased on {original}. Independently modified and maintained.\n"
     else:
-        attribution = "\n## Attribution\n\nOriginal extension by gtfish1988. Independently developed and maintained.\n"
+        attribution = "\n## Attribution\n\nOriginal extension by m0m0. Independently developed and maintained.\n"
 
     content = f"""# {ext_name}
 

@@ -1,9 +1,9 @@
 {
-	"name": "gtfish10",
-	"displayName": "gtfish10_diff-tool",
+	"name": "m0m0-10",
+	"displayName": "m0m0-10_diff-tool",
 	"description": "Two-file diff comparison via context menu with full absolute path display. Enhanced fork showing complete file paths for clearer diff identification.",
 	"version": "0.1.0",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.10.0"
 	},

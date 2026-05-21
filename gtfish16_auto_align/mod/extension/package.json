@@ -1,9 +1,9 @@
 {
-	"name": "gtfish16-auto-align",
-	"displayName": "gtfish16-auto-align",
+	"name": "m0m0-16-auto-align",
+	"displayName": "m0m0-16-auto-align",
 	"description": "Auto-align columnar data with configurable pre-separator spacing. Enhanced fork adding space before separators for balanced column alignment in CSV and delimited files.",
 	"version": "0.0.1",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.5.0"
 	},

@@ -1,9 +1,9 @@
 {
-	"name": "gtfish22-python-string-sql",
-	"displayName": "gtfish22-python-string-sql",
+	"name": "m0m0-22-python-string-sql",
+	"displayName": "m0m0-22-python-string-sql",
 	"description": "Syntax highlight SQL code embedded in Python strings. Enhanced fork with additional keybindings for toggling SQL highlighting in Python files.",
 	"version": "0.0.2",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/gtfish22_python-string-sql/mod/extension"

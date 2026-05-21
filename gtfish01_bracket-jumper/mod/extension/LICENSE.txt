@@ -1,4 +1,4 @@
-Copyright (c) 2022-2026 tgaochn (gtfish1988)
+Copyright (c) 2022-2026 tgaochn (m0m0)
 Portions Copyright (c) sashaweiss (original Bracket Jumper extension)
 
 MIT License

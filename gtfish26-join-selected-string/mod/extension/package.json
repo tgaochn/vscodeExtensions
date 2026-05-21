@@ -1,12 +1,12 @@
 {
-	"name": "gtfish26-join-selected-string",
-	"displayName": "gtfish26-join-selected-string",
+	"name": "m0m0-26-join-selected-string",
+	"displayName": "m0m0-26-join-selected-string",
 	"description": "Join selected text lines with a custom separator character. Enhanced fork with modified join behavior and keybinding configuration.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.97.0"
 	},
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"categories": [
 		"Other"
 	],

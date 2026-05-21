@@ -1,4 +1,4 @@
-# gtfish10_diff-tool
+# m0m0-10_diff-tool
 
 Compare two files side-by-side using VS Code's built-in diff viewer, with context menu integration and filename-based diff titles.
 

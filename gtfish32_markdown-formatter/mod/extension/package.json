@@ -1,9 +1,9 @@
 {
-	"name": "gtfish32-markdown-formatter",
-	"displayName": "gtfish32_markdown-formatter",
+	"name": "m0m0-32-markdown-formatter",
+	"displayName": "m0m0-32_markdown-formatter",
 	"description": "Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.",
 	"version": "0.8.26",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.21.0"
 	},

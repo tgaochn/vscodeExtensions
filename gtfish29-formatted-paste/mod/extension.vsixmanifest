@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish29-formatted-paste" Version="0.0.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish29-formatted-paste" Version="0.0.1" Publisher="m0m0"/>
         <DisplayName>gtfish29-formatted-paste</DisplayName>
         <Description xml:space="preserve">Paste clipboard content with leading and trailing whitespace automatically trimmed. Custom utility extension for clean paste operations.</Description>
         <Tags>paste,clipboard,trim,format</Tags>

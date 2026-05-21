@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish14" Version="0.2.0" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish14" Version="0.2.0" Publisher="m0m0"/>
         <DisplayName>gtfish14_value-sum-up</DisplayName>
         <Description xml:space="preserve">Calculate and display the sum of selected numeric values in the editor. Enhanced fork with improved number detection and status bar display.</Description>
         <Tags>sum,average,min,max,calculator,selection,statistics</Tags>

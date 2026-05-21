@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish08" Version="0.2.1" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish08" Version="0.2.1" Publisher="m0m0"/>
         <DisplayName>gtfish08_markdown-viewer</DisplayName>
         <Description xml:space="preserve">GitHub-styled markdown preview with high-contrast default themes for improved readability. Modified fork with customized theme defaults favoring light high-contrast mode for accessibility.</Description>
         <Tags>markdown,preview,github,themes</Tags>

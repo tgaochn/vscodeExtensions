@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish25-sql-formatter" Version="0.0.6" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish25-sql-formatter" Version="0.0.6" Publisher="m0m0"/>
         <DisplayName>gtfish25-sql-formatter</DisplayName>
         <Description xml:space="preserve">Format SQL files with support for multiple SQL dialects including BigQuery, PostgreSQL, MySQL, and more. Enhanced fork with customized formatting defaults and keybindings.</Description>
         <Tags>sql,formatter,bigquery,postgresql,mysql,prettier</Tags>

@@ -1,4 +1,4 @@
-# gtfish15-split-join-text
+# m0m0-15-split-join-text
 
 Split and join text lines with configurable separators. Quickly break a single line into multiple lines at separator positions, or join multiple lines back into one.
 

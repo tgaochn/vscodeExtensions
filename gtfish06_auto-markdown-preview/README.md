@@ -1,4 +1,4 @@
-# gtfish06_markdown-auto-preview
+# m0m0-06_markdown-auto-preview
 
 Auto-open Markdown Preview Enhanced pane when editing markdown files.
 

@@ -1,4 +1,4 @@
-# gtfish04_select-highlight
+# m0m0-04_select-highlight
 
 Highlight all occurrences of selected text with a customized cochineal color scheme.
 

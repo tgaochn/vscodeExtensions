@@ -1,9 +1,9 @@
 {
-	"name": "gtfish24-jira-markdown",
-	"displayName": "gtfish24-jira-markdown",
+	"name": "m0m0-24-jira-markdown",
+	"displayName": "m0m0-24-jira-markdown",
 	"description": "Convert between Markdown and JIRA markup formats with keyboard shortcuts. Enhanced fork with customized keybindings for quick format conversion.",
 	"version": "0.0.6",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.25.0"
 	},

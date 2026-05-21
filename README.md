@@ -1,5 +1,5 @@
-publishers: gtfish1988
-email: <gtfish1987@hotmail.com>
+publishers: m0m0
+email: <tgaochn@gmail.com>
 
 # 错误与排除
 

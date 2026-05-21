@@ -1,8 +1,8 @@
 {
-	"name": "gtfish08",
-	"displayName": "gtfish08_markdown-viewer",
+	"name": "m0m0-08",
+	"displayName": "m0m0-08_markdown-viewer",
 	"description": "GitHub-styled markdown preview with high-contrast default themes for improved readability. Modified fork with customized theme defaults favoring light high-contrast mode for accessibility.",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"version": "0.2.1",
 	"engines": {
 		"vscode": "^1.41.0"

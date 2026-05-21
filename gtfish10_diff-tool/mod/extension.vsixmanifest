@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
     xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Language="en-US" Id="gtfish10" Version="0.1.0" Publisher="gtfish1988"/>
+        <Identity Language="en-US" Id="gtfish10" Version="0.1.0" Publisher="m0m0"/>
         <DisplayName>gtfish10_diff-tool</DisplayName>
         <Description xml:space="preserve">Two-file diff comparison via context menu with full absolute path display. Enhanced fork showing complete file paths for clearer diff identification.</Description>
         <Tags>diff,compare,files</Tags>

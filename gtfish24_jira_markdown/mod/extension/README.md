@@ -1,4 +1,4 @@
-# gtfish24-jira-markdown
+# m0m0-24-jira-markdown
 
 Convert between Markdown and JIRA markup formats directly in VS Code. Supports headers, lists, bold, italic, code blocks, links, tables, and more. Outputs converted text to timestamped files or split-view panels for easy copying.
 

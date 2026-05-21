@@ -1,4 +1,4 @@
-# gtfish19-wrap-selection
+# m0m0-19-wrap-selection
 
 Wrap selected text with quotes, brackets, or custom user-defined patterns. Features a QuickPick menu for selecting from configured wrap patterns and automatic keybindings that wrap on keypress.
 

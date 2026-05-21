@@ -1,9 +1,9 @@
 {
-	"name": "gtfish25-sql-formatter",
-	"displayName": "gtfish25-sql-formatter",
+	"name": "m0m0-25-sql-formatter",
+	"displayName": "m0m0-25-sql-formatter",
 	"description": "Format SQL files with support for multiple SQL dialects including BigQuery, PostgreSQL, MySQL, and more. Enhanced fork with customized formatting defaults and keybindings.",
 	"version": "0.0.6",
-	"publisher": "gtfish1988",
+	"publisher": "m0m0",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.63.0"
