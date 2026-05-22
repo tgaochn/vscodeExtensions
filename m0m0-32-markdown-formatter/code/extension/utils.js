@@ -13,6 +13,14 @@ function trimExtraSpace(content) {
 
 // !! T5: 生效范围: 常规md范围, 非代码内部, 不含分隔符, 如: (), [], {}, ``, ""
 function noDelimiterReplace(content) {
+    // 保护 URL 不被空格化处理 (如 ?disco=AAA 不会被改成 ?disco = AAA)
+    const urlRegex = /\b(?:https?|ftp|file):\/\/\S+/g;
+    const urls = [];
+    content = content.replace(urlRegex, (match) => {
+        urls.push(match);
+        return `\x00URL${urls.length - 1}\x00`;
+    });
+
     // ! 一些特殊替换
     content = content.replaceAll("≤", ">=");
     content = content.replaceAll("≥", "<=");
@@ -46,6 +54,9 @@ function noDelimiterReplace(content) {
 
     // 移除每个部分的尾部空格
     content = content.replace(/\s+$/g, '');
+
+    // 还原被保护的 URL
+    content = content.replace(/\x00URL(\d+)\x00/g, (_, idx) => urls[parseInt(idx)]);
 
     return content;
 }
