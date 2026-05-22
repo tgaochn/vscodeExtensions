@@ -161,7 +161,7 @@ function globalReplaceOnLine(content) {
 }
 
 // !! T0: 全局生效, 输入为整个文件 (方便处理多行内容, 加换行等)
-function globalReplaceOnFileAtStart(content) {
+function globalReplaceOnFileAtStart(content, bareCodeBlockLanguages) {
     // ! 只有在需要匹配多行或者修改有问题的才需要在这里改, 比如不能插入换行符的
 
     // ! super ugly way to deal with the case of \\\\ - part 1
@@ -176,8 +176,13 @@ function globalReplaceOnFileAtStart(content) {
     content = content.replace(/((\$\$)?)\s*(\\begin{aligned.?})(.*)(\\end{aligned.?})\s*((\$\$)?)/g, '$1\n$3\n$4\n$5\n$6');
 
     // LLM output: wrap bare PLAINTEXT/MERMAID blocks in code fences (only outside code blocks)
+    const langs = (bareCodeBlockLanguages && bareCodeBlockLanguages.length)
+        ? bareCodeBlockLanguages
+        : ['PLAINTEXT', 'MERMAID', 'MD', 'MARKDOWN', 'PYTHON', 'POWERSHELL', 'BAT', 'VBS', 'CMD', 'REG'];
+    const escaped = langs.map(l => l.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const bareBlockRe = new RegExp(`(^|\\n)(${escaped.join('|')})\\n([\\s\\S]*?)(\\n{3,}|$)`, 'g');
     content = applyOutsideCodeBlocks(content, seg =>
-        seg.replace(/(^|\n)(PLAINTEXT|MERMAID|MD|MARKDOWN|PYTHON|POWERSHELL|BAT|VBS|CMD|REG)\n([\s\S]*?)(\n{3,}|$)/g, (_, prefix, lang, body, sep) =>
+        seg.replace(bareBlockRe, (_, prefix, lang, body, sep) =>
             prefix + '```' + lang + '\n' + body.replace(/\n+$/, '') + '\n```' + sep));
 
     // LLM output: remove blank lines between markdown table rows (only outside code blocks).
@@ -438,7 +443,8 @@ function isSeparatorBlockStart(line) {
     return /^\s*---\s*$/.test(line);
 }
 
-function processMdContent(content) {
+function processMdContent(content, options) {
+    options = options || {};
     const hasCRLF = content.includes('\r\n');
     if (hasCRLF) content = content.replace(/\r\n/g, '\n');
 
@@ -506,7 +512,7 @@ function processMdContent(content) {
     };
 
     // !! T0: 全局生效, 输入为整个文件 (方便处理换行等)
-    content = globalReplaceOnFileAtStart(content);
+    content = globalReplaceOnFileAtStart(content, options.bareCodeBlockLanguages);
 
     let lines = content.split("\n").map(processLine);
     let finalContent = assembleFormattedContent(lines);

@@ -325,8 +325,10 @@ class DocumentFormatter {
 
     updateDocument(document) {
         const content = document.getText(this.current_document_range(document));
+        const cfg = vscode.workspace.getConfiguration('gf32MdFormat');
+        const bareCodeBlockLanguages = cfg.get('bareCodeBlockLanguages');
 
-        return processMdContent(content);
+        return processMdContent(content, { bareCodeBlockLanguages });
     }
 
 }

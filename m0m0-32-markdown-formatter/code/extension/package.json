@@ -2,7 +2,7 @@
 	"name": "m0m0-32-markdown-formatter",
 	"displayName": "m0m0-32-markdown-formatter",
 	"description": "Advanced Markdown formatter with CJK-English auto-spacing, LaTeX-to-Unicode symbol conversion, code block language auto-wrapping, and HTML/Markdown bidirectional conversion. Extensively rewritten fork of markdownformat with 5 custom commands, modular architecture, and delimiter-aware formatting.",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"publisher": "m0m0",
 	"engines": {
 		"vscode": "^1.21.0"
@@ -56,6 +56,29 @@
 					"group": "navigation"
 				}
 			]
+		},
+		"configuration": {
+			"title": "GF32 MdFormat",
+			"properties": {
+				"gf32MdFormat.bareCodeBlockLanguages": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": [
+						"PLAINTEXT",
+						"MERMAID",
+						"MD",
+						"MARKDOWN",
+						"PYTHON",
+						"POWERSHELL",
+						"SQL",
+						"BAT",
+						"VBS",
+						"CMD",
+						"REG"
+					],
+					"description": "LLM 输出中, 这些以裸语言名开头的文本块会被自动包成 ``` 代码块. 可自由增减语言."
+				}
+			}
 		}
 	},
 	"scripts": {

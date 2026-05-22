@@ -17,17 +17,17 @@ An advanced Markdown formatter for VS Code with strong CJK (Chinese/Japanese/Kor
 
 ## Commands
 
-| Command                                          | Description                                       |
-| ------------------------------------------------ | ------------------------------------------------- |
-| `GF32 MdFormat: 格式化MD`                        | Format the current Markdown document              |
-| `GF32 MdFormat: 格式化MD_html2md`                | Convert HTML description to Markdown              |
-| `GF32 MdFormat: 格式化MD_md2html`                | Convert Markdown to HTML description              |
-| `GF32 MdFormat: 复制当前文件的相对路径`          | Copy encoded relative path of current file        |
-| `GF32 MdFormat: 复制当前文件的相对路径_带标题`   | Copy encoded relative path with filename as title |
+| Command                                        | Description                                       |
+|------------------------------------------------|---------------------------------------------------|
+| `GF32 MdFormat: 格式化MD`                      | Format the current Markdown document              |
+| `GF32 MdFormat: 格式化MD_html2md`              | Convert HTML description to Markdown              |
+| `GF32 MdFormat: 格式化MD_md2html`              | Convert Markdown to HTML description              |
+| `GF32 MdFormat: 复制当前文件的相对路径`        | Copy encoded relative path of current file        |
+| `GF32 MdFormat: 复制当前文件的相对路径_带标题` | Copy encoded relative path with filename as title |
 
 ## Key Modifications from Original
 
-This is an extensively rewritten fork of [`liushilive.markdownformat`](https://marketplace.visualstudio.com/items?itemName=liushilive.MarkdownFormat) (v0.0.15). The original version has not been updated since 2019. Major changes include:
+This is an extensively rewritten fork of [`liushilive.markdownformat`](https://marketplace.visualstudio.com/items?itemName=liushilive.MarkdownFormat)(v0.0.15). The original version has not been updated since 2019. Major changes include:
 
 - **Architecture**: Refactored into modular structure with separate `utils.js` module; layered processing pipeline (T0-T5)
 - **4 new commands** added (HTML/MD conversion, path copying)
