@@ -1,43 +1,46 @@
 {
-	"name": "m0m0-27-markdown-render-link",
-	"displayName": "m0m0-27-markdown-render-link",
-	"description": "Render markdown links with backtick-enclosed URLs as clickable links and support pattern-based auto-linking. Custom extension for enhanced markdown link rendering.",
-	"version": "0.1.0",
-	"publisher": "m0m0",
-	"keywords": [
-		"markdown",
-		"footnotes",
-		"md",
-		"documentation"
-	],
-	"license": "MIT",
-	"engines": {
-		"vscode": "^1.60.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [],
-	"contributes": {
-		"markdown.markdownItPlugins": true
-	},
-	"main": "./extension.js",
-	"scripts": {},
-	"devDependencies": {
-		"@types/vscode": "^1.60",
-		"esbuild": "^0.15.14"
-	},
-	"dependencies": {
-		"markdown-it": "^14.1.0",
-		"markdown-it-footnote": "^3.0.3"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-27-markdown-render-link/code/extension"
-	},
-	"bugs": {
-		"url": "https://github.com/tgaochn/vscodeExtensions/issues"
-	},
-	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-27-markdown-render-link/code/extension",
-	"icon": "images/icon.png"
+    "name": "m0m0-27-markdown-render-link",
+    "displayName": "m0m0-27-markdown-render-link",
+    "description": "Render markdown links with backtick-enclosed URLs as clickable links and support pattern-based auto-linking. Custom extension for enhanced markdown link rendering.",
+    "version": "1.0.0",
+    "publisher": "m0m0",
+    "author": {
+        "name": "m0m0"
+    },
+    "keywords": [
+        "markdown",
+        "link",
+        "render",
+        "backtick"
+    ],
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "contributes": {
+        "markdown.markdownItPlugins": true
+    },
+    "main": "./extension.js",
+    "scripts": {},
+    "devDependencies": {
+        "@types/vscode": "^1.60",
+        "esbuild": "^0.15.14"
+    },
+    "dependencies": {
+        "markdown-it": "^14.1.0",
+        "markdown-it-footnote": "^3.0.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-27-markdown-render-link/code/extension"
+    },
+    "bugs": {
+        "url": "https://github.com/tgaochn/vscodeExtensions/issues"
+    },
+    "homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-27-markdown-render-link/code/extension",
+    "icon": "images/icon.png"
 }

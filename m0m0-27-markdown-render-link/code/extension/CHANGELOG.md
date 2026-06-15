@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.0] - 2026-05-03
+## [1.0.0] - 2026-06-14
 
 - Initial release
 - Backtick link syntax support: `[title](`url`)`
