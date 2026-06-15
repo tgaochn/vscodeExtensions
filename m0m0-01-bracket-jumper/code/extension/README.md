@@ -41,4 +41,4 @@ Jump between matching brackets with customized keybindings. This extension provi
 
 ## Attribution
 
-Based on [Bracket Jumper](https://marketplace.visualstudio.com/items?itemName=sashaweiss.bracket-jumper) by sashaweiss. Independently modified and maintained.
+Based on [Bracket Jumper](https://marketplace.visualstudio.com/items?itemName=sashaweiss.bracket-jumper) by sashaweiss. The original extension has not been updated since 2017. This fork is independently modified and maintained.
