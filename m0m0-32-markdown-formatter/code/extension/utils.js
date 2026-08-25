@@ -117,15 +117,12 @@ function linkReplace(content) {
 
 // !! T3: 处理标题行
 function headerLineReplace(content) {
-    // 标题后加入一个空格
+    // 标题后加入一个空格 (`#   X` -> `# X`; 跳过 md tags: #XX)
     if (content.trim().search(/(^#{1,6}\s+)([\r\n]*)/) == -1) {
         // skip md tags: #XX
-        // content = content.trim().replace(/(^#{1,6})(.*)/, "$1 $2");
     } else {
         content = content.trim().replace(/(^#{1,6})\s+(.*)/, "$1 $2");
     }
-    // 标题前后加入空行
-    content = content.trim().replace(/(^#{1,6}.*)([\r\n]*)/, "\n$1\n");
 
     return content
 }
@@ -215,9 +212,9 @@ function globalReplaceOnFileAtEnd(content) {
     // 多个空行缩成一行
     content = content.replace(/\n\n+/g, '\n\n');
 
-    // 2025-07-25: 行内公式首尾空格去掉, 防止公式不能识别
-    content = content.replace(/([^\$])\$\s+(\[|\(|\{)/g, '$1$$$2');
-    content = content.replace(/(\]|\)|\})\s+\$([^\$])/g, '$1$$$2');
+    // 2025-07-25: 行内公式首尾空格去掉, 防止公式不能识别 (只处理行内空格/制表符, 避免跨行吃掉换行符)
+    content = content.replace(/([^\$])\$[ \t]+(\[|\(|\{)/g, '$1$$$2');
+    content = content.replace(/(\]|\)|\})[ \t]+\$([^\$])/g, '$1$$$2');
 
     return content
 }
@@ -499,7 +496,8 @@ function processMdContent(content, options) {
         }
 
         // !! T3: 处理标题行
-        if (isHeaderLine(line)) {
+        const isHeader = isHeaderLine(line);
+        if (isHeader) {
             line = headerLineReplace(line);
         }
 
@@ -518,6 +516,11 @@ function processMdContent(content, options) {
         // !! T4: 生效范围: 常规md范围, 非链接, 非代码部分
         line = regularReplace(line);
         line = trimExtraSpace(line);
+
+        // !! T3: 标题前加入空行 (放在常规处理之后, 避免换行符被后续处理破坏)
+        if (isHeader) {
+            line = "\n" + line;
+        }
 
         return line;
     };
