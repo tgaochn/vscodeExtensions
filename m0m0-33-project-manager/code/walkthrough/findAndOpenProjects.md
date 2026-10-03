@@ -7,5 +7,3 @@ To access the projects via **Command Palette**, you can also use the built in ke
 The projects can be filtered by its name or path.
 
 ### Command Palette
-
-![List](../docs/images/project-manager-list-sort-by-name.png)

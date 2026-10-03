@@ -27,7 +27,7 @@ function translateCodiconToLocalIcons(codicon: string): string {
 }
 
 export function getProjectIconPath(icon: string, lightDark: string): string {
-    return "docs/images/ico-" + translateCodiconToLocalIcons(icon) + "-" + lightDark + ".svg";
+    return "images/ico-" + translateCodiconToLocalIcons(icon) + "-" + lightDark + ".svg";
 }
 
 export function getProjectIcon(icon: string, projectPath: string): string | IconPath {

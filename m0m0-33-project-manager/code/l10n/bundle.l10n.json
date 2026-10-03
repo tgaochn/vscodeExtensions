@@ -1,7 +1,6 @@
 {
     "Remote projects can't be revealed in {0}": "Remote projects can't be revealed in {0}",
     "Remote projects can't be opened in {0}": "Remote projects can't be opened in {0}",
-    "While Project Manager is offered for free, if you \n        find it useful, please consider supporting it. Thank you!": "While Project Manager is offered for free, if you \n        find it useful, please consider supporting it. Thank you!",
     "Could not open the project!": "Could not open the project!",
     "Could not open the project in {0}. {1}": "Could not open the project in {0}. {1}",
     "Could not find {0}. Install its command line, or set the {1} setting to the full path of its executable.": "Could not find {0}. Install its command line, or set the {1} setting to the full path of its executable.",

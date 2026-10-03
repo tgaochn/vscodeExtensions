@@ -99,7 +99,7 @@ Invalid files are now reported with the **line and column** of the problem, inst
 - **Project Tags**: tag projects, filter by tag, collapsible tag groups
 - **Remote support**: SSH, WSL, Containers and Codespaces, including projects stored on the remote
 - **Multi-root ready**, virtual workspace and workspace trust aware
-- **Localization**: en, az, cs, fr, pt-br, ru, uk, zh-cn, zh-tw
+- **English only**: the upstream translations (az, cs, fr, pt-br, ru, uk, zh-cn, zh-tw) were removed, since this fork is for personal use
 
 ## Commands
 

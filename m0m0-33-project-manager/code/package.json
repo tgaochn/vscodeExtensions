@@ -1,7 +1,7 @@
 {
 	"name": "m0m0-33-project-manager",
 	"displayName": "m0m0-33-project-manager",
-	"description": "Easily switch between projects. Fork of Project Manager that turns the projects file into a real JSON with Comments file (projects.jsonc): comments are accepted everywhere, never silently dropped on save, and projects added by hand are no longer lost. Adds Open with VS Code / Open with Cursor buttons to the sidebar.",
+	"description": "Personal fork of Project Manager, published so my own machines can sync it. Not affiliated with the original author - if you want Project Manager, install alefragnani.project-manager instead. What it changes: the projects file becomes a real JSON with Comments file (projects.jsonc) that Code opens correctly everywhere, comments are never silently dropped on save, projects added by hand are no longer lost, and the sidebar gains Open with VS Code / Open with Cursor buttons.",
 	"version": "0.1.0",
 	"publisher": "m0m0",
 	"engines": {
@@ -11,15 +11,11 @@
 		"Other"
 	],
 	"keywords": [
-		"git",
 		"project",
-		"folder",
-		"workspace",
-		"switch",
-		"manage",
-		"mercurial",
-		"svn",
-		"multi-root ready"
+		"projects",
+		"favorites",
+		"m0m0",
+		"fork"
 	],
 	"extensionKind": [
 		"ui",
@@ -31,7 +27,7 @@
 			"supported": true
 		}
 	},
-	"icon": "docs/images/icon.png",
+	"icon": "images/icon.png",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"homepage": "https://github.com/tgaochn/vscodeExtensions/tree/master/m0m0-33-project-manager/code",
 	"repository": {
@@ -52,7 +48,7 @@
 				{
 					"id": "project-manager",
 					"title": "%projectManager.activitybar.title%",
-					"icon": "docs/images/project-manager-side-bar.svg"
+					"icon": "images/project-manager-side-bar.svg"
 				}
 			]
 		},
@@ -266,16 +262,16 @@
 				"command": "_projectManager.openWithVSCode",
 				"title": "%projectManager.commands.openWithVSCode.title%",
 				"icon": {
-					"light": "icon/open-with-vs-code-light.png",
-					"dark": "icon/open-with-vs-code-dark.png"
+					"light": "images/open-with-vs-code-light.png",
+					"dark": "images/open-with-vs-code-dark.png"
 				}
 			},
 			{
 				"command": "_projectManager.openWithCursor",
 				"title": "%projectManager.commands.openWithCursor.title%",
 				"icon": {
-					"light": "icon/open-with-cursor-light.png",
-					"dark": "icon/open-with-cursor-dark.png"
+					"light": "images/open-with-cursor-light.png",
+					"dark": "images/open-with-cursor-dark.png"
 				}
 			},
 			{
@@ -337,10 +333,6 @@
 			{
 				"command": "_projectManager.openFolderWelcome",
 				"title": "%projectManager.commands.openFolderWelcome.title%"
-			},
-			{
-				"command": "projectManager.supportProjectManager",
-				"title": "%projectManager.commands.supportProjectManager.title%"
 			},
 			{
 				"command": "_projectManager.openSideBar",

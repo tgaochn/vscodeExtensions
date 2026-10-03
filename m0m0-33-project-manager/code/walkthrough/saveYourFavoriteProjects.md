@@ -2,7 +2,6 @@
 
 You can save the current folder or workspace as a **Project** at any time. You just need to type its name. 
 
-![Save](../docs/images/project-manager-save.png)
 
 It _automatically_ suggests the name of the project with the name of the folder / workspace you have opened, as a shortcut.
 

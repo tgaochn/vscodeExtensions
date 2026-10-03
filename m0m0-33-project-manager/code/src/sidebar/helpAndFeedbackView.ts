@@ -13,10 +13,5 @@ export function registerHelpAndFeedbackView(context: ExtensionContext) {
     items.push(new ProvideFeedbackLink('project-manager'));
     items.push(predefinedProvider.getReviewIssuesLink());
     items.push(predefinedProvider.getReportIssueLink());
-    items.push({
-        icon: 'heart',
-        title: 'Support',
-        command: 'projectManager.supportProjectManager'
-    });
     new HelpAndFeedbackView(context, "projectManagerHelpAndFeedback", items);
 }

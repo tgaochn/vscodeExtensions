@@ -544,26 +544,14 @@ export class ProjectManagerContentProvider implements ContentProvider {
     }
 
     public provideSupportChannels(): SupportChannel[] {
-        const supportChannels: SupportChannel[] = [];
-        supportChannels.push({
-            title: "Become a sponsor on GitHub",
-            link: "https://www.github.com/sponsors/alefragnani",
-            message: "Become a Sponsor"
-        });
-        supportChannels.push({
-            title: "Donate via PayPal",
-            link: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EP57F3B6FXKTU&lc=US&item_name=Alessandro%20Fragnani&item_number=vscode%20extensions&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted",
-            message: "Donate via PayPal"
-        });
-        return supportChannels;
+        // This is a personal fork, not the original project, so it does not ask for the
+        // original author's sponsorship.
+        return [];
     }
 }
 
 export class ProjectManagerSocialMediaProvider implements SocialMediaProvider {
     public provideSocialMedias() {
-        return [{
-            title: "Follow me on Twitter",
-            link: "https://www.twitter.com/alefragnani"
-        }];
+        return [];
     }
 }

@@ -21,7 +21,6 @@ import { isMacOS, isRemoteUri, isWindows } from "./utils/remote";
 import { buildProjectUri } from "./utils/uri";
 import { Container } from "./core/container";
 import { registerWhatsNew } from "./whats-new/commands";
-import { registerSupportProjectManager } from "./commands/supportProjectManager";
 import { registerHelpAndFeedbackView } from "./sidebar/helpAndFeedbackView";
 import { registerRevealFileInOS } from "./commands/revealFileInOS";
 import { registerOpenWithExternalEditor } from "./commands/openWithExternalEditor";
@@ -60,7 +59,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
     registerRevealFileInOS();
     registerOpenSettings();
-    registerSupportProjectManager();
     registerHelpAndFeedbackView(context);
     registerSortBy();
     registerSideBarDecorations();
