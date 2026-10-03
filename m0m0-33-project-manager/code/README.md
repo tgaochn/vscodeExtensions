@@ -74,11 +74,18 @@ The command line handling lives in a separate `cli.js` that the application has 
 - `publisher`: `alefragnani` → `m0m0`
 - `version`: restarted at `0.1.0`; this fork's versioning is independent of the upstream `13.x` line
 - `homepage`, `repository`, `bugs` point at this fork's repository; the upstream `sponsor` entry was removed
-- the extension ID references in the manifest, the Help and Feedback view, the What's New provider, the Remote walkthrough snippets and the tests were updated to `m0m0.m0m0-33-project-manager`
+- the extension ID references in the manifest, the Help and Feedback view and the tests were updated to `m0m0.m0m0-33-project-manager`
 
 ### 6. Smaller fix
 
 Invalid files are now reported with the **line and column** of the problem, instead of a bare JSON parse error.
+
+### 7. The What's New page and the walkthrough are gone
+
+Nothing is shown after the extension is installed or updated.
+
+- **The What's New page was removed.** Its content was the upstream project's, not this fork's: `src/whats-new/contentProvider.ts` hardcoded 78 release-note entries starting at upstream 13.1.0. Its links did not work either — the page derives its repository URL from `repository.url` with the last four characters stripped (a convention that expects a `.git` clone URL), and builds issue and pull-request links from it using **upstream** issue numbers, while the "Write a review" link points at a Marketplace item that does not resolve. The page, the vendored `vscode-whats-new` library it needed, its two commands and its header logo were all removed.
+- **The walkthrough was removed.** VS Code can open a contributed walkthrough by itself right after installation, and this fork is meant to stay silent. The 6 step files, the `walkthroughs` manifest contribution and the `_projectManager.openSideBar` command the steps linked to are gone.
 
 ## Compatibility
 
@@ -111,7 +118,6 @@ Invalid files are now reported with the **line and column** of the problem, inst
 | `Project Manager: Edit Projects` | Edit `projects.jsonc` |
 | `Project Manager: Refresh Projects` | Refresh the auto-detected projects |
 | `Project Manager: Add Project to Workspace` | Add a project to the current workspace |
-| `Project Manager: What's New` | Show the release notes |
 
 Side Bar hover buttons: **Open in New Window**, **Open with VS Code**, **Open with Cursor**.
 

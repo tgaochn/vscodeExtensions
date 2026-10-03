@@ -73,19 +73,16 @@ src/
 ├── quickpick/            # QuickPick UI implementations (project picker, tag picker)
 ├── sidebar/              # Sidebar tree view providers and decorations
 ├── statusbar/            # Status bar integration
-├── storage/              # Project storage management (projects.json)
+├── storage/              # Project storage management (projects.jsonc)
 ├── utils/                # Utility functions (path, remote detection, URI building)
-├── whats-new/            # What's New notifications
 ├── test/                 # Test suites
 │   ├── suite/            # Test cases
 │   └── runTest.ts        # Test runner
 └── extension.ts          # Extension entry point (activate/deactivate)
 
-dist/                     # Webpack bundles (extension.js)
+images/                   # Icons: marketplace icon, activity bar, tree icons, command icons
 l10n/                     # Localization files
 out/                      # Compiled TypeScript files
-vscode-whats-new/         # Git submodule for What's New
-walkthrough/              # Getting Started walkthrough content
 ```
 
 ## Coding Conventions and Patterns
@@ -163,7 +160,7 @@ walkthrough/              # Getting Started walkthrough content
 
 ## Dependencies and External Tools
 
-- Requires `vscode-whats-new` submodule initialization.
+- No submodules: the fork vendors everything it needs, and `vscode-whats-new` was removed along with the What's New page.
 - No external runtime tools are required beyond standard extension toolchain.
 
 ## Troubleshooting and Known Limitations

@@ -30,7 +30,7 @@ First release, based on upstream [Project Manager](https://github.com/alefragnan
 
 - The extension identity is now `m0m0.m0m0-33-project-manager` (`name` / `displayName` = `m0m0-33-project-manager`, `publisher` = `m0m0`), and the version restarted at `0.1.0`.
 - `homepage` / `repository` / `bugs` point at this fork; the upstream `sponsor` entry was removed.
-- The extension ID was updated in the manifest, the Help and Feedback view, the What's New provider, the Remote walkthrough snippets and the tests.
+- The extension ID was updated in the manifest, the Help and Feedback view and the tests.
 
 ### Left unchanged on purpose
 
@@ -41,11 +41,10 @@ First release, based on upstream [Project Manager](https://github.com/alefragnan
 
 This fork is published on the VS Code Marketplace, so it has to be **visually distinguishable from the original at a glance**; otherwise it risks being treated as a duplicate listing, and it could interfere with the original author. To that end:
 
-- **The user-visible brand name is now `GF33 Project Manager`** — the activity bar title, the settings section title, 13 command titles, the walkthrough title and the welcome view texts, 101 occurrences in total. The original shows itself as "Project Manager" in the UI, which made this fork indistinguishable from the official extension once installed. **Command and setting IDs were not changed**, so existing settings do not need to be migrated.
-- **All icon assets were replaced**: the marketplace icon is now a `GF33` badge (replacing the original author's blue folder icon), the What's New header logo matches it, and the activity bar icon is a "rounded box with a list" glyph. The previous marketplace icon and logo are the original author's own artwork; reusing them would raise both a copyright question and the "looks like the same extension" problem.
-- **Fixed the What's New header logo path**: the path is built from the extension name (`images/vscode-<name>-logo-readme.png`), so the rename left it pointing at a file that no longer existed.
+- **The user-visible brand name is now `GF33 Project Manager`** — the activity bar title, the settings section title, 13 command titles and the welcome view texts, 101 occurrences in total. The original shows itself as "Project Manager" in the UI, which made this fork indistinguishable from the official extension once installed. **Command and setting IDs were not changed**, so existing settings do not need to be migrated.
+- **All icon assets were replaced**: the marketplace icon is now a `GF33` badge (replacing the original author's blue folder icon), and the activity bar icon is a "rounded box with a list" glyph. The previous marketplace icon is the original author's own artwork; reusing it would raise both a copyright question and the "looks like the same extension" problem.
 - **Removed the original author's support/donation entry points**: the `Support Project Manager` command (GitHub Sponsors + PayPal), the Support button in Help and Feedback, and the sponsorship and social links on the What's New page. A fork should not carry someone else's donation buttons.
-- **Removed the original author's promotional material**: the four upstream UI screenshots/GIFs referenced by the walkthrough (in 32 markdown files), a 48.7 MB promotional GIF, and the original gh-pages site files.
+- **Removed the original author's promotional material**: the four upstream UI screenshots/GIFs that the walkthrough used, a 48.7 MB promotional GIF, and the original gh-pages site files.
 - **The documentation links** in the welcome views now point at this repository instead of the original author's.
 - **`keywords` were trimmed** to reduce overlap with the original in search: `git`, `mercurial`, `svn`, `switch`, `manage` and `multi-root ready` were dropped, leaving descriptive words and the fork identifier.
 - **The top of the README** carries a prominent notice that this is a modified version of the original, with the modification date and the license.
@@ -56,24 +55,38 @@ The 8 upstream translations were deleted, **58 files** in total:
 
 - `package.nls.{az,cs,fr,pt-br,ru,uk,zh-cn,zh-tw}.json` (8 files)
 - `l10n/bundle.l10n.{az,cs,fr,pt-br,ru,uk,zh-cn,zh-tw}.json` (8 files)
-- `walkthrough/*.nls.{az,fr,pt-br,ru,uk,zh-cn,zh-tw}.md` (42 files)
+- `walkthrough/*.nls.{az,fr,pt-br,ru,uk,zh-cn,zh-tw}.md` (42 files, later removed altogether with the walkthrough)
 
 The English base files **must be kept** — deleting them breaks the extension:
 
 - `package.nls.json` — the `%key%` placeholders in `package.json` are resolved from it. Without it, every command title and setting description would show its raw `%projectManager.commands.saveProject.title%`.
 - `l10n/bundle.l10n.json` — the English reference table for the runtime messages (`l10n.t`).
-- The 6 English `.md` files under `walkthrough/` — the walkthrough steps in `package.json` reference them directly; the localized variants are only an optional side branch that VS Code looks for by convention.
 
 Non-English UIs now fall back to English.
 
 ### Changed (asset folders merged)
 
-The assets were spread over three folders: `icon/` (the button icons added by this fork), `images/` (the What's New header logo) and `docs/images/` (the marketplace icon, the activity bar icon and the runtime tree icons). They are all merged into **`images/`** now, and `icon/` and `docs/` are gone.
+The assets were spread over three folders: `icon/` (the button icons added by this fork), `images/` and `docs/images/` (the marketplace icon, the activity bar icon and the runtime tree icons). The icons are all merged into **`images/`** now, and `icon/` and `docs/` are gone. (The What's New header logo also lived in `images/`; it was deleted together with that page.)
 
 - The prefix in `src/utils/icons.ts` changed from `"docs/images/ico-"` to `"images/ico-"`, and **all 18 runtime tree icons moved with it**.
 - The marketplace icon path is now `images/icon.png`, matching the convention used by m0m0-32.
-- `images/vscode-<name>-logo-readme.png` has to stay directly in `images/`, because the vendored `vscode-whats-new` library hardcodes that folder (`Manager.ts`).
 - Three leftover assets referenced by no code at all were deleted along the way: `ico_file_code.png`, `ico_git_branch.png` and `ico_svn.png` (leftovers from an older version; `getIconDetailsFromProjectPath` returns codicon names, not file paths).
 - Dead entries were removed from `.vscodeignore` (the gh-pages entries such as `docs/index.html`, plus `AGENTS.md` and `.devcontainer/`).
 
 > Verified after the move: the bundle requests `images/ico-*` and no longer `docs/images/ico-*`, all 6 files referenced by the manifest are present, and all 18 runtime icons are accounted for.
+
+### Removed (the What's New page)
+
+The What's New page no longer exists, and nothing is shown after the extension is installed or updated.
+
+- **Its content was the upstream project's, not this fork's.** `src/whats-new/contentProvider.ts` hardcoded 78 release-note entries starting at upstream 13.1.0, so the page presented another project's release history as if it belonged to this one.
+- **Its links did not work.** The page derives its repository URL from `package.json` `repository.url` with the last four characters stripped (`Manager.ts`, a convention that expects a `.git` clone URL, while this fork uses a `tree/...` URL), and it builds issue and pull-request links from that — with issue numbers that belong to the upstream repository. The "Write a review" link points at `marketplace.visualstudio.com/items?itemName=m0m0.m0m0-33-project-manager`, which does not resolve before the extension is published.
+- **Removed**: the `src/whats-new/` folder, the vendored `vscode-whats-new/` library (9 files, ~196 KB in the package), the `projectManager.whatsNew` and `_projectManager.whatsNewContextMenu` commands with their `commandPalette` and `extension/context` menu contributions, the two matching `package.nls.json` titles, the What's New header logo, and the `registerWhatsNew()` call in `activate()`.
+- The `lint` script no longer lints `vscode-whats-new`, which no longer exists.
+
+### Removed (the walkthrough)
+
+The walkthrough is gone as well, so that installing or updating the extension is completely silent.
+
+- VS Code can open a contributed walkthrough by itself right after installation. That is a VS Code behaviour, not something the extension asks for, so the only way to guarantee no page appears is to stop contributing one.
+- **Removed**: the 6 step files under `walkthrough/`, the `walkthroughs` section of `contributes` (57 lines), the 14 matching `package.nls.json` keys, `src/commands/walkthrough.ts`, and the `_projectManager.openSideBar` command those steps linked to (with its `commandPalette` entry and its `package.nls.json` title, which became orphaned).
