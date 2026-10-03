@@ -1,6 +1,6 @@
 # Changelog
 
-This file lists the versions of **this fork** only. The history of the upstream Project Manager 13.x and earlier is kept in [`CHANGELOG.original.md`](CHANGELOG.original.md).
+This file lists the versions of **this fork** only. The history of the upstream Project Manager 13.x and earlier is kept in [`CHANGELOG.original.md`](https://github.com/tgaochn/vscodeExtensions/blob/master/m0m0-33-project-manager/code/CHANGELOG.original.md).
 
 ## [0.1.0] - 2026-10-03
 

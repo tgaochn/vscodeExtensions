@@ -1,7 +1,7 @@
 {
 	"name": "m0m0-33-project-manager",
 	"displayName": "m0m0-33-project-manager",
-	"description": "Personal fork of Project Manager, published so my own machines can sync it. Not affiliated with the original author - if you want Project Manager, install alefragnani.project-manager instead. What it changes: the projects file becomes a real JSON with Comments file (projects.jsonc) that Code opens correctly everywhere, comments are never silently dropped on save, projects added by hand are no longer lost, and the sidebar gains Open with VS Code / Open with Cursor buttons.",
+	"description": "Fork of Project Manager by Alessandro Fragnani, modified by m0m0. Turns the projects file into a real JSON with Comments file (projects.jsonc) that Code opens correctly everywhere, keeps the comments when the file is saved, stops projects added by hand from being lost, and adds Open with VS Code / Open with Cursor buttons to the Side Bar.",
 	"version": "0.1.0",
 	"publisher": "m0m0",
 	"engines": {

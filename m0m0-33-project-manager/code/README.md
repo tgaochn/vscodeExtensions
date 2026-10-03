@@ -106,7 +106,7 @@ Nothing is shown after the extension is installed or updated.
 - **Project Tags**: tag projects, filter by tag, collapsible tag groups
 - **Remote support**: SSH, WSL, Containers and Codespaces, including projects stored on the remote
 - **Multi-root ready**, virtual workspace and workspace trust aware
-- **English only**: the upstream translations (az, cs, fr, pt-br, ru, uk, zh-cn, zh-tw) were removed, since this fork is for personal use
+- **English only**: the upstream translations (az, cs, fr, pt-br, ru, uk, zh-cn, zh-tw) were removed to reduce package size
 
 ## Commands
 
@@ -142,10 +142,10 @@ npx @vscode/vsce package      # -> m0m0-33-project-manager-0.1.0.vsix
 
 Based on [Project Manager](https://github.com/alefragnani/vscode-project-manager) v13.1.1, Copyright (c) Alessandro Fragnani.
 
-This fork is **not** affiliated with, endorsed by, or supported by the original author. Report problems with this fork here, not upstream. The original project's changelog is preserved in [`CHANGELOG.original.md`](CHANGELOG.original.md).
+This fork is **not** affiliated with, endorsed by, or supported by the original author. Report problems with this fork here, not upstream. The original project's changelog is preserved in [`CHANGELOG.original.md`](https://github.com/tgaochn/vscodeExtensions/blob/master/m0m0-33-project-manager/code/CHANGELOG.original.md).
 
 ## License
 
-**GPLv3** — see [`LICENSE.md`](LICENSE.md).
+**GPLv3** — see [`LICENSE.md`](https://github.com/tgaochn/vscodeExtensions/blob/master/m0m0-33-project-manager/code/LICENSE.md).
 
 This is a modified version of a GPLv3 work, distributed under the same license. The copyright notices in the source files are those of the original author and have been left untouched; the modifications listed above were made by m0m0 on 2026-10-03. The corresponding source is available in this repository.

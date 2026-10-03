@@ -16,3 +16,6 @@ webpack.config.js
 **/.git
 **/.gitmodules
 .nvmrc
+
+# upstream history, kept in the repository only
+CHANGELOG.original.md

@@ -4,13 +4,14 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { ExtensionContext } from "vscode";
-import { HelpAndFeedbackView, Link, StandardLinksProvider, ProvideFeedbackLink, Command } from "vscode-ext-help-and-feedback-view";
+import { HelpAndFeedbackView, Link, StandardLinksProvider, Command } from "vscode-ext-help-and-feedback-view";
 
 export function registerHelpAndFeedbackView(context: ExtensionContext) {
     const items = new Array<Link | Command>();
     const predefinedProvider = new StandardLinksProvider('m0m0.m0m0-33-project-manager');
     items.push(predefinedProvider.getGetStartedLink());
-    items.push(new ProvideFeedbackLink('project-manager'));
+    // `ProvideFeedbackLink` is not used here: its argument is a Twitter hashtag, not a URL, so it
+    // produced a "Provide Feedback" entry that opened a tweet composer mentioning @code.
     items.push(predefinedProvider.getReviewIssuesLink());
     items.push(predefinedProvider.getReportIssueLink());
     new HelpAndFeedbackView(context, "projectManagerHelpAndFeedback", items);
